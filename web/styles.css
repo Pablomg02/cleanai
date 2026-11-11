@@ -137,6 +137,7 @@ body.no-drawer main { padding-right: var(--gut); }
 body[data-tab="inicio"] main { padding-top: calc(var(--top-h, var(--hdr)) + 14px); }
 html:has(body[data-tab="inicio"]) { scroll-padding-top: calc(var(--top-h, var(--hdr)) + 16px); }
 body[data-tab="inicio"] .chev { display: none; }
+body[data-tab="inicio"] .drawer { top: var(--top-h, var(--hdr)); }
 body.docked:not(.no-drawer) main { padding-right: calc(var(--drawer) + var(--gut)); }
 .view { display: none; }
 .view.active { display: block; animation: fadeIn .45s var(--ease) both; }

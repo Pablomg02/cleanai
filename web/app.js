@@ -1312,9 +1312,12 @@
   }
   function closeHdr() {
     clearTimeout(hdrSettle); clearTimeout(hdrClose);
-    top.classList.remove("open", "settled");
     top.querySelectorAll(".fam.open").forEach((w) => w.classList.remove("open"));
+    if (S.tab === "inicio") return; // En Inicio el menú se queda siempre desplegado
+    top.classList.remove("open", "settled");
   }
+  // Altura real de la cabecera, para reservar su hueco en Inicio (donde no se pliega)
+  new ResizeObserver(() => document.documentElement.style.setProperty("--top-h", top.offsetHeight + "px")).observe(top);
   // Se despliega al pasar por la barra, salvo encima de los chips de modelos (que tienen su propio desplegable)
   top.addEventListener("pointerover", (e) => {
     if (e.pointerType !== "mouse" || hdrShut) return;
@@ -1377,6 +1380,7 @@
     moveInk();
     if (push && location.hash !== "#" + t) history.replaceState(null, "", "#" + t);
     setDrawer(!!$("#drawer-" + t));
+    if (t === "inicio") openHdr(); else if (changedTab) closeHdr();
     if (changedTab) scrollTo({ top: 0 });
     VIEWS[t]();
     updateCrumb();

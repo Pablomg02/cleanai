@@ -202,12 +202,16 @@
 
   /* ================= Familias, formas, iconos ================= */
   const famColor = (f) => (C.families[f] || {}).color || "#898781";
-  // Versión oscura del color de la familia para texto: se oscurece (mismo tono)
+  // Color de la empresa: lo usan las vistas de suscripciones, donde la familia solo cambia la forma
+  const coColor = (c) => ((C.companies || {})[c] || {}).color || "#898781";
+  // Versión oscura de un color para texto: se oscurece (mismo tono)
   // hasta un contraste ≥ 5,5:1 sobre blanco, para que se lea siempre.
   const darkCache = {};
-  function famDark(f) {
+  const famDark = (f) => darkOf(famColor(f));
+  function darkOf(hex) {
+    const f = hex;
     if (darkCache[f]) return darkCache[f];
-    const n = parseInt(famColor(f).slice(1), 16);
+    const n = parseInt(hex.slice(1), 16);
     let rgb = [n >> 16, (n >> 8) & 255, n & 255];
     const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
     const contrast = (c) => 1.05 / (0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2]) + 0.05);
@@ -240,11 +244,15 @@
       default: return `M${r},0A${r},${r} 0 1,1 ${-r},0A${r},${r} 0 1,1 ${r},0z`;
     }
   }
-  function famIcon(f, size = 11) {
+  // color: opcional, para pintar la forma de la familia con otro color (p. ej. el de la empresa)
+  function famIcon(f, size = 11, color) {
     const c = C.families[f] || { color: "#898781", shape: "circle" };
     const h = size + 4;
-    return `<svg width="${h}" height="${h}" viewBox="${-h / 2} ${-h / 2} ${h} ${h}" aria-hidden="true"><path d="${shapePath(c.shape, size)}" fill="${c.color}"/></svg>`;
+    return `<svg width="${h}" height="${h}" viewBox="${-h / 2} ${-h / 2} ${h} ${h}" aria-hidden="true"><path d="${shapePath(c.shape, size)}" fill="${color || c.color}"/></svg>`;
   }
+  // En las vistas de suscripciones: forma de la familia, color de la empresa
+  const subIcon = (m, size) => famIcon(m.family, size, coColor(m.provider));
+  const subDark = (m) => darkOf(coColor(m.provider));
   const modelName = (m) => `${esc(m.name)} <span class="e">${esc(m.effort)}</span>`;
   const modelText = (m) => `${m.name} ${m.effort}`;
 
@@ -1077,10 +1085,10 @@
       el.dataset.pin = el.dataset.pick = rec.pin;
       el.classList.toggle("best", i === 0);
       el.querySelector(".rk").textContent = i + 1;
-      el.querySelector(".nm").innerHTML = `${famIcon(r.family)}<span class="t">${r.name}</span>`;
+      el.querySelector(".nm").innerHTML = `${r.icon || famIcon(r.family)}<span class="t">${r.name}</span>`;
       el.querySelector(".val").innerHTML = `${esc(r.display)}${r.sub ? `<small>${esc(r.sub)}</small>` : ""}`;
       el.style.setProperty("--c", r.color);
-      el.style.setProperty("--cd", famDark(r.family));
+      el.style.setProperty("--cd", r.cd || famDark(r.family));
       const dotMode = r.mode === "dot";
       rec.fill.style.display = dotMode ? "none" : "";
       rec.dot.style.display = dotMode ? "" : "none";
@@ -1973,6 +1981,12 @@
   const COST = "cost_per_task_usd";
   const longName = (m) => `${esc(m.name)} ${esc(m.effort)}`;
   const nameTag = (m) => `<b class="mname" style="--cd:${famDark(m.family)}">${famIcon(m.family, 10)}${longName(m)}</b>`;
+  const subTag = (m) => `<b class="mname" style="--cd:${subDark(m)}">${subIcon(m, 10)}${longName(m)}</b>`;
+  // Nivel de precio de la gráfica de suscripciones (≈ 20 € o ≈ 100 € al mes)
+  const TIERS = ((PR && PR.homeTiers) || []).map((t) => ({ ...t, plans: t.plans.filter((id) => PLAN.has(id)) })).filter((t) => t.plans.length);
+  HOME.tier = store.get("hTier", TIERS[0] ? TIERS[0].id : null);
+  if (!TIERS.some((t) => t.id === HOME.tier)) HOME.tier = TIERS[0] ? TIERS[0].id : null;
+  const homeTier = () => TIERS.find((t) => t.id === HOME.tier);
 
   function segInk(seg) {
     const a = seg.querySelector("button.active"), ink = seg.querySelector(".seg-ink");
@@ -2013,6 +2027,15 @@
       if (!PR) { seg.remove(); return; }
       seg.innerHTML = `<span class="seg-ink"></span><button type="button" data-m="sub">€ suscripción</button><button type="button" data-m="api">Precio de API</button>`;
       seg.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) setPriceMode(b.dataset.m); });
+    });
+    document.querySelectorAll("#view-inicio [data-tier]").forEach((seg) => {
+      if (!TIERS.length) { seg.remove(); return; }
+      seg.innerHTML = `<span class="seg-ink"></span>` + TIERS.map((t) => `<button type="button" data-t="${esc(t.id)}">${esc(t.name)}</button>`).join("");
+      seg.addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b || b.dataset.t === HOME.tier) return;
+        HOME.tier = b.dataset.t; store.set("hTier", HOME.tier); renderInicio();
+      });
     });
     document.querySelectorAll("#view-inicio [data-by]").forEach((seg) => {
       if (!PR) { seg.remove(); return; }
@@ -2092,6 +2115,12 @@
       seg.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.b === HOME.by));
       segInk(seg);
     });
+    // Con suscripciones, la gráfica elige el nivel de precio de los planes
+    document.querySelectorAll("#view-inicio [data-tier]").forEach((seg) => {
+      seg.hidden = !bySubs;
+      seg.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.t === HOME.tier));
+      if (bySubs) segInk(seg);
+    });
     // Con suscripciones todo va en € de suscripción: el selector de escala sobra
     document.querySelectorAll("#view-inicio [data-price]").forEach((seg) => {
       seg.hidden = bySubs;
@@ -2113,14 +2142,23 @@
     $("#hpSubs").hidden = $("#hpLegend").hidden = !bySubs;
     let ins = "";
     if (bySubs) {
-      const sums = SUB.sel.map((id) => planSummary(PLAN.get(id), y, vis));
-      subChart($("#hpSubs"), sums, y);
-      $("#hpLegend").innerHTML = sums.map((r) => `<span data-k="${r.p.id}">${dashSw(r.p)}${esc(r.p.name)} · ${esc(priceTxt(r.p.priceEur))}/mes</span>`).join("") +
-        `<a href="#suscripciones" class="linkbtn">Elegir otros planes →</a>`;
+      // Planes del nivel elegido: uno por empresa, así que todos con trazo continuo (los distingue el color)
+      const tier = homeTier(), ids = tier ? tier.plans : SUB.sel;
+      const sums = ids.map((id) => planSummary(PLAN.get(id), y, vis));
+      const solid = tier ? () => "" : undefined;
+      subChart($("#hpSubs"), sums, y, solid);
+      $("#hpLegend").innerHTML = sums.map((r) => `<span data-k="${r.p.id}">${dashSw(r.p, tier ? "" : undefined)}${esc(r.p.name)} · ${esc(priceTxt(r.p.priceEur))}/mes</span>`).join("") +
+        `<a href="#suscripciones" class="linkbtn">Elegir otros planes →</a>` +
+        (tier && tier.note ? `<p class="sl-note">${esc(tier.note)}</p>` : "");
       $("#hpLegend").querySelectorAll("[data-k]").forEach((el) => { el.onpointerenter = () => subHL($("#hpSubs"), el.dataset.k); el.onpointerleave = () => subHL($("#hpSubs"), null); });
-      const V = subVerdicts(y, vis);
-      if (V) ins = `${icon("coin", 15)}<span>En <b>${esc(area.name)}</b>, la nota más alta la da <b>${esc(V.top.p.name)}</b> con ${nameTag(V.top.m)}, desde ${esc(priceTxt(V.top.p.priceEur))} al mes. ` +
-        `A ${T.margin} pt o menos, el mejor valor es <b>${esc(V.value.p.name)}</b> con ${nameTag(V.value.m)} (${esc(eurTxt(V.value.eur))} por tarea)` +
+      // «Elegir otros planes»: Suscripciones se abre con los planes de este nivel
+      $("#hpLegend").querySelector(".linkbtn").onclick = () => {
+        if (!tier) return;
+        SUB.sel = ids.slice(0, SUB_MAX); SUB.mode = "chart"; SUB.area = y; saveSub();
+      };
+      const V = subVerdicts(y, vis, tier ? ids.map((id) => PLAN.get(id)) : PR.plans);
+      if (V) ins = `${icon("coin", 15)}<span>En <b>${esc(area.name)}</b>${tier ? `, entre los planes de ${esc(tier.name)}` : ""}, la nota más alta la da <b>${esc(V.top.p.name)}</b> con ${subTag(V.top.m)}, desde ${esc(priceTxt(V.top.p.priceEur))} al mes. ` +
+        `A ${T.margin} pt o menos, el mejor valor es <b>${esc(V.value.p.name)}</b> con ${subTag(V.value.m)} (${esc(eurTxt(V.value.eur))} por tarea)` +
         (V.cheap.p.id !== V.value.p.id ? ` y la entrada más barata, <b>${esc(V.cheap.p.name)}</b> (${esc(priceTxt(V.cheap.p.priceEur))} al mes).` : ".") + `</span>`;
     }
     const P = taskPicks(y, vis);
@@ -2161,7 +2199,7 @@
       // ¿Pagar más da más nota? Planes del mismo proveedor con el mismo mejor modelo
       const sums = PR.plans.map((p) => planSummary(p, rk, vis)).filter((r) => r.best);
       const same = PROVIDERS.map((prov) => sums.filter((r) => r.p.provider === prov)).sort((a, b) => b.length - a.length).find((g) => g.length > 1 && g.every((r) => r.best.m === g[0].best.m));
-      if (same) rins = `${esc(same.map((r) => r.p.name).join(", ").replace(/, ([^,]*)$/, " y $1"))} dan acceso al mismo modelo, ${nameTag(same[0].best.m)}: pagar más te da más uso, no más nota.`;
+      if (same) rins = `${esc(same.map((r) => r.p.name).join(", ").replace(/, ([^,]*)$/, " y $1"))} dan acceso al mismo modelo, ${subTag(same[0].best.m)}: pagar más te da más uso, no más nota.`;
     } else if (lead && rk !== "intelligence_index" && gen) {
       rins = lead.slug === gen.slug ? `El primero en <b>${esc(rarea.name)}</b>, ${nameTag(lead)}, coincide con el primero del índice general.` :
         `El primero en <b>${esc(rarea.name)}</b> es ${nameTag(lead)}, aunque el índice general lo encabeza ${nameTag(gen)}.`;
@@ -2202,20 +2240,26 @@
   if (!AREA.has(SUB.area) || !METRICS.has(SUB.area)) SUB.area = "intelligence_index";
   if (!Array.isArray(SUB.sel)) SUB.sel = PR ? PROVIDERS.map((p) => PR.defaults[p]) : [];
   SUB.sel = SUB.sel.filter((id) => PLAN.has(id)).slice(0, SUB_MAX);
-  // Trazo de cada plan elegido: se le asigna el primero libre al entrar y lo conserva mientras siga
-  // en la gráfica (quitar un plan no cambia el trazo de los demás). El chip de cada plan es su leyenda.
+  // Trazo de cada plan elegido. El color ya dice la empresa, así que el trazo solo separa planes
+  // de la misma empresa: se le asigna el primero libre entre los suyos al entrar y lo conserva mientras
+  // siga en la gráfica (quitar un plan no cambia el trazo de los demás). El chip de cada plan es su leyenda.
   const DASHES = ["", "9 5", "0.5 4.5", "13 4 0.5 4"];
-  SUB.dash = store.get("subDash", {});
+  SUB.dash = store.get("subDashCo", {});
   function syncDash() {
     for (const k of Object.keys(SUB.dash)) if (!SUB.sel.includes(k)) delete SUB.dash[k];
-    for (const id of SUB.sel) if (!(id in SUB.dash)) { const used = new Set(Object.values(SUB.dash)); SUB.dash[id] = DASHES.findIndex((d, i) => !used.has(i)); }
+    for (const id of SUB.sel) if (!(id in SUB.dash)) {
+      const prov = PLAN.get(id).provider;
+      const used = new Set(Object.entries(SUB.dash).filter(([k]) => PLAN.get(k).provider === prov).map(([, v]) => v));
+      SUB.dash[id] = DASHES.findIndex((d, i) => !used.has(i));
+    }
   }
   syncDash();
-  const saveSub = () => { syncDash(); store.set("subArea", SUB.area); store.set("subMode", SUB.mode); store.set("subSel", SUB.sel); store.set("subApi", SUB.api); store.set("subDash", SUB.dash); };
+  const saveSub = () => { syncDash(); store.set("subArea", SUB.area); store.set("subMode", SUB.mode); store.set("subSel", SUB.sel); store.set("subApi", SUB.api); store.set("subDashCo", SUB.dash); };
   // Pago por uso: referencia opcional en la gráfica (todos los modelos, a precio de API en €); se distingue por el color
   const API_PLAN = { id: "api", name: "Pago por uso (API)", short: "API", provider: null };
   const planDash = (p) => (p.id === "api" ? "" : DASHES[SUB.dash[p.id] ?? 0]);
-  const dashSw = (p) => `<svg class="dsw" width="24" height="8" viewBox="0 0 24 8" aria-hidden="true"><path d="M2 4H22" stroke-dasharray="${planDash(p)}"/></svg>`;
+  // Muestra del trazo de un plan, en el color de su empresa (dash: trazo forzado, p. ej. "" en la portada)
+  const dashSw = (p, dash) => `<svg class="dsw" width="24" height="8" viewBox="0 0 24 8" aria-hidden="true"${p.provider ? ` style="color:${coColor(p.provider)}"` : ""}><path d="M2 4H22" stroke-dasharray="${dash ?? planDash(p)}"/></svg>`;
   const priceTxt = (v) => nf(v % 1 ? 2 : 0).format(v) + " €";
   const tasksTxt = (t) => (t >= 100 ? nf(0).format(+t.toPrecision(2)) : nf(t >= 10 ? 0 : 1).format(t));
   const planHas = (p, m) => p.id === "api" || (m.provider === p.provider && !(p.payg || []).includes(m.family));
@@ -2243,8 +2287,9 @@
   }
   // Las tres respuestas, entre todos los planes: la nota más alta (en el plan más barato que la da),
   // el menor coste por tarea a «margen» puntos o menos de esa nota y el plan más barato que llega a ese nivel
-  function subVerdicts(y, vis) {
-    const sums = PR.plans.map((p) => planSummary(p, y, vis)).filter((r) => r.best);
+  // plans: opcional, para limitar la comparación a esos planes (p. ej. un nivel de precio de la portada)
+  function subVerdicts(y, vis, plans = PR.plans) {
+    const sums = plans.map((p) => planSummary(p, y, vis)).filter((r) => r.best);
     if (!sums.length) return null;
     const B = Math.max(...sums.map((r) => r.best.s)), floor = B - T.margin;
     const top = sums.filter((r) => r.best.s >= B - 1e-9).sort((a, b) => a.p.priceEur - b.p.priceEur)[0].best;
@@ -2255,8 +2300,9 @@
   }
 
   /* ---- Gráfica: una frontera por plan (X: € por tarea en log, Y: nota) ---- */
-  function subChart(host, series, y) {
-    host._sc = { series, y };
+  // dash: función opcional plan → trazo (por defecto, el que tiene el plan en la vista Suscripciones)
+  function subChart(host, series, y, dash) {
+    host._sc = { series, y, dash };
     if (!host._ro) { host._ro = new ResizeObserver(() => drawSubChart(host)); host._ro.observe(host); }
     drawSubChart(host);
   }
@@ -2265,7 +2311,7 @@
     host.querySelectorAll(".sser").forEach((g) => g.classList.toggle("on", g.dataset.k === id));
   }
   function drawSubChart(host) {
-    const { series = [], y } = host._sc || {};
+    const { series = [], y, dash = planDash } = host._sc || {};
     const W = host.clientWidth, H = host.clientHeight;
     if (!W || !H) return;
     const ser = series.filter((r) => r.front.length);
@@ -2293,12 +2339,13 @@
     s += `<text class="axis-title" transform="rotate(-90)" x="${-(M.t + H - M.b) / 2}" y="13" text-anchor="middle">${esc(my.short)}  → mejor</text></g>`;
     for (const r of ser) {
       const d = "M" + r.front.map((q) => `${sx(q.eur).toFixed(1)},${sy(q.s).toFixed(1)}`).join("L");
-      s += `<g class="sser${r.p.id === "api" ? " api" : ""}" data-k="${r.p.id}"><path class="shalo" d="${d}"/><path class="sline" d="${d}" stroke-dasharray="${planDash(r.p)}"/>`;
+      // Cada empresa, un color (línea y puntos); la forma del punto dice la familia y el trazo, el plan
+      s += `<g class="sser${r.p.id === "api" ? " api" : ""}" data-k="${r.p.id}"${r.p.provider ? ` style="--sc:${coColor(r.p.provider)}"` : ""}><path class="shalo" d="${d}"/><path class="sline" d="${d}" stroke-dasharray="${dash(r.p)}"/>`;
       r.front.forEach((q, i) => {
         const f = C.families[q.m.family] || { shape: "circle" };
-        s += `<g class="spt" data-pin="${q.m.slug}" data-pick="${q.m.slug}" data-i="${i}" transform="translate(${sx(q.eur).toFixed(1)},${sy(q.s).toFixed(1)})"><circle r="12" fill="transparent"/><path d="${shapePath(f.shape, 9)}" fill="${famColor(q.m.family)}"/></g>`;
+        s += `<g class="spt" data-pin="${q.m.slug}" data-pick="${q.m.slug}" data-i="${i}" transform="translate(${sx(q.eur).toFixed(1)},${sy(q.s).toFixed(1)})"><circle r="12" fill="transparent"/><path d="${shapePath(f.shape, 9)}" fill="${coColor(q.m.provider)}"/></g>`;
       });
-      s += `<text class="slabel">${esc(r.p.name)}${r.p.priceEur ? `<tspan class="sp"> · ${esc(priceTxt(r.p.priceEur))}</tspan>` : ""}</text></g>`;
+      s += `<text class="slabel"${r.p.provider ? ` style="--cd:${darkOf(coColor(r.p.provider))}"` : ""}>${esc(r.p.name)}${r.p.priceEur ? `<tspan class="sp"> · ${esc(priceTxt(r.p.priceEur))}</tspan>` : ""}</text></g>`;
     }
     host.innerHTML = s + "</svg>";
     // Nombre de cada plan junto a su mejor punto (el último de la frontera); se apartan si chocan
@@ -2326,7 +2373,7 @@
   }
   function subTip(q, y) {
     const api = q.p.id === "api";
-    let h = `<div class="tt-h">${famIcon(q.m.family)}${esc(modelText(q.m))}</div>` + ttRow(api ? "Sin suscripción" : "Plan", api ? "precio de API" : `${q.p.name} · ${priceTxt(q.p.priceEur)}/mes`);
+    let h = `<div class="tt-h">${subIcon(q.m)}${esc(modelText(q.m))}</div>` + ttRow(api ? "Sin suscripción" : "Plan", api ? "precio de API" : `${q.p.name} · ${priceTxt(q.p.priceEur)}/mes`);
     h += ttRow(METRICS.get(y).short, fmt(y, q.s));
     h += ttRow(api ? "€ de API por tarea" : "€ de suscripción por tarea", eurTxt(q.eur));
     if (!api) h += ttRow("Tareas al mes", "≈ " + tasksTxt(q.tasks)) + ttRow("Precio de API por tarea", "$" + nf(q.usd >= 10 ? 1 : 2).format(q.usd));
@@ -2340,7 +2387,7 @@
       .sort((a, b) => b.best.s - a.best.s || a.p.priceEur - b.p.priceEur);
     const top = Math.max(...sums.map((r) => r.best.s), 0), b = m.unit === "score" ? 100 : top;
     return sums.map(({ p, best: q, front }) => ({
-      key: "plan:" + p.id, pin: q.m.slug, family: q.m.family, color: famColor(q.m.family),
+      key: "plan:" + p.id, pin: q.m.slug, family: q.m.family, color: coColor(q.m.provider), icon: subIcon(q.m), cd: subDark(q.m),
       name: `${esc(p.name)} <span class="e">${esc(famShort(q.m.family))} ${esc(q.m.effort)}</span>`,
       value: q.s, display: fmt(y, q.s), frac: b ? q.s / b : 0, mode: "bar", sub: `${priceTxt(p.priceEur)}/mes`,
       tip: () => `<div class="tt-h">${esc(p.name)} · ${esc(priceTxt(p.priceEur))}/mes</div>` +
@@ -2414,7 +2461,7 @@
       ctl.insertAdjacentHTML("beforebegin", `<div class="empty">Ningún modelo visible tiene datos en esta área.</div>`);
       $("#subWhy").innerHTML = "";
     } else {
-      const mn = (q) => `${famIcon(q.m.family, 11)}<b>${esc(famShort(q.m.family))} ${esc(q.m.effort)}</b>`;
+      const mn = (q) => `${subIcon(q.m, 11)}<b>${esc(famShort(q.m.family))} ${esc(q.m.effort)}</b>`;
       const card = (ic, tag, q, nums, hero, i) => `<div class="pickcard${hero ? " hero-pick" : ""}${SUB.sel.includes(q.p.id) ? "" : " addable"}" data-k="${q.p.id}" title="${SUB.sel.includes(q.p.id) ? "" : "Clic: añadirlo a la gráfica"}" style="animation-delay:${i * 50}ms">
         <span class="pk">${icon(ic, 16)}</span><span class="ptag">${tag}</span><span class="pname">${esc(q.p.name)}</span><span class="pnum">${nums}</span></div>`;
       ctl.insertAdjacentHTML("beforebegin",
@@ -2448,7 +2495,7 @@
       $("#subCards").innerHTML = sums.map((r, i) => {
         const p = r.p;
         // Las 5 mejores notas a la vista; el resto de la frontera, plegado
-        const li = (q) => `<li data-pin="${q.m.slug}" data-pick="${q.m.slug}" style="--cd:${famDark(q.m.family)}"><span class="nm">${famIcon(q.m.family)}${esc(famShort(q.m.family))} <span class="e">${esc(q.m.effort)}</span></span>
+        const li = (q) => `<li data-pin="${q.m.slug}" data-pick="${q.m.slug}" style="--cd:${subDark(q.m)}"><span class="nm">${subIcon(q.m)}${esc(famShort(q.m.family))} <span class="e">${esc(q.m.effort)}</span></span>
           <span class="pv"><b>${fmt(y, q.s)}</b> · ${eurTxt(q.eur, true)}/tarea<br>≈ ${tasksTxt(q.tasks)} tareas/mes</span></li>`;
         const fr = r.front.slice().reverse(), LIM = 5;
         const list = fr.slice(0, LIM).map(li).join("") + (fr.length > LIM ? `<li class="more"><details><summary>Ver ${fr.length - LIM} más baratos</summary><ol>${fr.slice(LIM).map(li).join("")}</ol></details></li>` : "");

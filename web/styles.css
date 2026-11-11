@@ -910,7 +910,7 @@ body.color-names .pop-h > span:not(.pop-co) { color: var(--cd, inherit); }
 body.no-grid .subchart .gridline { display: none; }
 .sser { animation: fadeIn .5s var(--ease) both; transition: opacity .25s var(--ease); }
 .subchart.hl .sser:not(.on) { opacity: .16; }
-.sline { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sline { fill: none; stroke: var(--sc, var(--ink)); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .shalo { fill: none; stroke: var(--surface); stroke-width: 6; stroke-linejoin: round; }
 .sser.api .sline { stroke: var(--axis); stroke-width: 3; }
 .sser.on .sline { stroke-width: 2.6; }
@@ -921,6 +921,7 @@ body.no-grid .subchart .gridline { display: none; }
 body.has-pins .spt:not(.pinned):not(:hover) { opacity: .3; }
 .slabel { font-size: calc(12px * var(--fs, 1)); font-weight: 700; fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
 .slabel .sp { font-weight: 500; fill: var(--ink-2); }
+body.color-names .slabel { fill: var(--cd, var(--ink)); }
 .dsw { flex: none; overflow: visible; }
 .dsw path { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
 
@@ -928,6 +929,7 @@ body.has-pins .spt:not(.pinned):not(:hover) { opacity: .3; }
 .sub-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; margin-top: 10px; font-size: 13px; color: var(--ink-2); }
 .sub-legend span { display: inline-flex; align-items: center; gap: 7px; cursor: default; }
 .sub-legend .linkbtn { margin-left: auto; text-decoration: none; }
+.sub-legend .sl-note { flex-basis: 100%; margin: 0; font-size: 12px; color: var(--muted); }
 .wlink { display: inline-block; margin-top: 6px; color: var(--ink); font-weight: 600; text-decoration: none; }
 .wlink:hover { text-decoration: underline; text-underline-offset: 3px; }
 

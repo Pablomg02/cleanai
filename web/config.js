@@ -26,10 +26,12 @@ window.AA_CONFIG = {
   },
   // Empresas (campo provider de cada modelo): nombre en la barra y abreviatura en móvil.
   // Las familias se agrupan por empresa en el orden de "families".
+  // color: el de la empresa en las gráficas de suscripciones (allí cada familia solo
+  // cambia de forma). Paleta validada para daltonismo (ΔE CVD ≥ 15, normal ≥ 20).
   companies: {
-    Anthropic: { name: "Anthropic", abbr: "A" },
-    Google:    { name: "Google",    abbr: "G" },
-    OpenAI:    { name: "OpenAI",    abbr: "O" },
+    Anthropic: { name: "Anthropic", abbr: "A", color: "#e34948" },
+    Google:    { name: "Google",    abbr: "G", color: "#eda100" },
+    OpenAI:    { name: "OpenAI",    abbr: "O", color: "#2a78d6" },
   },
   efforts: ["max", "xhigh", "high", "medium", "low"],
   coverageThreshold: 0.5,
@@ -122,6 +124,12 @@ window.AA_CONFIG = {
   pricing: {
     fxUsdPerEur: 1.1214, fxDate: "2026-11-10 (BCE)",
     defaults: { Anthropic: "claude-max", Google: "google-ai-ultra-5x", OpenAI: "chatgpt-pro-100" },
+    // Niveles de precio para la gráfica de suscripciones de la portada (el primero es el inicial)
+    homeTiers: [
+      { id: "20", name: "≈ 20 €/mes", plans: ["claude-pro", "chatgpt-plus"],
+        note: "Google AI Pro (21,99 €) no aparece: no incluye Gemini 4 Carbon, el único modelo de Google en los datos." },
+      { id: "100", name: "≈ 100 €/mes", plans: ["claude-max", "google-ai-ultra-5x", "chatgpt-pro-100"] },
+    ],
     // Por proveedor: título del selector de plan y familia de referencia para la portada
     providers: {
       Anthropic: { label: "Plan de Claude", ref: "Opus", refName: "Opus" },

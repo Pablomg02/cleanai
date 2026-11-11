@@ -2702,7 +2702,67 @@
     render();
   }
 
+  /* ================= Tiras de píldoras ================= */
+  // Al pasar el ratón por una .gpill su etiqueta se despliega. Sin corrección la píldora solo crece hacia
+  // la derecha, empuja a las demás y la que estaba bajo el ratón se escapa. Mientras el ratón está en la
+  // tira, cada frame se desplaza la tira (con scroll si lo tiene, si no con transform) para que el centro
+  // de la píldora bajo el ratón se quede donde estaba con la tira en reposo: crece hacia los dos lados.
+  function centerPills(strip) {
+    let anchors = null, active = null, T = 0, sl = 0, raf = 0, wheel = 0;
+    const mid = (p) => p.offsetLeft + p.offsetWidth / 2; // posición en el contenido; no la cambian ni el scroll ni el transform
+    // Centro de cada píldora con la tira en reposo (sin desplegar más etiqueta que la de la activa)
+    const rest = () => {
+      const m = new Map();
+      let acc = 0;
+      for (const p of strip.querySelectorAll(".gpill")) {
+        const gl = p.querySelector(".gl");
+        const g = !gl || p.classList.contains("active") ? 0 : gl.offsetWidth + (parseFloat(getComputedStyle(gl).marginLeft) || 0);
+        m.set(p, mid(p) - acc - g / 2);
+        acc += g;
+      }
+      return m;
+    };
+    // Anclas en coordenadas visibles de la tira; «shift» conserva el desplazamiento visible actual
+    const reanchor = (shift) => { anchors = new Map([...rest()].map(([p, x]) => [p, x + shift])); active = strip.querySelector(".gpill.active"); };
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      if (strip.scrollLeft !== sl) { // si lo ha movido el usuario, las anclas lo siguen; si es el navegador recortando, no
+        if (performance.now() - wheel < 400) for (const [p, x] of anchors) anchors.set(p, x - (strip.scrollLeft - sl));
+        sl = strip.scrollLeft;
+      }
+      const h = strip.querySelector(".gpill:hover");
+      if (!h) return;
+      // Píldoras nuevas o cambio de activa (clic): reposo nuevo, pero la píldora bajo el ratón no se mueve
+      if (!anchors.has(h) || strip.querySelector(".gpill.active") !== active) reanchor(mid(h) + T - sl - rest().get(h));
+      const d = anchors.get(h) - mid(h); // lo que hay que desplazar: T - scroll
+      const max = strip.scrollWidth - strip.clientWidth;
+      const s = max > 1 ? Math.min(max, Math.max(0, -d)) : 0;
+      const t = d + s;
+      if (s !== sl) { strip.scrollLeft = s; sl = strip.scrollLeft; }
+      if (Math.abs(t - T) > 0.05) { T = t; strip.style.transform = T ? `translateX(${T.toFixed(2)}px)` : ""; }
+    };
+    strip.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "touch") return;
+      const cur = getComputedStyle(strip).transform;
+      T = cur && cur !== "none" ? new DOMMatrixReadOnly(cur).m41 : 0; // por si vuelve a mitad de la transición de salida
+      strip.style.transition = "none";
+      strip.style.transform = T ? `translateX(${T.toFixed(2)}px)` : "";
+      sl = strip.scrollLeft;
+      reanchor(T - sl);
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(tick);
+    });
+    strip.addEventListener("wheel", () => { wheel = performance.now(); }, { passive: true });
+    strip.addEventListener("pointerleave", () => {
+      cancelAnimationFrame(raf);
+      anchors = null; T = 0;
+      strip.style.transition = "transform .4s var(--ease)";
+      strip.style.transform = "";
+    });
+  }
+
   /* ================= Arranque ================= */
+  document.querySelectorAll(".gstrip").forEach(centerPills);
   const fetched = (D.meta.fetched_at || "").slice(0, 10);
   $("#foot").innerHTML = `Datos: <a href="https://artificialanalysis.ai" target="_blank" rel="noopener">Artificial Analysis</a> (descargados el ${esc(fetched)}). ` +
     `CyberBench, CWE-bench y SWE-bench Pro son externos (Vals AI, benchmarklist.com) y se editan a mano en <code>data/external_benchmarks.json</code>. ` +

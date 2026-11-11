@@ -1,0 +1,403 @@
+{
+ "id": "6fb13851-40ce-4bda-ad3f-6b38e0c5daa7",
+ "slug": "gpt-6-luna",
+ "name": "GPT-6 Luna (Max)",
+ "shortName": "GPT-6 Luna (max)",
+ "suffix": "Max",
+ "chartDefaultSelected": true,
+ "chartHighlighted": false,
+ "releaseDate": "2026-09-22",
+ "knowledgeCutoffDate": null,
+ "isReasoning": true,
+ "effort": {
+  "slug": "max",
+  "label": "max",
+  "level": 60
+ },
+ "release": {
+  "slug": "gpt-6-luna",
+  "name": "GPT-6 Luna",
+  "deprecatedTo": null
+ },
+ "deprecated": false,
+ "isOpenWeights": false,
+ "openSourceCategorization": "proprietary",
+ "parameters": null,
+ "inferenceParametersActiveBillions": null,
+ "sizeClass": "medium",
+ "contextWindowTokens": 1000000,
+ "licenseName": null,
+ "licenseUrl": null,
+ "modelWeightsSourceUrl": null,
+ "microevalsEnabled": true,
+ "intelligenceIndex": 27.8552004938153,
+ "capabilities": {
+  "financeAndAccounting": 33.8675825488803,
+  "strategyAndOps": 43.1882020223437,
+  "legal": 32.2110713906242,
+  "healthcareAndMedical": 34.8235666086145,
+  "engineering": 33.298545508658,
+  "economics": 34.5359833333333
+ },
+ "omniscience": -8.266666666666667,
+ "omniscienceAccuracy": 0.3963333333333333,
+ "omniscienceHallucinationRate": 0.7934842628382109,
+ "mlcrOverall": 0.261111111111111,
+ "harveyLab": 0.03333333333333333,
+ "gdpPdfAllPass": 0.228,
+ "gdpval": 1443.56,
+ "gdpvalInterval": {
+  "lower": 1423.74,
+  "upper": 1463.37
+ },
+ "itBenchSre": null,
+ "tau2": null,
+ "tauBanking": null,
+ "terminalbenchHard": null,
+ "terminalBench21": null,
+ "terminalBench40": 0.126262626262626,
+ "frontierCode": 0.419269666666667,
+ "frontierCode20": 0.251747727272727,
+ "terminalBenchScience": 0.0857142857142857,
+ "healthbench": 0.5457844450559368,
+ "vialsScore": 0.2732919254658385,
+ "mkaClimbWsr": 0.3675354471188268,
+ "healthbenchProfessional": 0.6189434003955461,
+ "hleDiamond": 0.222,
+ "critptAgenticHard": 0.425,
+ "scicode": 0.546296296296296,
+ "lcr": 0.833333333333333,
+ "ifbench": null,
+ "hle": 0.385078776645042,
+ "gpqa": null,
+ "critpt": 0.194285714285714,
+ "apexAgents": null,
+ "mmmuPro": 0.796531791907514,
+ "livecodebench": null,
+ "aime25": null,
+ "analystAgent": 0.4375,
+ "automationBenchPartialScore": 0.5316814034483175,
+ "price1mInputTokens": 0.1,
+ "price1mOutputTokens": 0.5,
+ "cacheHitPrice": 0.01,
+ "cacheHitDiscountPercent": 0.9,
+ "cacheWritePrice": 0.125,
+ "pricePer1k1mpImages": null,
+ "price1mBlended0To3To1": 0.2,
+ "price1mBlended7To2To1": 0.077,
+ "price1mBlended0To1To1": 0.3,
+ "price1mBlended100To1To1": 0.01568627450980392,
+ "price1mBlended0To100To1": 0.10396039603960396,
+ "intelligenceIndexTimePerTask": 692.5125059093631,
+ "intelligenceIndexCost": {
+  "total": 136.06082185078296,
+  "input": 81.26666385078296,
+  "nonCacheInput": 1.7141741000000001,
+  "cacheRead": 58.236369989062354,
+  "cacheWrite": 21.31611976172061,
+  "output": 54.794158,
+  "reasoning": 46.650232,
+  "answer": 8.143926
+ },
+ "intelligenceIndexCostPerTask": {
+  "cost": {
+   "total": 0.15195575732105837,
+   "input": 0.11430773113823903,
+   "nonCacheInput": 0.000814838695,
+   "cacheRead": 0.08963626960255419,
+   "cacheWrite": 0.023856622840684842,
+   "output": 0.03764802618281935,
+   "reasoning": 0.028781102766303218,
+   "answer": 0.008866923416516133
+  },
+  "evaluations": [
+   {
+    "slug": "aa-briefcase",
+    "weightedCostPerTask": 0.025498811110892392
+   },
+   {
+    "slug": "automationbench-aa",
+    "weightedCostPerTask": 0.0018199822210224262
+   },
+   {
+    "slug": "terminalbench-4-0",
+    "weightedCostPerTask": 0.023621085607736896
+   },
+   {
+    "slug": "frontiercode-2-0",
+    "weightedCostPerTask": 0.02638850608249693
+   },
+   {
+    "slug": "omniscience",
+    "weightedCostPerTask": 0.00035156394999999994
+   },
+   {
+    "slug": "gdp-pdf",
+    "weightedCostPerTask": 0.0014273532
+   },
+   {
+    "slug": "hle-diamond",
+    "weightedCostPerTask": 0.00148947557
+   },
+   {
+    "slug": "critpt-v2-hard",
+    "weightedCostPerTask": 0.0032463504688193547
+   },
+   {
+    "slug": "terminal-bench-science",
+    "weightedCostPerTask": 0.06811262911009038
+   }
+  ]
+ },
+ "canonicalIntelligenceIndexTokenCount": {
+  "input": 6011307698,
+  "output": 109588316,
+  "answer": 16287852,
+  "reasoning": 93300464
+ },
+ "intelligenceIndexOutputTokensPerTask": {
+  "reasoning": 57562.205532606444,
+  "answer": 17733.846833032265,
+  "output": 75296.05236563871
+ },
+ "intelligenceIndexEvaluations": [
+  {
+   "slug": "aa-briefcase",
+   "score": 1337.11,
+   "outputTokensPerTask": 110018.61538461539,
+   "costPerTask": 0.16999207407261596,
+   "timePerTask": 1011.862702531897
+  },
+  {
+   "slug": "automationbench-aa",
+   "score": 0.5316814034483175,
+   "outputTokensPerTask": 34034.07305936073,
+   "costPerTask": 0.03639964442044852,
+   "timePerTask": 313.0180199380007
+  },
+  {
+   "slug": "terminalbench-4-0",
+   "score": 0.126262626262626,
+   "outputTokensPerTask": 140973.75757575757,
+   "costPerTask": 0.23621085607736897,
+   "timePerTask": 1296.5631936741283
+  },
+  {
+   "slug": "frontiercode-2-0",
+   "score": 0.251747727272727,
+   "outputTokensPerTask": 69839.4696969697,
+   "costPerTask": 0.17592337388331286,
+   "timePerTask": 642.327248928932
+  },
+  {
+   "slug": "omniscience",
+   "score": -8.266666666666667,
+   "outputTokensPerTask": 4663.009,
+   "costPerTask": 0.0023437596666666663,
+   "timePerTask": 42.886604891142376
+  },
+  {
+   "slug": "gdp-pdf",
+   "score": 0.228,
+   "outputTokensPerTask": 24831.15,
+   "costPerTask": 0.028547064,
+   "timePerTask": 228.37693837663406
+  },
+  {
+   "slug": "hle-diamond",
+   "score": 0.222,
+   "outputTokensPerTask": 29660.992,
+   "costPerTask": 0.0148947557,
+   "timePerTask": 272.79793896673476
+  },
+  {
+   "slug": "critpt-v2-hard",
+   "score": 0.425,
+   "outputTokensPerTask": 48777.05,
+   "costPerTask": 0.03246350468819355,
+   "timePerTask": 448.612059531838
+  },
+  {
+   "slug": "terminal-bench-science",
+   "score": 0.0857142857142857,
+   "outputTokensPerTask": 151556.3142857143,
+   "costPerTask": 0.45408419406726913,
+   "timePerTask": 1393.8930354904367
+  }
+ ],
+ "briefcaseBreakdown": {
+  "overall": {
+   "elo": 1337.11,
+   "lower95ci": 1328.58,
+   "upper95ci": 1346.49
+  },
+  "rubricPassRate": 0.4121212121212121,
+  "analyticalQuality": {
+   "elo": 1375.91,
+   "lower95ci": 1357.65,
+   "upper95ci": 1393.47
+  },
+  "presentation": {
+   "elo": 1396.53,
+   "lower95ci": 1380.98,
+   "upper95ci": 1411.75
+  }
+ },
+ "briefcaseTotalCost": 15.46927874060805,
+ "aa3dElo": 1000,
+ "aa3dEloInterval": {
+  "lower": 1000,
+  "upper": 1000
+ },
+ "code2videoElo": 1029.65,
+ "code2videoEloInterval": {
+  "lower": 1010.01,
+  "upper": 1049.29
+ },
+ "personalityBench": {
+  "scores": {
+   "lexicallyVaried": 886.97,
+   "eloquent": 915.2,
+   "literate": 903.14,
+   "naturalSounding": 1114.92,
+   "metaphorical": 891.14,
+   "structured": 805.33,
+   "scannable": 586.78,
+   "summarizesBottomLine": 941.35,
+   "answerFirst": 1045,
+   "informationDense": 867.54,
+   "evidenceBased": 856.58,
+   "resourceSpecific": 1074.27,
+   "providesActionableGuidance": 903.53,
+   "pragmatic": 892.27,
+   "truthful": 888.57,
+   "admitsUncertainty": 769.37,
+   "disclaimsWithAssumptions": 870.03,
+   "flagsNuances": 790.78,
+   "sycophantic": 1012.78,
+   "friendly": 870.85,
+   "humorous": 822.91,
+   "sincere": 992.55,
+   "emotionallyIntelligent": 893.71,
+   "direct": 1027.15,
+   "confident": 1007.75,
+   "opinionated": 1016.86,
+   "constructivelyPushesBack": 857.46,
+   "creative": 677.38,
+   "openEnded": 731.15,
+   "slop": 793.71
+  },
+  "indexScores": {
+   "expressiveness": 40.1875,
+   "organization": 21.625,
+   "informativeness": 17.5,
+   "transparency": 52.56250000000001,
+   "warmth": 48.4375,
+   "conviction": 48.4375,
+   "imagination": 19.5625,
+   "slop": 3.0625
+  },
+  "indexIntervals": {
+   "expressiveness": {
+    "lower": 37,
+    "upper": 43
+   },
+   "organization": {
+    "lower": 19,
+    "upper": 32
+   },
+   "informativeness": {
+    "lower": 17,
+    "upper": 19
+   },
+   "transparency": {
+    "lower": 47,
+    "upper": 61
+   },
+   "warmth": {
+    "lower": 43,
+    "upper": 52
+   },
+   "conviction": {
+    "lower": 41,
+    "upper": 55
+   },
+   "imagination": {
+    "lower": 15,
+    "upper": 25
+   },
+   "slop": {
+    "lower": 3,
+    "upper": 4
+   }
+  }
+ },
+ "personalityBenchMeans": {
+  "charCount": 1736.29111111111,
+  "wordCount": 270.467777777778,
+  "sentenceCount": 18.1733333333333,
+  "paragraphCount": 4.95666666666667,
+  "avgSentenceLength": 15.4100150241841,
+  "listCount": 0.728888888888889,
+  "headingCount": 0.585555555555556,
+  "tableCount": 0.0633333333333333,
+  "emDashCount": 2.49555555555556,
+  "contractionCount": 5.25333333333333,
+  "exclamationCount": 0.01,
+  "questionCount": 1.08333333333333,
+  "parentheticalCount": 0.425555555555556,
+  "quoteCount": 3.26777777777778,
+  "colonCount": 3.24333333333333,
+  "ellipsisCount": 0.0344444444444444,
+  "boldCount": 5.17555555555556,
+  "italicsCount": 0.524444444444444,
+  "emojiCount": 0,
+  "acronymCount": 1.28333333333333,
+  "endsWithQuestion": 0.05
+ },
+ "headline": {
+  "outputSpeed": 108.72879799732245,
+  "timeToFirstToken": 81.37268272156834,
+  "timeToFirstAnswerToken": 81.37268272156834
+ },
+ "multiTurn": {
+  "timeToFirstToken": 13.31547035184252
+ },
+ "workloads": {
+  "1k": {
+   "timeToFirstToken": 101.79556400097059
+  },
+  "10k": {
+   "timeToFirstToken": 122.72741359041187
+  },
+  "100k": {
+   "timeToFirstToken": 223.7667076825
+  }
+ },
+ "endToEndTime": 173.64252226429903,
+ "performanceDataSource": {
+  "type": "firstParty",
+  "providerName": "OpenAI"
+ },
+ "priceDataSource": {
+  "type": "firstParty",
+  "providerName": "OpenAI"
+ },
+ "hostModelCount": 8,
+ "creator": {
+  "id": "e67e56e3-15cd-43db-b679-da4660a69f41",
+  "slug": "openai",
+  "name": "OpenAI",
+  "logo": "/img/logos/openai.svg",
+  "color": "#1f1f1f",
+  "country": "us"
+ },
+ "inputModalityText": true,
+ "inputModalityImage": true,
+ "inputModalitySpeech": false,
+ "inputModalityVideo": false,
+ "outputModalityText": true,
+ "outputModalityImage": false,
+ "outputModalitySpeech": false,
+ "outputModalityVideo": false
+}

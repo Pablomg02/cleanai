@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CleanAI · Comparador de modelos de IA</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Cabecera: barra fina; al pasar el ratón se despliegan pestañas y filtros -->
+<header class="top" id="top">
+  <div class="bar" id="bar">
+    <div class="bar-l">
+      <a class="brand" id="brand" href="#inicio" title="CleanAI · Inicio" aria-label="CleanAI, ir al inicio"></a>
+      <span class="crumb" id="crumb"></span>
+    </div>
+    <div class="bar-c">
+      <div class="fampick compact" id="famFilter"></div>
+      <div id="priceSel"></div>
+    </div>
+    <div class="bar-r">
+      <span class="pins" id="pins" hidden></span>
+      <span class="sum" id="sum"></span>
+      <span class="chev" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="drop" id="drop">
+    <div class="drop-inner">
+      <nav class="tabs" id="tabs" role="tablist">
+        <span class="tab-ink" id="tabInk"></span>
+        <button role="tab" data-tab="inicio">Inicio</button>
+        <button role="tab" data-tab="tareas">Para qué</button>
+        <button role="tab" data-tab="suscripciones">Suscripciones</button>
+        <button role="tab" data-tab="explorar">Explorar</button>
+        <button role="tab" data-tab="ranking">Ranking</button>
+        <button role="tab" data-tab="ponderar">Ponderar</button>
+        <button role="tab" data-tab="mapa">Mapa</button>
+        <button role="tab" data-tab="comparar">Comparar</button>
+      </nav>
+      <div class="filters">
+        <span class="flabel">Effort en todas las familias</span>
+        <div class="filter-group" id="effFilter"></div>
+        <button class="linkbtn" id="resetFilters">Todos</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- INICIO -->
+  <section class="view" id="view-inicio">
+    <div class="home">
+      <header class="home-hero">
+        <div class="hh-logo" id="heroLogo"></div>
+        <h1>CleanAI</h1>
+        <p class="lead">Una comparación clara y elegante de los modelos de IA, pensada para lo que necesita cada persona.</p>
+        <p class="hh-stats" id="heroStats"></p>
+        <div class="hh-cta">
+          <button type="button" class="btn primary" data-go="tareas">Elegir por mi tarea</button>
+          <a class="btn" href="#homeNav">Ver todas las secciones</a>
+        </div>
+      </header>
+
+      <section class="hcard reveal" id="homePareto">
+        <div class="hc-head">
+          <div class="hc-t"><p class="eyebrow">Frontera de Pareto</p><h2>Inteligencia frente a precio</h2>
+            <p class="sub" id="hpSub"></p></div>
+          <div class="hc-ctl"><div class="seg hseg" data-by></div><div class="seg hseg" data-price></div></div>
+        </div>
+        <div class="gstrip hstrip" data-area="sc"></div>
+        <div id="hpScatter" class="scatter home-sc"></div>
+        <div id="hpSubs" class="subchart home-sc" hidden></div>
+        <div class="sub-legend" id="hpLegend" hidden></div>
+        <p class="hc-insight" id="hpInsight"></p>
+      </section>
+
+      <section class="hcard reveal" id="homeRank">
+        <div class="hc-head">
+          <div class="hc-t"><p class="eyebrow">Ranking</p><h2 id="hrTitle">Inteligencia bruta</h2>
+            <p class="sub" id="hrSub"></p></div>
+          <div class="hc-ctl"><div class="seg hseg" data-by></div><div class="seg hseg" data-price></div></div>
+        </div>
+        <div class="gstrip hstrip" data-area="rk"></div>
+        <div class="bars big" id="hrBars"></div>
+        <div class="hc-foot"><button type="button" class="linkbtn" id="hrMore"></button><button type="button" class="linkbtn" id="hrOpen">Abrir en Ranking →</button></div>
+        <p class="hc-insight" id="hrInsight"></p>
+      </section>
+
+      <section class="hsec reveal">
+        <p class="eyebrow">Por qué CleanAI</p>
+        <h2>Por qué comparar suscripciones</h2>
+        <div class="why-grid" id="homeWhy"></div>
+      </section>
+
+      <section class="hsec reveal" id="homeNav">
+        <p class="eyebrow">Secciones</p>
+        <h2>Qué puedes hacer aquí</h2>
+        <div class="nav-grid" id="homeNavGrid"></div>
+      </section>
+
+      <section class="hsec reveal" id="homeCredits">
+        <p class="eyebrow">Créditos</p>
+        <h2>De dónde salen los datos</h2>
+        <p class="sub">CleanAI no hace mediciones propias: reúne y ordena el trabajo de estos equipos. No está afiliado a ninguno de ellos.</p>
+        <div class="credit-grid" id="creditGrid"></div>
+      </section>
+    </div>
+    <aside class="drawer" id="drawer-inicio">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Ajustes</span></button>
+      <div class="panel">
+        <div class="psec gopts" data-kind="home"></div>
+      </div>
+    </aside>
+  </section>
+  <!-- PARA QUÉ -->
+  <section class="view" id="view-tareas">
+    <div class="landing" id="taskLanding">
+      <div class="hero">
+        <h1>¿Para qué lo necesitas?</h1>
+        <p class="lead">Elige una tarea y te digo qué modelo rinde más, cuál da casi lo mismo por mucho menos y cuál termina antes.</p>
+      </div>
+      <div class="group-grid" id="groupGrid"></div>
+    </div>
+
+    <div class="task" id="taskDetail" hidden>
+      <div class="gstrip" id="gstrip"></div>
+      <div class="task-head">
+        <div class="th-text"><h2 id="tdTitle"></h2><p id="tdDesc"></p></div>
+        <div class="seg" id="tdMode" role="tablist"></div>
+      </div>
+      <div class="picks" id="tdPicks"></div>
+      <div class="stage">
+        <div id="tdScatter" class="scatter big-task"></div>
+        <div class="bars big" id="tdBars" hidden></div>
+      </div>
+      <a class="scroll-hint" href="#tdBenchSec">Benchmarks que forman la nota <span>↓</span></a>
+      <section class="bench-sec" id="tdBenchSec">
+        <h3>Qué mide esta nota</h3>
+        <p class="sub" id="tdBenchSub"></p>
+        <div class="bench-grid" id="tdBench"></div>
+      </section>
+    </div>
+
+    <aside class="drawer" id="drawer-tareas">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Detalles · Ajustes</span><span class="rail-icons" id="tdRailIcons"></span></button>
+      <div class="panel">
+        <div class="psec">
+          <h4>Por qué estos tres</h4>
+          <div id="tdWhy"></div>
+        </div>
+        <div class="psec gopts" data-kind="task"></div>
+        <div class="psec" data-only="chart">
+          <h4>Ejes</h4>
+          <div class="togs">
+            <label class="tog"><input type="checkbox" id="tdXLog"><span>Eje X logarítmico</span></label>
+            <label class="tog"><input type="checkbox" id="tdYLog"><span>Eje Y logarítmico</span></label>
+          </div>
+        </div>
+        <div class="psec">
+          <h4>Frontera de Pareto</h4>
+          <ol class="pareto-list" id="tdPareto"></ol>
+        </div>
+        <div class="psec">
+          <h4>Zoom y destacados</h4>
+          <ul class="keys">
+            <li><b>Arrastrar</b> sobre la gráfica: ampliar esa zona</li>
+            <li><b>Ctrl + rueda</b> o pellizco en el trackpad: acercar o alejar</li>
+            <li><b>Mayús + arrastrar</b> con zoom: moverte</li>
+            <li><b>Doble clic</b> o «Ver todo»: vista completa</li>
+            <li><b>Clic en un modelo</b>: destacarlo en todas las vistas (también en rankings, mapa y tablas)</li>
+            <li><b>Esc</b>: quitar destacados y zoom</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- SUSCRIPCIONES -->
+  <section class="view" id="view-suscripciones">
+    <div class="gstrip" id="subStrip"></div>
+    <div class="task-head">
+      <div class="th-text"><h2>Comparar suscripciones</h2><p id="subDesc"></p></div>
+      <div class="seg" id="subMode" role="tablist"></div>
+    </div>
+    <div class="picks" id="subPicks"></div>
+    <div class="toolbar sub-bar" id="subBar"><span class="flabel">En la gráfica · hasta 4 planes</span><div class="plan-pick" id="subPick"></div></div>
+    <div class="stage">
+      <div id="subChart" class="subchart big-sub"></div>
+      <div class="bars big" id="subBars" hidden></div>
+    </div>
+    <section class="bench-sec" id="subCardSec">
+      <h3>La frontera de cada plan</h3>
+      <p class="sub">De la nota más alta a la más barata. Las tareas al mes son las que caben en el límite del plan usando solo ese modelo.</p>
+      <div class="plan-grid" id="subCards"></div>
+    </section>
+    <aside class="drawer" id="drawer-suscripciones">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Detalles · Cálculo</span></button>
+      <div class="panel">
+        <div class="psec"><h4>Por qué estos tres</h4><div id="subWhy"></div></div>
+        <div class="psec"><h4>Cálculo</h4><div id="subCalc"></div></div>
+        <div class="psec"><h4>Los planes</h4><div id="subPlans"></div></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- EXPLORAR -->
+  <section class="view" id="view-explorar">
+    <div class="toolbar">
+      <label class="axis-pick"><span>Y</span><select id="ySel"></select></label>
+      <button class="icon-btn" id="swapXY" title="Intercambiar ejes" aria-label="Intercambiar ejes">⇅</button>
+      <label class="axis-pick"><span>X</span><select id="xSel"></select></label>
+      <div class="dd" id="scatterPresets"></div>
+    </div>
+    <div class="stage">
+      <div id="scatterMain" class="scatter big"></div>
+    </div>
+    <aside class="drawer" id="drawer-explorar">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Pareto · Ajustes</span><span class="rail-icons" id="xRailIcons"></span></button>
+      <div class="panel">
+        <div class="psec gopts" data-kind="scatter"></div>
+        <div class="psec">
+          <h4>Ejes</h4>
+          <div class="togs">
+            <label class="tog"><input type="checkbox" id="xLog"><span>Eje X logarítmico</span></label>
+            <label class="tog"><input type="checkbox" id="yLog"><span>Eje Y logarítmico</span></label>
+          </div>
+          <p class="hint" id="scatterNote"></p>
+        </div>
+        <div class="psec">
+          <h4>Frontera de Pareto</h4>
+          <p class="hint">Ningún otro modelo los mejora a la vez en los dos ejes. Son los puntos rellenos.</p>
+          <ol class="pareto-list" id="paretoList"></ol>
+        </div>
+        <div class="psec">
+          <h4>Zoom y destacados</h4>
+          <ul class="keys">
+            <li><b>Arrastrar</b> sobre la gráfica: ampliar esa zona</li>
+            <li><b>Ctrl + rueda</b> o pellizco en el trackpad: acercar o alejar</li>
+            <li><b>Mayús + arrastrar</b> con zoom: moverte</li>
+            <li><b>Doble clic</b> o «Ver todo»: vista completa</li>
+            <li><b>Clic en un modelo</b>: destacarlo en todas las vistas (también en rankings, mapa y tablas)</li>
+            <li><b>Esc</b>: quitar destacados y zoom</li>
+          </ul>
+        </div>
+        <div class="psec metric-help" id="axisHelp"></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- RANKING -->
+  <section class="view" id="view-ranking">
+    <div class="toolbar">
+      <label class="axis-pick wide"><span>¿Quién es el mejor en…?</span><select id="rankSel"></select></label>
+      <div class="dd" id="quickQs"></div>
+    </div>
+    <div class="stage">
+      <div class="bars big" id="rankBars"></div>
+    </div>
+    <aside class="drawer" id="drawer-ranking">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Qué mide · Ajustes</span></button>
+      <div class="panel">
+        <div class="psec metric-help" id="rankHelp"></div>
+        <div class="psec gopts" data-kind="bars"></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- PONDERAR -->
+  <section class="view" id="view-ponderar">
+    <div class="toolbar">
+      <div class="dd" id="weightPresets"></div>
+      <span class="tb-hint">Combina atributos con pesos. Cada uno se normaliza de 0 (peor modelo) a 100 (mejor).</span>
+    </div>
+    <div class="criteria" id="criteria"></div>
+    <div class="seg-legend" id="segLegend"></div>
+    <div class="stage">
+      <div class="bars big" id="weightBars"></div>
+    </div>
+    <aside class="drawer" id="drawer-ponderar">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Opciones · Ajustes</span></button>
+      <div class="panel">
+        <div class="psec">
+          <h4>Cálculo</h4>
+          <div class="togs">
+            <label class="tog"><input type="checkbox" id="normVisible"><span>Normalizar solo con los modelos visibles</span></label>
+            <label class="tog"><input type="checkbox" id="missingZero"><span>Dato que falta = 0</span></label>
+          </div>
+        </div>
+        <div class="psec gopts" data-kind="weights"></div>
+        <div class="psec">
+          <h4>Cómo se calcula</h4>
+          <p class="hint">Cada criterio se lleva a 0–100: 0 es el peor modelo y 100 el mejor. Si en un criterio «menos es mejor», se invierte. Costes, tiempos y tokens se comparan en escala logarítmica.</p>
+          <p class="hint">La puntuación es la media ponderada. Si a un modelo le falta un dato, ese criterio se ignora y su peso se reparte, salvo que actives «Dato que falta = 0».</p>
+          <div id="critInfo"></div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- MAPA -->
+  <section class="view" id="view-mapa">
+    <div class="toolbar">
+      <label class="tog"><input type="checkbox" id="partialMap"><span>Incluir datos parciales</span></label>
+      <span class="tb-hint">Nota 0–100 por grupo, relativa al dataset. Clic en una columna para ordenar; en una celda, para ver el detalle.</span>
+    </div>
+    <div class="stage heat-card"><div id="heatmap" class="heatmap"></div></div>
+    <aside class="drawer" id="drawer-mapa">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Ajustes · Grupos</span></button>
+      <div class="panel">
+        <div class="psec gopts" data-kind="map"></div>
+        <div class="psec">
+          <h4>Qué entra en cada grupo</h4>
+          <div id="mapGroups"></div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- COMPARAR -->
+  <section class="view" id="view-comparar">
+    <div class="toolbar">
+      <span class="flabel">Elige hasta 6</span>
+      <div class="fampick" id="cmpPick"></div>
+      <span class="tb-sep"></span>
+      <label class="axis-pick"><span>Categoría</span><select id="cmpCat"></select></label>
+      <label class="tog"><input type="checkbox" id="cmpOnlyData" checked><span>Ocultar filas sin datos</span></label>
+    </div>
+    <div class="stage"><div class="cmp-wrap" id="cmpTable"></div></div>
+    <aside class="drawer" id="drawer-comparar">
+      <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Ajustes</span></button>
+      <div class="panel">
+        <div class="psec gopts" data-kind="cmp"></div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer class="foot" id="foot"></footer>
+<div class="tooltip" id="tooltip" role="tooltip"></div>
+
+<script src="data.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

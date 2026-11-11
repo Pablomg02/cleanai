@@ -1,0 +1,77 @@
+column,name,unit,higher_is_better,category,evaluation_slug,evaluation_summary,n_models_with_data
+intelligence_index,AA Intelligence Index v5.0.1,index,True,index,artificial-analysis-intelligence-index,"A composite benchmark aggregating nine challenging evaluations to provide a holistic measure of AI capabilities across knowledge work, coding, science, and general knowledge.",43
+cap_engineering,Engineering Index,index,True,domain_index,,,43
+cap_economics,Economics Index,index,True,domain_index,,,43
+cap_finance_accounting,Finance & Accounting Index,index,True,domain_index,,,43
+cap_strategy_ops,Strategy & Ops Index,index,True,domain_index,,,43
+cap_legal,Legal Index,index,True,domain_index,,,43
+cap_healthcare_medical,Healthcare & Medical Index,index,True,domain_index,,,33
+terminal_bench_4_0,Terminal-Bench 4.0,frac,True,coding_agentic,terminalbench-4-0,"A harder 66-task benchmark of complex terminal work across software, machine learning, science, operations, security, hardware, and media, with recalibrated compute and time allowances and improved instructions, environments, and verifiers.",43
+frontiercode_2_0,FrontierCode-AA 2.0,frac,True,coding_agentic,frontiercode-2-0,"Artificial Analysis' implementation of Cognition's FrontierCode 2.0, a private agentic coding benchmark of 132 tasks in real open-source repositories, graded on whether a maintainer would merge the agent's change.",43
+frontiercode_1_1,FrontierCode 1.1,frac,True,coding_agentic,frontiercode,"Artificial Analysis' implementation of Cognition's FrontierCode 1.1, a private agentic coding benchmark that tests models on completing coding tasks in a way that would actually get merged by maintainers of real-world repositories.",36
+scicode,SciCode,frac,True,coding_science,scicode,A scientist-curated coding benchmark featuring 288 test set subproblems from 80 laboratory problems across 16 scientific disciplines.,40
+automationbench,AutomationBench-AA (partial score),frac,True,agentic,automationbench-aa,"A benchmark measuring agentic task completion across simulated SaaS application environments, scoring the share of each task's objectives completed without guardrail violations.",43
+itbench_sre,ITBench-AA (SRE),frac,True,agentic,itbench-aa,"Artificial Analysis' implementation of IBM's ITBench benchmark, testing AI agents on Kubernetes incident root-cause analysis from offline incident snapshots. The agent inspects alerts, events, traces, and topology and identifies the contributing-factor entities (deployments, pods, namespaces, network policies, etc.) responsible for the failure.",2
+analyst_agent,AA-AnalystAgent,frac,True,agentic,aa-analyst-agent,"Artificial Analysis' data analysis benchmark, testing AI agents on their ability to work with spreadsheets and documents to answer quantitative questions a Business Analyst or Data Analyst would face day-to-day.",6
+code2video_elo,Code2Video-AA (Elo),elo,True,coding_visual,code2video-aa,"Artificial Analysis' implementation of HeyGen's Code2Video Bench, evaluating how well models create short product and brand videos from 114 design briefs using HyperFrames HTML.",6
+aa3d_elo,AA-3D (Elo),elo,True,coding_visual,aa-3d,"A benchmark developed by Artificial Analysis for how well AI models build interactive 3D experiences. Models work as agents in an offline sandbox via Stirrup to turn a written brief into a three.js scene, with Elo ratings derived from blind pairwise votes.",7
+terminal_bench_science,Terminal-Bench-Science 0.1,frac,True,science,terminal-bench-science,"A 70-task benchmark of research workflows authored and reviewed by domain experts across the life, physical, earth, mathematical, and engineering sciences, each completed in a terminal and checked by its own set of tests.",43
+hle_diamond,HLE-Diamond,frac,True,reasoning_knowledge,hle-diamond,"A refined and updated 1,000-question set of Humanity's Last Exam, split evenly between reasoning and knowledge questions, with 272 questions that include an image.",43
+hle,Humanity's Last Exam,frac,True,reasoning_knowledge,humanitys-last-exam,"A frontier-level benchmark with 2,500 expert-vetted questions across mathematics, sciences, and humanities, designed to be the final closed-ended academic evaluation.",40
+critpt_v2_hard,CritPt v2 (Hard Subset),frac,True,science,critpt-v2,"CritPt v2 is the revised version of CritPt, a benchmark designed to test LLMs on research-level physics reasoning tasks, featuring 70 composite research challenges. Models solve problems with a code-execution tool in an offline Linux sandbox.",43
+critpt_v1,CritPt (v1),frac,True,science,critpt,"A benchmark designed to test LLMs on research-level physics reasoning tasks, featuring 71 composite research challenges.",40
+mka_climb_wsr,MKA (climb WSR),frac,True,science,mka,"Artificial Analysis' implementation of Google DeepMind's Multimodal Knowledge Agent (MKA) benchmark. It tests whether agents can read visually dense project files, such as architectural drawings, engineering schematics and clinical scans, and produce the deliverables a professional would.",9
+vials,VIALS-AA,frac,True,science,vials-aa,VIALS-AA is Artificial Analysis' implementation of Handshake AI's VIALS benchmark. It tests whether language models can interpret scientific images and answer questions about the evidence they contain.,9
+mmmu_pro,MMMU-Pro (multimodal),frac,True,multimodal,mmmu-pro,An enhanced MMMU benchmark that eliminates shortcuts and guessing strategies to more rigorously test multimodal models across 30 academic disciplines.,26
+omniscience_index,AA-Omniscience v1.1 (index),index,True,knowledge_reliability,omniscience,A benchmark measuring factual recall and hallucination across various economically relevant domains.,43
+omniscience_accuracy,AA-Omniscience accuracy,frac,True,knowledge_reliability,omniscience,A benchmark measuring factual recall and hallucination across various economically relevant domains.,43
+omniscience_hallucination_rate,AA-Omniscience hallucination rate,frac,False,knowledge_reliability,omniscience,A benchmark measuring factual recall and hallucination across various economically relevant domains.,43
+lcr,AA-LCR v1.1 (long context reasoning),frac,True,long_context,artificial-analysis-long-context-reasoning,"A challenging benchmark measuring language models' ability to extract, reason about, and synthesize information from long-form documents ranging from 10k to 100k tokens (measured using the cl100k_base tokenizer).",41
+mlcr,MLCR-AA (long context),frac,True,long_context,mlcr-aa,"An open benchmark from Wisedocs measuring how well models reason over long, fragmented medical records, performing the multi-document synthesis claims professionals rely on when reviewing insurance and healthcare cases.",33
+briefcase_elo,AA-Briefcase v1.1 (Elo),elo,True,knowledge_work,aa-briefcase,"A private evaluation developed by Artificial Analysis for frontier agentic capability in long-horizon knowledge work, testing agents on realistic business workflows that require deliverables such as spreadsheets, presentations, and memos.",43
+briefcase_elo_lo95,AA-Briefcase Elo lower 95% CI,elo,True,knowledge_work,aa-briefcase,"A private evaluation developed by Artificial Analysis for frontier agentic capability in long-horizon knowledge work, testing agents on realistic business workflows that require deliverables such as spreadsheets, presentations, and memos.",43
+briefcase_elo_hi95,AA-Briefcase Elo upper 95% CI,elo,True,knowledge_work,aa-briefcase,"A private evaluation developed by Artificial Analysis for frontier agentic capability in long-horizon knowledge work, testing agents on realistic business workflows that require deliverables such as spreadsheets, presentations, and memos.",43
+briefcase_rubric_pass,AA-Briefcase rubric pass rate,frac,True,knowledge_work,aa-briefcase,"A private evaluation developed by Artificial Analysis for frontier agentic capability in long-horizon knowledge work, testing agents on realistic business workflows that require deliverables such as spreadsheets, presentations, and memos.",43
+briefcase_analytical_elo,AA-Briefcase analytical quality (Elo),elo,True,knowledge_work,aa-briefcase,"A private evaluation developed by Artificial Analysis for frontier agentic capability in long-horizon knowledge work, testing agents on realistic business workflows that require deliverables such as spreadsheets, presentations, and memos.",43
+briefcase_presentation_elo,AA-Briefcase presentation (Elo),elo,True,knowledge_work,aa-briefcase,"A private evaluation developed by Artificial Analysis for frontier agentic capability in long-horizon knowledge work, testing agents on realistic business workflows that require deliverables such as spreadsheets, presentations, and memos.",43
+gdpval_elo,GDPval-AA v2.1 (Elo),elo,True,knowledge_work,gdpval-aa,"GDPval-AA v2.1 is Artificial Analysis' evaluation framework for OpenAI's GDPval dataset. It tests AI models on real-world tasks across 44 occupations and 9 major industries. Models are given shell access and web browsing capabilities in an agentic loop via Stirrup to solve tasks, with Elo ratings derived from blind pairwise comparisons.",41
+gdpval_elo_lo,GDPval-AA Elo lower CI,elo,True,knowledge_work,gdpval-aa,"GDPval-AA v2.1 is Artificial Analysis' evaluation framework for OpenAI's GDPval dataset. It tests AI models on real-world tasks across 44 occupations and 9 major industries. Models are given shell access and web browsing capabilities in an agentic loop via Stirrup to solve tasks, with Elo ratings derived from blind pairwise comparisons.",41
+gdpval_elo_hi,GDPval-AA Elo upper CI,elo,True,knowledge_work,gdpval-aa,"GDPval-AA v2.1 is Artificial Analysis' evaluation framework for OpenAI's GDPval dataset. It tests AI models on real-world tasks across 44 occupations and 9 major industries. Models are given shell access and web browsing capabilities in an agentic loop via Stirrup to solve tasks, with Elo ratings derived from blind pairwise comparisons.",41
+gdp_pdf_all_pass,GDP.pdf (all pass),frac,True,knowledge_work,gdp-pdf,"Artificial Analysis' implementation of Surge AI's GDP.pdf benchmark, testing whether language models can reason over long, real-world professional documents and satisfy detailed task-specific criteria.",43
+harvey_lab,Harvey LAB-AA v1.1 (legal),frac,True,knowledge_work,harvey-lab-aa,"Artificial Analysis' implementation of Harvey's Legal Agent Benchmark (LAB), testing AI agents on real-world legal work from Harvey's dataset of 120 private tasks spanning 24 legal practice areas. v1.1, built in collaboration with Harvey, checks every deliverable against the task's source documents for hallucinations, so work that passes every rubric criterion but contains a material hallucination receives no credit. A panel of three judges grades each deliverable criterion-by-criterion.",15
+healthbench,HealthBench,frac,True,health,healthbench,"OpenAI's HealthBench: 5,000 health conversations graded against physician-written rubrics, from emergency referrals to global health.",11
+healthbench_professional,HealthBench Professional,frac,True,health,healthbench,"OpenAI's HealthBench: 5,000 health conversations graded against physician-written rubrics, from emergency referrals to global health.",11
+cost_per_task_usd,Coste por tarea del Index (USD),usd,False,cost,,,43
+cost_per_task_input,Coste/tarea: input sin caché,usd,False,cost,,,43
+cost_per_task_cache_read,Coste/tarea: cache hit,usd,False,cost,,,43
+cost_per_task_cache_write,Coste/tarea: cache write,usd,False,cost,,,43
+cost_per_task_reasoning,Coste/tarea: reasoning,usd,False,cost,,,43
+cost_per_task_answer,Coste/tarea: answer,usd,False,cost,,,43
+cost_index_total_usd,Coste total de correr el Index (USD),usd,False,cost,,,43
+briefcase_total_cost_usd,Coste total AA-Briefcase (USD),usd,False,cost,,,43
+output_tokens_per_task,Tokens de salida por tarea,tok,False,tokens,,,43
+reasoning_tokens_per_task,Tokens de reasoning por tarea,tok,False,tokens,,,43
+answer_tokens_per_task,Tokens de respuesta por tarea,tok,False,tokens,,,43
+index_total_output_tokens,Tokens de salida totales (Index),tok,False,tokens,,,43
+index_total_input_tokens,Tokens de entrada totales (Index),tok,False,tokens,,,43
+time_per_task_s,Tiempo por tarea del Index (s),s,False,speed,,,43
+output_speed_tps,Velocidad de salida (tokens/s),tok/s,True,speed,,,43
+ttft_s,Time to first token (s),s,False,speed,,,43
+ttfat_s,Time to first answer token (s),s,False,speed,,,43
+e2e_time_s,End-to-end response time (s),s,False,speed,,,43
+ttft_multiturn_s,TTFT multi-turn (s),s,False,speed,,,43
+ttft_1k_s,TTFT con prompt 1k (s),s,False,speed,,,43
+ttft_10k_s,TTFT con prompt 10k (s),s,False,speed,,,43
+ttft_100k_s,TTFT con prompt 100k (s),s,False,speed,,,43
+price_input_1m,Precio input (USD/1M),usd/1M,False,price,,,43
+price_output_1m,Precio output (USD/1M),usd/1M,False,price,,,43
+price_cache_hit_1m,Precio cache hit (USD/1M),usd/1M,False,price,,,43
+price_cache_write_1m,Precio cache write (USD/1M),usd/1M,False,price,,,43
+price_blended_3to1,Precio blended 3:1 (USD/1M),usd/1M,False,price,,,43
+context_window,Ventana de contexto (tokens),tok,True,spec,,,43
+personality_slop,PersonalityBench: slop,index,False,style,aa-personalitybench,"Measures how models communicate rather than whether they are correct: 30 judged personality traits rolled up into 8 indexes, plus 21 measured communication characteristics.",7
+personality_informativeness,PersonalityBench: informativeness,index,True,style,aa-personalitybench,"Measures how models communicate rather than whether they are correct: 30 judged personality traits rolled up into 8 indexes, plus 21 measured communication characteristics.",7
+personality_transparency,PersonalityBench: transparency,index,True,style,aa-personalitybench,"Measures how models communicate rather than whether they are correct: 30 judged personality traits rolled up into 8 indexes, plus 21 measured communication characteristics.",7
+personality_organization,PersonalityBench: organization,index,True,style,aa-personalitybench,"Measures how models communicate rather than whether they are correct: 30 judged personality traits rolled up into 8 indexes, plus 21 measured communication characteristics.",7
+personality_conviction,PersonalityBench: conviction,index,True,style,aa-personalitybench,"Measures how models communicate rather than whether they are correct: 30 judged personality traits rolled up into 8 indexes, plus 21 measured communication characteristics.",7
+personality_sycophantic,PersonalityBench: sycophantic,index,False,style,aa-personalitybench,"Measures how models communicate rather than whether they are correct: 30 judged personality traits rolled up into 8 indexes, plus 21 measured communication characteristics.",7

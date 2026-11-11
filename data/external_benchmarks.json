@@ -1,0 +1,72 @@
+{
+  "_readme": "Benchmarks EXTERNOS a Artificial Analysis, metidos a mano. No se regeneran con fetch_aa.py: hay que actualizarlos a mano. Cobertura parcial: suelen estar medidos en un solo effort (casi siempre max). Valores en fracción 0-1. Revisado el 2026-11-11 (también para OpenAI: GPT-6.1 Terra no tiene datos y ningún GPT-6 tiene SWE-bench Pro).",
+  "benchmarks": [
+    {
+      "id": "ext_cyberbench",
+      "name": "CyberBench v1.1 (Vals AI)",
+      "short": "CyberBench",
+      "unit": "frac",
+      "higher_is_better": true,
+      "category": "security",
+      "source": "Vals AI",
+      "url": "https://www.vals.ai/benchmarks/cyber",
+      "description": "El agente tiene que generar una entrada proof-of-concept que provoque un crash al estilo OSS-Fuzz y parchear el bug sin romper el comportamiento normal. Mide caza de vulnerabilidades y parcheo.",
+      "notes": {
+        "claude-opus-5-5": "Fila 'Claude Opus 5.5 (CVP)', effort max. La fila estándar 'Claude Opus 5.5' saca 55,36 %, sin effort indicado.",
+        "claude-sonnet-5-5": "Con Sonnet 5 como fallback cuando el modelo se niega. Si esas tareas cuentan como fallo, baja a 41,97 %.",
+        "claude-haiku-5-5": "Effort max, sin fallback de rechazo.",
+        "gpt-6-astra": "Effort max según la ficha del modelo en Vals; la tabla no indica effort. Sin datos de rechazos publicados: la nota queda muy por debajo de GPT-6 Sol (77,98 %), que no está en el dataset.",
+        "gpt-6-1-sol": "Effort max según la ficha del modelo en Vals; la tabla no indica effort. Sin datos de rechazos publicados: la nota queda muy por debajo de GPT-6 Sol (77,98 %), que no está en el dataset.",
+        "gpt-6-luna": "Effort max según la ficha del modelo en Vals. Sin fallback de rechazo: los rechazos cuentan como fallo."
+      },
+      "values": {
+        "claude-opus-5-5": 0.7458,
+        "claude-sonnet-5-5": 0.5958,
+        "claude-haiku-5-5": 0.7548,
+        "gpt-6-astra": 0.4107,
+        "gpt-6-1-sol": 0.3929,
+        "gpt-6-luna": 0.7625
+      }
+    },
+    {
+      "id": "ext_cwe_bench",
+      "name": "CWE-bench v1 (Pass@1)",
+      "short": "CWE-bench",
+      "unit": "frac",
+      "higher_is_better": true,
+      "category": "security",
+      "source": "benchmarklist.com",
+      "url": "https://benchmarklist.com/benchmarks/cwe_bench_v1/",
+      "description": "Auditoría defensiva: encontrar y parchear vulnerabilidades no divulgadas. 120 tareas que cubren 73 CWEs. Pass@1 con verificación programática.",
+      "notes": {
+        "gemini-4-carbon": "Effort high, dato de Google.",
+        "claude-opus-5-5-high": "Effort high.",
+        "gpt-6-astra-high": "Effort high, harness Codex. Pass@1 programático; con el panel de jueces baja a 66 %."
+      },
+      "values": {
+        "gemini-4-carbon": 0.71,
+        "claude-opus-5-5-high": 0.67,
+        "gpt-6-astra-high": 0.68
+      }
+    },
+    {
+      "id": "ext_swe_bench_pro",
+      "name": "SWE-bench Pro (system card)",
+      "short": "SWE-bench Pro",
+      "unit": "frac",
+      "higher_is_better": true,
+      "category": "coding_agentic",
+      "source": "System cards de Anthropic, vía benchmarklist.com",
+      "url": "https://benchmarklist.com/benchmarks/swe_bench_pro/",
+      "description": "Resolver issues reales de repositorios grandes. El dato lo publica el propio fabricante.",
+      "notes": {
+        "claude-opus-5-5": "Effort max, dato del fabricante.",
+        "claude-sonnet-5-5": "Effort max, dato del fabricante."
+      },
+      "values": {
+        "claude-opus-5-5": 0.899,
+        "claude-sonnet-5-5": 0.813
+      }
+    }
+  ]
+}

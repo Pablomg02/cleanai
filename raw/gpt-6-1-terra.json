@@ -1,0 +1,291 @@
+{
+ "id": "b0c462cf-f2d0-4126-9434-28db9502219f",
+ "slug": "gpt-6-1-terra",
+ "name": "GPT-6.1 Terra (Max)",
+ "shortName": "GPT-6.1 Terra (max)",
+ "suffix": "Max",
+ "chartDefaultSelected": true,
+ "chartHighlighted": false,
+ "releaseDate": "2026-10-26",
+ "knowledgeCutoffDate": null,
+ "isReasoning": true,
+ "effort": {
+  "slug": "max",
+  "label": "max",
+  "level": 60
+ },
+ "release": {
+  "slug": "gpt-6-1-terra",
+  "name": "GPT-6.1 Terra",
+  "deprecatedTo": null
+ },
+ "deprecated": false,
+ "isOpenWeights": false,
+ "openSourceCategorization": "proprietary",
+ "parameters": null,
+ "inferenceParametersActiveBillions": null,
+ "sizeClass": "large",
+ "contextWindowTokens": 1000000,
+ "licenseName": null,
+ "licenseUrl": null,
+ "modelWeightsSourceUrl": null,
+ "microevalsEnabled": true,
+ "intelligenceIndex": 51.3265188577015,
+ "capabilities": {
+  "financeAndAccounting": 48.9942076168811,
+  "strategyAndOps": 50.0150723234021,
+  "legal": 46.3841187912948,
+  "healthcareAndMedical": 44.7227955763038,
+  "engineering": 54.7359752164502,
+  "economics": 48.4951333333333
+ },
+ "omniscience": 29.566666666666666,
+ "omniscienceAccuracy": 0.47633333333333333,
+ "omniscienceHallucinationRate": 0.3450031826861871,
+ "mlcrOverall": 0.305555555555556,
+ "gdpPdfAllPass": 0.286,
+ "gdpval": 1476.02,
+ "gdpvalInterval": {
+  "lower": 1453.31,
+  "upper": 1498.73
+ },
+ "itBenchSre": null,
+ "tau2": null,
+ "tauBanking": null,
+ "terminalbenchHard": null,
+ "terminalBench21": null,
+ "terminalBench40": 0.555555555555556,
+ "frontierCode": 0.36025,
+ "frontierCode20": 0.423200505050505,
+ "terminalBenchScience": 0.576190476190476,
+ "healthbench": null,
+ "vialsScore": 0.6024844720496895,
+ "mkaClimbWsr": 0.43755021366952485,
+ "healthbenchProfessional": null,
+ "hleDiamond": 0.473,
+ "critptAgenticHard": 0.68,
+ "scicode": 0.550925925925926,
+ "lcr": 0.826666666666667,
+ "ifbench": null,
+ "hle": 0.462465245597776,
+ "gpqa": null,
+ "critpt": 0.28,
+ "apexAgents": null,
+ "mmmuPro": 0.846820809248555,
+ "livecodebench": null,
+ "aime25": null,
+ "analystAgent": null,
+ "automationBenchPartialScore": 0.6016762327257726,
+ "price1mInputTokens": 1,
+ "price1mOutputTokens": 5,
+ "cacheHitPrice": 0.05,
+ "cacheHitDiscountPercent": 0.95,
+ "cacheWritePrice": 1.25,
+ "pricePer1k1mpImages": null,
+ "price1mBlended0To3To1": 2,
+ "price1mBlended7To2To1": 0.735,
+ "price1mBlended0To1To1": 3,
+ "price1mBlended100To1To1": 0.10784313725490197,
+ "price1mBlended0To100To1": 1.0396039603960396,
+ "intelligenceIndexTimePerTask": 812.9133310851944,
+ "intelligenceIndexCost": {
+  "total": 972.3358390033461,
+  "input": 475.405579003346,
+  "nonCacheInput": 17.149089,
+  "cacheRead": 270.0027816144439,
+  "cacheWrite": 188.25370838890208,
+  "output": 496.93026000000003,
+  "reasoning": 406.615515,
+  "answer": 90.314745
+ },
+ "intelligenceIndexCostPerTask": {
+  "cost": {
+   "total": 0.961108031081634,
+   "input": 0.6616922074921133,
+   "nonCacheInput": 0.00815032475,
+   "cacheRead": 0.4264246328151169,
+   "cacheWrite": 0.22711724992699645,
+   "output": 0.2994158235895208,
+   "reasoning": 0.19680942126498924,
+   "answer": 0.10260640232453162
+  },
+  "evaluations": [
+   {
+    "slug": "aa-briefcase",
+    "weightedCostPerTask": 0.12116643604459638
+   },
+   {
+    "slug": "automationbench-aa",
+    "weightedCostPerTask": 0.009264252671692034
+   },
+   {
+    "slug": "terminalbench-4-0",
+    "weightedCostPerTask": 0.14853125323157165
+   },
+   {
+    "slug": "frontiercode-2-0",
+    "weightedCostPerTask": 0.1938772227330226
+   },
+   {
+    "slug": "omniscience",
+    "weightedCostPerTask": 0.006377197449999999
+   },
+   {
+    "slug": "gdp-pdf",
+    "weightedCostPerTask": 0.011758996
+   },
+   {
+    "slug": "hle-diamond",
+    "weightedCostPerTask": 0.014650311800000001
+   },
+   {
+    "slug": "critpt-v2-hard",
+    "weightedCostPerTask": 0.025052344669855186
+   },
+   {
+    "slug": "terminal-bench-science",
+    "weightedCostPerTask": 0.43043001648089624
+   }
+  ]
+ },
+ "canonicalIntelligenceIndexTokenCount": {
+  "input": 5567807688,
+  "output": 99386052,
+  "answer": 18062949,
+  "reasoning": 81323103
+ },
+ "intelligenceIndexOutputTokensPerTask": {
+  "reasoning": 39361.88425299784,
+  "answer": 20521.280464906326,
+  "output": 59883.16471790417
+ },
+ "intelligenceIndexEvaluations": [
+  {
+   "slug": "aa-briefcase",
+   "score": 1402.61,
+   "outputTokensPerTask": 61442.241758241755,
+   "costPerTask": 0.8077762402973093,
+   "timePerTask": 834.0777855065611
+  },
+  {
+   "slug": "automationbench-aa",
+   "score": 0.6016762327257726,
+   "outputTokensPerTask": 16470.1202435312,
+   "costPerTask": 0.18528505343384066,
+   "timePerTask": 223.58170904316947
+  },
+  {
+   "slug": "terminalbench-4-0",
+   "score": 0.555555555555556,
+   "outputTokensPerTask": 101429.80303030302,
+   "costPerTask": 1.4853125323157166,
+   "timePerTask": 1376.9085091126851
+  },
+  {
+   "slug": "frontiercode-2-0",
+   "score": 0.423200505050505,
+   "outputTokensPerTask": 68141.87121212122,
+   "costPerTask": 1.292514818220151,
+   "timePerTask": 925.0251848640519
+  },
+  {
+   "slug": "omniscience",
+   "score": 29.566666666666666,
+   "outputTokensPerTask": 8478.432666666668,
+   "costPerTask": 0.04251464966666667,
+   "timePerTask": 115.09463425838038
+  },
+  {
+   "slug": "gdp-pdf",
+   "score": 0.286,
+   "outputTokensPerTask": 14767.04,
+   "costPerTask": 0.23517992,
+   "timePerTask": 200.4624126533379
+  },
+  {
+   "slug": "hle-diamond",
+   "score": 0.473,
+   "outputTokensPerTask": 29171.192,
+   "costPerTask": 0.14650311800000002,
+   "timePerTask": 395.99862452419364
+  },
+  {
+   "slug": "critpt-v2-hard",
+   "score": 0.68,
+   "outputTokensPerTask": 38380.125,
+   "costPerTask": 0.25052344669855187,
+   "timePerTask": 521.009793122839
+  },
+  {
+   "slug": "terminal-bench-science",
+   "score": 0.576190476190476,
+   "outputTokensPerTask": 138092.08571428573,
+   "costPerTask": 2.8695334432059747,
+   "timePerTask": 1874.5986108669883
+  }
+ ],
+ "briefcaseBreakdown": {
+  "overall": {
+   "elo": 1402.61,
+   "lower95ci": 1392.43,
+   "upper95ci": 1412.95
+  },
+  "rubricPassRate": 0.42424242424242425,
+  "analyticalQuality": {
+   "elo": 1489.44,
+   "lower95ci": 1470.44,
+   "upper95ci": 1510.48
+  },
+  "presentation": {
+   "elo": 1468.01,
+   "lower95ci": 1450.57,
+   "upper95ci": 1485.89
+  }
+ },
+ "briefcaseTotalCost": 73.50763786705514,
+ "headline": {
+  "outputSpeed": 73.66488213197765,
+  "timeToFirstToken": 157.71942368665222,
+  "timeToFirstAnswerToken": 157.71942368665222
+ },
+ "multiTurn": {
+  "timeToFirstToken": 10.999742706397546
+ },
+ "workloads": {
+  "1k": {
+   "timeToFirstToken": 253.38514558402937
+  },
+  "10k": {
+   "timeToFirstToken": 312.4800843009412
+  },
+  "100k": {
+   "timeToFirstToken": 347.45208411575
+  }
+ },
+ "endToEndTime": 338.73568027124503,
+ "performanceDataSource": {
+  "type": "firstParty",
+  "providerName": "OpenAI"
+ },
+ "priceDataSource": {
+  "type": "firstParty",
+  "providerName": "OpenAI"
+ },
+ "hostModelCount": 6,
+ "creator": {
+  "id": "e67e56e3-15cd-43db-b679-da4660a69f41",
+  "slug": "openai",
+  "name": "OpenAI",
+  "logo": "/img/logos/openai.svg",
+  "color": "#1f1f1f",
+  "country": "us"
+ },
+ "inputModalityText": true,
+ "inputModalityImage": true,
+ "inputModalitySpeech": false,
+ "inputModalityVideo": false,
+ "outputModalityText": true,
+ "outputModalityImage": false,
+ "outputModalitySpeech": false,
+ "outputModalityVideo": false
+}

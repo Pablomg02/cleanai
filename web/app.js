@@ -108,12 +108,6 @@
       n: MODELS.filter((m) => val(m, id) !== null).length,
     });
   }
-  // Puntuación de «Ponderar» como métrica oculta (eje Y de su gráfica de Pareto); se rellena al dibujar esa vista
-  const WSCORE = "w__score";
-  METRICS.set(WSCORE, {
-    id: WSCORE, name: "Puntuación ponderada", short: "Puntuación ponderada", unit: "score", hib: true, cat: "group", hidden: true,
-    desc: "Media ponderada de tus criterios, cada uno normalizado de 0 a 100.", source: "Calculado", url: "", log: false, n: 0,
-  });
 
   /* ================= Escala de precios: $ de API, € de API o € de suscripción ================= */
   const PR = C.pricing || null;
@@ -353,7 +347,7 @@
     barH: "md", barScale: "zero", oneEff: false, mapNums: true, cmpBars: true, cmpBest: true,
   }, store.get("gprefs", {}));
   const pct = (v) => nf(0).format(v * 100) + " %";
-  // [tipo, clave, texto, ...]; "only" limita el control a un modo de Para qué o Ponderar (chart | rank)
+  // [tipo, clave, texto, ...]; "only" limita el control a un modo de Para qué (chart | rank)
   const GO = {
     pareto: ["tog", "Frontera de Pareto", "chart"],
     paretoOnly: ["tog", "Solo la frontera (el resto, atenuado y sin nombre)", "chart"],
@@ -377,7 +371,7 @@
     task: ["pareto", "paretoOnly", "connect", "famLine", "labels", "lineW", "ptSize", "barH", "barScale", "oneEff", "fontSize", "grid", "colorText"],
     home: ["pareto", "paretoOnly", "connect", "famLine", "labels", "lineW", "ptSize", "barH", "barScale", "oneEff", "fontSize", "grid", "colorText"],
     bars: ["barH", "barScale", "oneEff", "fontSize", "colorText"],
-    weights: ["pareto", "paretoOnly", "connect", "famLine", "labels", "lineW", "ptSize", "barH", "oneEff", "fontSize", "grid", "colorText"],
+    weights: ["barH", "oneEff", "fontSize", "colorText"],
     map: ["mapNums", "oneEff", "fontSize", "colorText"],
     cmp: ["cmpBars", "cmpBest", "fontSize", "colorText"],
   };
@@ -388,7 +382,7 @@
       const keys = GKINDS[host.dataset.kind] || [];
       host.innerHTML = `<h4>Ajustes de gráfica</h4><p class="hint">Se aplican a todas las secciones.</p><div class="gopt-list">` + keys.map((k) => {
         const [type, text, only, ...rest] = GO[k];
-        const oa = only && (host.dataset.kind === "task" || host.dataset.kind === "weights") ? ` data-only="${only}"` : "";
+        const oa = only && host.dataset.kind === "task" ? ` data-only="${only}"` : "";
         if (type === "tog") return `<label class="tog"${oa}><input type="checkbox" data-g="${k}"><span>${esc(text)}</span></label>`;
         if (type === "seg") {
           const [opts, hint] = rest;
@@ -482,11 +476,11 @@
   });
 
   /* ================= Selector de métricas ================= */
-  function fillMetricSelect(sel, current, filter = () => true, isOff = () => false) {
+  function fillMetricSelect(sel, current, filter = () => true) {
     sel.innerHTML = "";
     const byCat = new Map();
     for (const m of METRICS.values()) {
-      if (m.hidden || !filter(m)) continue;
+      if (!filter(m)) continue;
       if (!byCat.has(m.cat)) byCat.set(m.cat, []);
       byCat.get(m.cat).push(m);
     }
@@ -497,7 +491,6 @@
       for (const m of byCat.get(c)) {
         const o = document.createElement("option");
         o.value = m.id;
-        o.disabled = isOff(m);
         let t = m.short;
         if (m.n < N) t += `  ·  ${m.n}/${N}`;
         if (m.external) t += "  ·  externo";
@@ -1011,7 +1004,6 @@
       for (const id of ["intelligence_index", "cost_per_task_usd", "time_per_task_s"]) {
         if (id !== cfg.x && id !== cfg.y) h += ttRow(METRICS.get(id).short, fmt(id, val(m, id)));
       }
-      if (cfg.tipExtra) h += cfg.tipExtra(m);
       const p = this.pts.get(m.slug);
       if (p && p.tag) h += `<div class="tt-n"><b style="color:var(--ink)">${esc(p.tag)}</b></div>`;
       const notes = [extNote(cfg.x, m), extNote(cfg.y, m)].filter(Boolean);
@@ -1758,29 +1750,8 @@
   const MAX_CRIT = 6;
   let crit = store.get("crit", C.weightPresets[0].criteria.map(([id, w]) => ({ id, w })));
   crit = crit.filter((c) => METRICS.has(c.id)).slice(0, MAX_CRIT);
-  const W = {
-    normVisible: store.get("normVisible", false), missingZero: store.get("missingZero", false), preset: store.get("wpreset", null),
-    mode: store.get("wmode", "rank"), x: store.get("wx", "cost_per_task_usd"), xLog: store.get("wxLog", null), xMoved: null,
-  };
-  if (W.mode !== "chart") W.mode = "rank";
-  const W_MODES = [["rank", "Ranking"], ["chart", "Pareto"]];
-  // Eje X por defecto si el elegido pasa a ser un criterio de la puntuación
-  const W_XFALL = ["cost_per_task_usd", "time_per_task_s", "e2e_time_s", "output_speed_tps", "price_blended_3to1", "intelligence_index"];
-  let weightDD = null, weightScatter = null, wXKey = "";
-  const wParts = new Map(); // slug -> desglose, para el tooltip de la gráfica
-
-  // El eje X no puede ser uno de los criterios del eje Y: si coincide, se cambia a otro libre
-  function fixWX() {
-    const used = new Set(crit.map((c) => c.id));
-    const ok = (id) => METRICS.has(id) && !METRICS.get(id).hidden && !used.has(id);
-    if (ok(W.x)) { if (W.xLog === null) W.xLog = !!METRICS.get(W.x).log; return; }
-    const old = METRICS.get(W.x);
-    W.x = W_XFALL.find(ok) || [...METRICS.values()].find((m) => ok(m.id)).id;
-    W.xLog = !!METRICS.get(W.x).log;
-    // El aviso solo tras un cambio del usuario (no en la primera carga) y mientras no cambien los criterios
-    W.xMoved = wXKey && old && !old.hidden ? { name: old.short, key: crit.map((c) => c.id).join("|") } : null;
-    store.set("wx", W.x); store.set("wxLog", W.xLog);
-  }
+  const W = { normVisible: store.get("normVisible", false), missingZero: store.get("missingZero", false), preset: store.get("wpreset", null) };
+  let weightDD = null;
 
   function initPonderar() {
     weightDD = dropdown($("#weightPresets"), "Plantillas", C.weightPresets.map((p) => ({
@@ -1791,14 +1762,6 @@
     nv.checked = W.normVisible; mz.checked = W.missingZero;
     nv.onchange = () => { W.normVisible = nv.checked; store.set("normVisible", nv.checked); renderPonderar(); };
     mz.onchange = () => { W.missingZero = mz.checked; store.set("missingZero", mz.checked); renderPonderar(); };
-    const seg = $("#wMode");
-    seg.innerHTML = `<span class="seg-ink"></span>` + W_MODES.map(([k, t]) => `<button type="button" data-k="${k}">${t}</button>`).join("");
-    seg.querySelectorAll("button").forEach((b) => b.onclick = () => { if (W.mode === b.dataset.k) return; W.mode = b.dataset.k; store.set("wmode", W.mode); renderPonderar(); });
-    const xs = $("#wXSel");
-    xs.onchange = () => { W.x = xs.value; W.xLog = !!METRICS.get(W.x).log; W.xMoved = null; store.set("wx", W.x); store.set("wxLog", W.xLog); renderPonderar(); };
-    const xl = $("#wXLog");
-    xl.onchange = () => { W.xLog = xl.checked; store.set("wxLog", W.xLog); renderPonderar(); };
-    weightScatter = new Scatter($("#weightScatter"));
     buildCriteria();
   }
   const saveCrit = () => { store.set("crit", crit); store.set("wpreset", W.preset); };
@@ -1869,25 +1832,6 @@
       rows.push({ m, score: acc / sw, parts, sw, miss });
     }
     rows.sort((a, b) => b.score - a.score);
-
-    // La puntuación queda como métrica (oculta) para la gráfica de Pareto
-    for (const m of MODELS) delete m.v[WSCORE];
-    wParts.clear();
-    for (const r of rows) { r.m.v[WSCORE] = r.score; wParts.set(r.m.slug, r); }
-    METRICS.get(WSCORE).n = rows.length;
-
-    const chart = W.mode === "chart";
-    const seg = $("#wMode");
-    seg.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.k === W.mode));
-    segInk(seg);
-    document.querySelectorAll("#drawer-ponderar [data-only]").forEach((el) => { el.hidden = el.dataset.only !== (chart ? "chart" : "rank"); });
-    $("#wXPick").hidden = !chart;
-    $("#segLegend").hidden = chart;
-    $("#weightBars").hidden = chart;
-    $("#weightScatter").hidden = !chart;
-    if (chart) { renderWeightChart(vis); return; }
-    $("#wHint").textContent = "Combina atributos con pesos. Cada uno se normaliza de 0 (peor modelo) a 100 (mejor).";
-
     renderBars($("#weightBars"), (G.oneEff ? oneEach(rows, (r) => r.m.family) : rows).map(({ m, score, parts, sw, miss }) => ({
       key: m.slug, family: m.family, name: modelName(m) + (miss ? ` <span class="note">*${miss} sin dato</span>` : ""),
       color: famColor(m.family), value: score, display: nf(1).format(score), frac: score / 100,
@@ -1902,45 +1846,6 @@
         return h;
       },
     })), { empty: "Ajusta los pesos: ningún modelo visible tiene datos para estos criterios." });
-  }
-
-  function renderWeightChart(vis) {
-    fixWX();
-    // Las métricas que ya están en la puntuación no se pueden elegir como eje X
-    const xs = $("#wXSel"), key = crit.map((c) => c.id).join("|");
-    if (key !== wXKey || !xs.options.length) {
-      const used = new Set(crit.map((c) => c.id));
-      fillMetricSelect(xs, W.x, undefined, (m) => used.has(m.id));
-      for (const o of xs.options) if (o.disabled) o.textContent += "  ·  en tus criterios";
-      wXKey = key;
-    }
-    xs.value = W.x;
-    $("#wXLog").checked = W.xLog;
-    const mx = METRICS.get(W.x);
-    if (W.xMoved && W.xMoved.key !== crit.map((c) => c.id).join("|")) W.xMoved = null;
-    $("#wHint").textContent = W.xMoved
-      ? `«${W.xMoved.name}» ya está en tus criterios: el eje X pasa a «${mx.short}».`
-      : "Y: tu puntuación ponderada. X: cualquier métrica que no esté en tus criterios.";
-    weightScatter.set({
-      models: vis, x: W.x, y: WSCORE, xLog: W.xLog, yLog: false,
-      tipExtra: (m) => {
-        const r = wParts.get(m.slug);
-        if (!r) return "";
-        let h = `<div class="tt-n">Desglose (valor bruto → nota 0–100)</div>`;
-        for (const p of r.parts) {
-          if (p.c.w <= 0) continue;
-          h += ttRow(METRICS.get(p.c.id).short, p.n === null ? (W.missingZero ? "sin dato (0)" : "sin dato") : `${fmt(p.c.id, p.raw)} → ${nf(0).format(p.n)}`);
-        }
-        return h;
-      },
-      onDraw: ({ pts, front, missing }) => {
-        $("#wScatterNote").textContent = (missing ? `${missing} modelo(s) visibles no tienen dato en el eje X o en tus criterios y no aparecen. ` : "") +
-          (G.connect ? "Las líneas unen los efforts de cada familia, de low a max." : "");
-        const list = pts.filter((m) => front.has(m.slug)).sort((a, b) => val(b, WSCORE) - val(a, WSCORE));
-        $("#wParetoList").innerHTML = G.pareto || G.paretoOnly ? (list.map((m, i) => `<li data-pin="${m.slug}" data-pick="${m.slug}" style="--cd:${famDark(m.family)};animation-delay:${i * 40}ms">${famIcon(m.family)}<span class="nm">${modelName(m)}</span>
-          <span class="pv">${fmt(WSCORE, val(m, WSCORE))}<br>${fmt(W.x, val(m, W.x))}</span></li>`).join("") || `<li class="empty">Sin datos</li>`) : `<li class="empty">Frontera desactivada</li>`;
-      },
-    });
   }
   VIEWS.ponderar = renderPonderar;
 
@@ -2027,7 +1932,7 @@
       changed: () => { store.set("cmp", cmpSel); renderComparar(); },
     });
     const cs = $("#cmpCat");
-    cs.innerHTML = `<option value="all">Todas</option>` + CAT_ORDER.filter((c) => [...METRICS.values()].some((m) => m.cat === c && !m.hidden)).map((c) => `<option value="${c}">${esc(catName(c))}</option>`).join("");
+    cs.innerHTML = `<option value="all">Todas</option>` + CAT_ORDER.filter((c) => [...METRICS.values()].some((m) => m.cat === c)).map((c) => `<option value="${c}">${esc(catName(c))}</option>`).join("");
     cs.onchange = () => { cmpCat = cs.value; store.set("cmpCat", cmpCat); renderComparar(); };
     $("#cmpOnlyData").onchange = (e) => { cmpOnly = e.target.checked; store.set("cmpOnly", cmpOnly); renderComparar(); };
   }
@@ -2041,7 +1946,7 @@
     let h = `<table class="cmp"><thead><tr><th>Métrica</th>${sel.map((m) => `<th data-pin="${m.slug}" data-pick="${m.slug}" style="--cd:${famDark(m.family)}" title="Clic: destacar en todas las vistas"><div class="hn">${famIcon(m.family)}${esc(famShort(m.family))}<button class="rm" data-s="${m.slug}" title="Quitar" aria-label="Quitar">×</button></div><span class="he">${esc(m.effort)}</span></th>`).join("")}</tr></thead><tbody>`;
     for (const c of CAT_ORDER) {
       if (cmpCat !== "all" && cmpCat !== c) continue;
-      const ms = [...METRICS.values()].filter((m) => m.cat === c && !m.hidden && (!cmpOnly || sel.some((x) => val(x, m.id) !== null)));
+      const ms = [...METRICS.values()].filter((m) => m.cat === c && (!cmpOnly || sel.some((x) => val(x, m.id) !== null)));
       if (!ms.length) continue;
       h += `<tr class="cat"><td colspan="${sel.length + 1}">${esc(catName(c))}</td></tr>`;
       for (const m of ms) {

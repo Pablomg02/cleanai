@@ -272,13 +272,16 @@
   <!-- PONDERAR -->
   <section class="view" id="view-ponderar">
     <div class="toolbar">
+      <div class="seg" id="wMode" role="tablist"></div>
+      <label class="axis-pick" id="wXPick" hidden><span>X</span><select id="wXSel" aria-label="Eje X"></select></label>
       <div class="dd" id="weightPresets"></div>
-      <span class="tb-hint">Combina atributos con pesos. Cada uno se normaliza de 0 (peor modelo) a 100 (mejor).</span>
+      <span class="tb-hint" id="wHint">Combina atributos con pesos. Cada uno se normaliza de 0 (peor modelo) a 100 (mejor).</span>
     </div>
     <div class="criteria" id="criteria"></div>
     <div class="seg-legend" id="segLegend"></div>
     <div class="stage">
       <div class="bars big" id="weightBars"></div>
+      <div id="weightScatter" class="scatter big-w" hidden></div>
     </div>
     <aside class="drawer" id="drawer-ponderar">
       <button class="rail" aria-label="Abrir panel"><span class="rail-chev"></span><span class="rail-t">Opciones · Ajustes</span></button>
@@ -291,6 +294,18 @@
           </div>
         </div>
         <div class="psec gopts" data-kind="weights"></div>
+        <div class="psec" data-only="chart">
+          <h4>Ejes</h4>
+          <div class="togs">
+            <label class="tog"><input type="checkbox" id="wXLog"><span>Eje X logarítmico</span></label>
+          </div>
+          <p class="hint" id="wScatterNote"></p>
+        </div>
+        <div class="psec" data-only="chart">
+          <h4>Frontera de Pareto</h4>
+          <p class="hint">Ningún otro modelo tiene a la vez más puntuación ponderada y mejor valor en el eje X.</p>
+          <ol class="pareto-list" id="wParetoList"></ol>
+        </div>
         <div class="psec">
           <h4>Cómo se calcula</h4>
           <p class="hint">Cada criterio se lleva a 0–100: 0 es el peor modelo y 100 el mejor. Si en un criterio «menos es mejor», se invierte. Costes, tiempos y tokens se comparan en escala logarítmica.</p>

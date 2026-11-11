@@ -261,7 +261,7 @@ body.no-drawer .drawer { display: none; }
 @keyframes grow { from { transform: scaleX(0); } }
 
 /* Tira compacta de grupos (tras elegir) */
-.gstrip { position: relative; display: flex; gap: 4px; padding: 4px; background: var(--plane); border-radius: 999px; overflow-x: auto; scrollbar-width: none; width: max-content; max-width: 100%; margin-bottom: 14px; }
+.gstrip { display: flex; gap: 4px; padding: 4px; background: var(--plane); border-radius: 999px; overflow-x: auto; scrollbar-width: none; width: max-content; max-width: 100%; margin: 0 auto 14px; }
 .gstrip::-webkit-scrollbar { display: none; }
 .gpill {
   display: inline-flex; align-items: center; gap: 0; border: 0; background: none; cursor: pointer; flex: none;

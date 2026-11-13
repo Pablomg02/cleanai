@@ -88,7 +88,7 @@
  "price1mBlended0To1To1": 24,
  "price1mBlended100To1To1": 0.6666666666666666,
  "price1mBlended0To100To1": 8.316831683168317,
- "intelligenceIndexTimePerTask": 2702.5029475324063,
+ "intelligenceIndexTimePerTask": 2808.6254845326544,
  "intelligenceIndexCost": {
   "total": 22191.421519777276,
   "input": 11237.737559841287,
@@ -163,84 +163,84 @@
  "intelligenceIndexEvaluations": [
   {
    "slug": "aa-briefcase",
-   "score": 1785.32,
+   "score": 1784.66,
    "outputTokensPerTask": 550380.2637362637,
    "costPerTask": 59.35153486471977,
-   "timePerTask": 5432.925093796167
+   "timePerTask": 5646.26650562049
   },
   {
    "slug": "automationbench-aa",
    "score": 0.7642233832611831,
    "outputTokensPerTask": 68931.73515981736,
    "costPerTask": 4.4483182548807925,
-   "timePerTask": 680.4403761980464
+   "timePerTask": 707.1600728649723
   },
   {
    "slug": "terminalbench-4-0",
    "score": 0.595959595959596,
    "outputTokensPerTask": 376804.4393939394,
    "costPerTask": 31.589769302212897,
-   "timePerTask": 3719.5198104307437
+   "timePerTask": 3865.5788106867853
   },
   {
    "slug": "frontiercode-2-0",
    "score": 0.487597222222222,
    "outputTokensPerTask": 419817.7121212121,
    "costPerTask": 43.3740716159139,
-   "timePerTask": 4144.113321796694
+   "timePerTask": 4306.845362376759
   },
   {
    "slug": "omniscience",
    "score": 66.76666666666667,
    "outputTokensPerTask": 5440.493666666666,
    "costPerTask": 0.21898487481174234,
-   "timePerTask": 53.70431411115466
+   "timePerTask": 55.81318805948384
   },
   {
    "slug": "gdp-pdf",
    "score": 0.242,
    "outputTokensPerTask": 27840.37,
    "costPerTask": 2.51789698324489,
-   "timePerTask": 274.8184387404734
+   "timePerTask": 285.61007541943263
   },
   {
    "slug": "hle-diamond",
    "score": 0.802,
    "outputTokensPerTask": 43213.75,
    "costPerTask": 1.733883952,
-   "timePerTask": 426.5724667855037
+   "timePerTask": 443.3232172078355
   },
   {
    "slug": "critpt-v2-hard",
    "score": 0.765,
    "outputTokensPerTask": 123348.2,
    "costPerTask": 6.353041121460681,
-   "timePerTask": 1217.597314455507
+   "timePerTask": 1265.4102192194737
   },
   {
    "slug": "terminal-bench-science",
    "score": 0.733333333333333,
    "outputTokensPerTask": 455032.97142857144,
    "costPerTask": 45.205926007936405,
-   "timePerTask": 4491.730921084686
+   "timePerTask": 4668.11329332343
   }
  ],
  "briefcaseBreakdown": {
   "overall": {
-   "elo": 1785.32,
-   "lower95ci": 1773.79,
-   "upper95ci": 1798.07
+   "elo": 1784.66,
+   "lower95ci": 1773.45,
+   "upper95ci": 1797.73
   },
   "rubricPassRate": 0.6608247422680412,
   "analyticalQuality": {
-   "elo": 2015.01,
-   "lower95ci": 1994.61,
-   "upper95ci": 2038.21
+   "elo": 2013.66,
+   "lower95ci": 1993.7,
+   "upper95ci": 2036.14
   },
   "presentation": {
-   "elo": 1706.03,
-   "lower95ci": 1684.94,
-   "upper95ci": 1729.53
+   "elo": 1705.44,
+   "lower95ci": 1684.74,
+   "upper95ci": 1728.03
   }
  },
  "briefcaseTotalCost": 5400.989672689499,
@@ -249,26 +249,127 @@
   "lower": 1245.9488,
   "upper": 1296.8814
  },
+ "personalityBench": {
+  "scores": {
+   "lexicallyVaried": 1210.9,
+   "eloquent": 1247.57,
+   "literate": 1053.75,
+   "naturalSounding": 1274.67,
+   "metaphorical": 1224.43,
+   "structured": 924.6,
+   "scannable": 1104.55,
+   "summarizesBottomLine": 786.18,
+   "answerFirst": 1032.76,
+   "informationDense": 1356.44,
+   "evidenceBased": 1204.68,
+   "resourceSpecific": 1305.15,
+   "providesActionableGuidance": 867.95,
+   "pragmatic": 1088.92,
+   "truthful": 919.58,
+   "admitsUncertainty": 796.46,
+   "disclaimsWithAssumptions": 904.27,
+   "flagsNuances": 932.36,
+   "sycophantic": 896.97,
+   "friendly": 1069.12,
+   "humorous": 1142.08,
+   "sincere": 1302.71,
+   "emotionallyIntelligent": 1054.41,
+   "direct": 990.38,
+   "confident": 1022.07,
+   "opinionated": 1176.64,
+   "constructivelyPushesBack": 1188.96,
+   "creative": 1176.22,
+   "openEnded": 901.22,
+   "slop": 835.91
+  },
+  "indexScores": {
+   "expressiveness": 80.96153846153847,
+   "organization": 54.30769230769231,
+   "informativeness": 46.69230769230769,
+   "transparency": 80.96153846153847,
+   "warmth": 82.86538461538461,
+   "conviction": 75.25,
+   "imagination": 67.63461538461539,
+   "slop": 6.711538461538462
+  },
+  "indexIntervals": {
+   "expressiveness": {
+    "lower": 75,
+    "upper": 87
+   },
+   "organization": {
+    "lower": 38,
+    "upper": 67
+   },
+   "informativeness": {
+    "lower": 43,
+    "upper": 56
+   },
+   "transparency": {
+    "lower": 65,
+    "upper": 85
+   },
+   "warmth": {
+    "lower": 81,
+    "upper": 84
+   },
+   "conviction": {
+    "lower": 68,
+    "upper": 88
+   },
+   "imagination": {
+    "lower": 61,
+    "upper": 78
+   },
+   "slop": {
+    "lower": 5,
+    "upper": 8
+   }
+  }
+ },
+ "personalityBenchMeans": {
+  "charCount": 2019.13666666667,
+  "wordCount": 328.763333333333,
+  "sentenceCount": 24.2966666666667,
+  "paragraphCount": 6.86777777777778,
+  "avgSentenceLength": 14.185601702525,
+  "listCount": 1.61,
+  "headingCount": 0.82,
+  "tableCount": 0.0455555555555556,
+  "emDashCount": 0.05,
+  "contractionCount": 7.01555555555556,
+  "exclamationCount": 0.05,
+  "questionCount": 1.16555555555556,
+  "parentheticalCount": 1.51,
+  "quoteCount": 4.28,
+  "colonCount": 3.67333333333333,
+  "ellipsisCount": 0.0255555555555556,
+  "boldCount": 6.65,
+  "italicsCount": 0.312222222222222,
+  "emojiCount": 0,
+  "acronymCount": 1.37,
+  "endsWithQuestion": 0.124444444444444
+ },
  "headline": {
-  "outputSpeed": 101.3045926888888,
-  "timeToFirstToken": 247.84841125912985,
-  "timeToFirstAnswerToken": 247.84841125912985
+  "outputSpeed": 97.4768483188663,
+  "timeToFirstToken": 267.2343834947695,
+  "timeToFirstAnswerToken": 267.2343834947695
  },
  "multiTurn": {
-  "timeToFirstToken": 116.53694140940551
+  "timeToFirstToken": 116.87538396897234
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 168.9638156155
+   "timeToFirstToken": 183.00027177276667
   },
   "10k": {
-   "timeToFirstToken": 388.06817165056253
+   "timeToFirstToken": 443.0271373226
   },
   "100k": {
-   "timeToFirstToken": 580.4476560605
+   "timeToFirstToken": 626.7527399663333
   }
  },
- "endToEndTime": 435.6222606154374,
+ "endToEndTime": 480.9586673023111,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "Anthropic"

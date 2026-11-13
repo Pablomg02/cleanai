@@ -1,6 +1,6 @@
 # Subscription to API-equivalent conversion factors (Anthropic, Google, OpenAI)
 
-Research date: 2026-11-11. Web research only. Every number below has a source, or is labelled **ASSUMPTION**. Most estimates of API-equivalent value come from third parties, because neither Anthropic nor Google publishes absolute limits.
+Research date: 2026-11-11 (Google AI Pro and Gemini 4 Hydrogen updated 2026-11-13). Web research only. Every number below has a source, or is labelled **ASSUMPTION**. Most estimates of API-equivalent value come from third parties, because neither Anthropic nor Google publishes absolute limits.
 
 ---
 
@@ -11,9 +11,9 @@ Research date: 2026-11-11. Web research only. Every number below has a source, o
 | Claude Pro | 20 | 21.78 (assumed) | Opus, Sonnet, Haiku (Fable only via pay-as-you-go credits) | 600 / **850** / 1,200 | **42.5x** | medium |
 | Claude Max (formerly "Max 5x") | 100 | 108.90 (assumed) | Fable (up to 50% of weekly limit), Opus, Sonnet, Haiku | 3,000 / **4,350** / 5,825 | **43.5x** | medium |
 | Claude Ultra (formerly "Max 20x") | 200 | 217.80 (assumed) | Fable (up to 50% of weekly limit), Opus, Sonnet, Haiku | 5,800 / **8,700** / 11,926 | **43.5x** | medium |
-| Google AI Pro | 19.99 | 21.99 | none (Gemini 4 Argon only, no Carbon) | 60 / **150** / 400 (ASSUMPTION) | 7.5x | low |
-| Google AI Ultra (5x) | 99.99 | 99.99 | Gemini 4 Carbon | 300 / **750** / 2,000 (ASSUMPTION) | 7.5x | low |
-| Google AI Ultra (20x) | 199.99 | 219.99 | Gemini 4 Carbon | 1,200 / **3,000** / 8,000 (ASSUMPTION) | 15x | low |
+| Google AI Pro | 19.99 | 21.99 | Gemini 4 Hydrogen (no Carbon: pay-as-you-go) | 60 / **150** / 400 (ASSUMPTION) | 7.5x | low |
+| Google AI Ultra (5x) | 99.99 | 99.99 | Gemini 4 Carbon, Hydrogen | 300 / **750** / 2,000 (ASSUMPTION) | 7.5x | low |
+| Google AI Ultra (20x) | 199.99 | 219.99 | Gemini 4 Carbon, Hydrogen | 1,200 / **3,000** / 8,000 (ASSUMPTION) | 15x | low |
 
 - FX: ECB reference rate on **2026-11-10: 1 EUR = 1.1214 USD**.
 - Ratio = API-USD per month at full use / subscription list price in USD.
@@ -63,18 +63,19 @@ On **2026-10-30**, Anthropic renamed its plans. "Max 20x" ($200) became **Ultra*
   - An Italian source reports a 90 € net price for the $100 tier.
 - **ASSUMPTION:** Spanish web prices are 18 / 90 / 180 € net, i.e. **21.78 / 108.90 / 217.80 € with IVA**. Converting USD at 1.1214 plus 21% IVA gives almost the same: 21.58 / 107.90 / 215.80 €. App Store prices are higher (Max about 40% more).
 
-### Google (official: gemini.google/es/subscriptions, fetched 2026-11-11; blog.google, 2026-05-19 and 2026-11-10)
+### Google (official: gemini.google/es/subscriptions, fetched 2026-11-11 and 2026-11-13; blog.google, 2026-05-19, 2026-11-10 and 2026-11-12)
 
 | Plan | EUR (Spain page) | USD | Usage | Models relevant here | Antigravity |
 |---|---|---|---|---|---|
-| AI Plus | 4.99 € | $4.99 (some sources say $7.99) | 2x Free | Flash only | - |
-| AI Pro | 21.99 € | $19.99 | 4x Free | Gemini 4 Argon, **no Carbon** | "entry-level" limits |
-| AI Ultra (5x) | 99.99 € | $99.99 | 5x AI Pro | "Highest access to Gemini 4 Carbon" and Argon | higher limits |
-| AI Ultra (20x) | 219.99 € | $199.99 | 20x AI Pro | Carbon and Argon | highest limits |
+| AI Plus | 4.99 € | $4.99 (some sources say $7.99) | 2x Free | Gemini 4 Hydrogen (subscriptions page, 2026-11-13; not in the launch post) | - |
+| AI Pro | 21.99 € | $19.99 | 4x Free | Gemini 4 Hydrogen and Argon, **no Carbon** | "entry-level" limits, Hydrogen included |
+| AI Ultra (5x) | 99.99 € | $99.99 | 5x AI Pro | "Highest access to Gemini 4 Carbon", Argon and Hydrogen | higher limits |
+| AI Ultra (20x) | 219.99 € | $199.99 | 20x AI Pro | Carbon, Argon and Hydrogen | highest limits |
 
 - At I/O on **2026-05-19**, Google introduced the $100 Ultra tier and cut the top Ultra tier from $250 to $200 (blog.google).
 - **Gemini 4 Carbon** reached general availability on **2026-11-10**. It is rolling out to **all Google AI Ultra subscribers** in the Gemini app, AI Mode and **Antigravity**, and Argon remains on Pro and above (blog.google, 9to5google, 2026-11-10).
-- Carbon API price is **$2 in / $10 out per MTok until 2026-11-30, then $4 / $20**. If your dataset's costs use one of these and the quota uses the other, the ratio moves by up to 2x.
+- **Gemini 4 Hydrogen** launched on **2026-11-12** (blog.google, "Introducing Gemini 4 Hydrogen"). Official post: "If you're a paid Google AI Pro or Ultra subscriber, you can try it in Google Antigravity"; it is also in the Gemini app model dropdown (free users only via auto selection) and in Search for all users. API price: **$1.50 in / $7.50 out per MTok**, flat across the 1M context. Thinking levels low / medium / high (default in the API) / xhigh; Artificial Analysis lists xhigh as its default. The post gives no usage limits per plan and does not mention AI Plus; only the subscriptions page lists Hydrogen for Plus.
+- Carbon API price is **$2 in / $10 out per MTok until 2026-11-30, then $4 / $20**. Artificial Analysis switched Carbon to $2 / $10 on 2026-11-13 (before: $4 / $20). If your dataset's costs use one of these and the quota uses the other, the ratio moves by up to 2x.
 - Gemini CLI: the official quota page still lists 1,500 requests/day for Pro and 2,000 for Ultra (last updated 2026-06-18). One guide dated 2026-11-07 says Pro and Ultra subscribers were moved from Gemini CLI to the Antigravity CLI on 2026-06-18. **Unverified**, and treated here as irrelevant: Antigravity is the agentic surface.
 - Antigravity on Pro and Ultra also offers Claude Sonnet 5.5 and Opus 5.5, on a **separate fixed rate limit** (sessionwatcher.com, 2026-11-06; antigravity.google blog, 2026-05-19).
 - VAT: the Spanish page does not say whether IVA is included. **ASSUMPTION:** it is included, as is usual for Google One consumer prices in the EU, and 219.99 € vs $199.99 is consistent with that.
@@ -150,7 +151,7 @@ On **2026-10-30**, Anthropic renamed its plans. "Max 20x" ($200) became **Ultra*
 - Google: Antigravity's quota is explicitly "drawn down according to API pricing".
 - **ASSUMPTION:** the ratio does not depend on effort level. Use one factor per (plan, model).
 
-**Google, across Gemini models.** The quota is price-weighted, so the ratio is roughly **constant across Gemini models** (Argon, Carbon, Flash) within a plan (antigravity.google blog, 2026-05-19). Carbon "uses more tokens than Argon" (blog.google), which consumes more quota in absolute terms but leaves the ratio unchanged.
+**Google, across Gemini models.** The quota is price-weighted, so the ratio is roughly **constant across Gemini models** (Argon, Carbon, Hydrogen, Flash) within a plan (antigravity.google blog, 2026-05-19). Carbon "uses more tokens than Argon" (blog.google), which consumes more quota in absolute terms but leaves the ratio unchanged.
 
 **Anthropic, across Claude models.** The ratio is **not** constant. Anthropic publishes no weights, beyond saying that Fable uses limits "faster than other Claude models" and is capped at 50% of the weekly limit.
 - **Fable vs Opus.** SemiAnalysis (A4 vs A3): Fable 5.1 gives about $4,970 per full limit against $11,726 for Opus 5.5 on the same plan, a factor of about **0.42**. This is corroborated qualitatively by FinOps ("Fable-heavier week hit the cap $300 sooner") and by SemiAnalysis's margins (Opus 5.5 subscription use at −369% gross margin at 100% use, Fable 5.1 at +1%, meaning Opus is far more subsidized).
@@ -183,7 +184,7 @@ Recommended per-model multipliers on the plan ratio (Anthropic):
 
 ## 6. Default plan per provider
 - **Anthropic: `claude-max` ($100, about 108.90 €).** It is the cheapest plan that includes Fable, has unlimited Claude Code and is the classic heavy-professional tier. Because weekly limits scale linearly with price ($20 per 1x Pro), its ratio (about 43x) is essentially the same as Ultra's, so the choice changes the € price shown but barely changes the conversion.
-- **Google: `google-ai-ultra-5x` ($99.99 / 99.99 €).** AI Pro does not include Gemini 4 Carbon, so the cheapest plan that runs the dataset's Google model is Ultra 5x. It is also the direct price analogue of Claude Max. Ultra 20x doubles the ratio for a heavy user who actually reaches the cap.
+- **Google: `google-ai-ultra-5x` ($99.99 / 99.99 €).** AI Pro does not include Gemini 4 Carbon, so the cheapest plan that runs both Google models in the dataset is Ultra 5x. Since 2026-11-13 AI Pro is in the web's ≈ 20 € tier for Gemini 4 Hydrogen, with Carbon as pay-as-you-go (like Fable on Claude Pro). It is also the direct price analogue of Claude Max. Ultra 20x doubles the ratio for a heavy user who actually reaches the cap.
 
 ---
 
@@ -219,6 +220,8 @@ Recommended per-model multipliers on the plan ratio (Anthropic):
 - https://www.antigravity.google/blog/changes-to-antigravity-plans (2026-05-19)
 - https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/ (2026-11-10)
 - https://9to5google.com/2026/11/10/gemini-app-4-carbon/ (2026-11-10)
+- https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/ (2026-11-12)
+- https://9to5google.com/2026/11/12/gemini-4-hydrogen-launch/ (2026-11-12)
 - https://sessionwatcher.com/guides/antigravity-pricing (2026-11-03 / 11-06)
 - https://plancaps.com/tools/antigravity (2026-11-03)
 - https://www.implicator.ai/google-caps-gemini-per-prompt-quota-use-after-subscriber-backlash/ (2026-05-29)
@@ -248,6 +251,7 @@ Recommended per-model multipliers on the plan ratio (Anthropic):
     },
     "Google": {
       "Carbon": 1.0,
+      "Hydrogen": 1.0,
       "notes": "Antigravity quota is drawn down according to API pricing, so the ratio is the same across Gemini models and thinking levels."
     }
   },
@@ -317,7 +321,8 @@ Recommended per-model multipliers on the plan ratio (Anthropic):
       "name": "Google AI Pro",
       "price_eur": 21.99,
       "price_usd": 19.99,
-      "models": [],
+      "models": ["Gemini 4 Hydrogen"],
+      "pay_as_you_go": ["Gemini 4 Carbon"],
       "api_usd_month": {"low": 60, "mid": 150, "high": 400},
       "ratio_mid": 7.5,
       "eur_sub_per_api_usd_mid": 0.1466,
@@ -325,9 +330,10 @@ Recommended per-model multipliers on the plan ratio (Anthropic):
       "sources": [
         "https://gemini.google/es/subscriptions/ (2026-11-11)",
         "https://www.antigravity.google/blog/changes-to-antigravity-plans (2026-05-19)",
-        "https://aicoderscope.com/blog/google-antigravity-review-2026/ (2026, early-2026 anecdote)"
+        "https://aicoderscope.com/blog/google-antigravity-review-2026/ (2026, early-2026 anecdote)",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/ (2026-11-12)"
       ],
-      "notes": "Does NOT include Gemini 4 Carbon (Argon only), so it cannot run the dataset's Google model. The API value is an ASSUMPTION: no measurement exists. A March 2026 anecdote gives about $90/mo; limits were raised later. 5-hour refresh up to an unpublished weekly cap."
+      "notes": "Includes Gemini 4 Hydrogen (Gemini app and Antigravity, since 2026-11-12) and Argon. Does NOT include Gemini 4 Carbon, which is treated as pay-as-you-go at API rates. The API value is an ASSUMPTION: no measurement exists. A March 2026 anecdote gives about $90/mo; limits were raised later. 5-hour refresh up to an unpublished weekly cap."
     },
     {
       "id": "google-ai-ultra-5x",
@@ -335,7 +341,7 @@ Recommended per-model multipliers on the plan ratio (Anthropic):
       "name": "Google AI Ultra (5x, $99.99)",
       "price_eur": 99.99,
       "price_usd": 99.99,
-      "models": ["Gemini 4 Carbon"],
+      "models": ["Gemini 4 Carbon", "Gemini 4 Hydrogen"],
       "api_usd_month": {"low": 300, "mid": 750, "high": 2000},
       "ratio_mid": 7.5,
       "eur_sub_per_api_usd_mid": 0.1333,
@@ -354,7 +360,7 @@ Recommended per-model multipliers on the plan ratio (Anthropic):
       "name": "Google AI Ultra (20x, $199.99)",
       "price_eur": 219.99,
       "price_usd": 199.99,
-      "models": ["Gemini 4 Carbon"],
+      "models": ["Gemini 4 Carbon", "Gemini 4 Hydrogen"],
       "api_usd_month": {"low": 1200, "mid": 3000, "high": 8000},
       "ratio_mid": 15.0,
       "eur_sub_per_api_usd_mid": 0.07333,

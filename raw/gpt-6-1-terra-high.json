@@ -85,7 +85,7 @@
  "price1mBlended0To1To1": 3,
  "price1mBlended100To1To1": 0.10784313725490197,
  "price1mBlended0To100To1": 1.0396039603960396,
- "intelligenceIndexTimePerTask": 239.69315800647144,
+ "intelligenceIndexTimePerTask": 259.07169925639226,
  "intelligenceIndexCost": {
   "total": 266.79498336499194,
   "input": 163.89481336499196,
@@ -163,63 +163,63 @@
    "score": 1263.74,
    "outputTokensPerTask": 19338.186813186814,
    "costPerTask": 0.2755634102049543,
-   "timePerTask": 276.7884241053485
+   "timePerTask": 299.16601693543356
   },
   {
    "slug": "automationbench-aa",
    "score": 0.584605963496433,
    "outputTokensPerTask": 8519.531202435312,
    "costPerTask": 0.10816495593633714,
-   "timePerTask": 121.94047138020241
+   "timePerTask": 131.79902752060022
   },
   {
    "slug": "terminalbench-4-0",
    "score": 0.419191919191919,
    "outputTokensPerTask": 30376.5,
    "costPerTask": 0.4375420474275898,
-   "timePerTask": 434.78034657844705
+   "timePerTask": 469.9311575189823
   },
   {
    "slug": "frontiercode-2-0",
    "score": 0.37457904040404,
    "outputTokensPerTask": 20603.969696969696,
    "costPerTask": 0.39185184394450456,
-   "timePerTask": 294.90563711225144
+   "timePerTask": 318.74795744022526
   },
   {
    "slug": "omniscience",
    "score": 27.766666666666666,
    "outputTokensPerTask": 565.9286666666667,
    "costPerTask": 0.0029521949999999995,
-   "timePerTask": 8.100164990437074
+   "timePerTask": 8.75504134445512
   },
   {
    "slug": "gdp-pdf",
    "score": 0.28,
    "outputTokensPerTask": 1964.58,
    "costPerTask": 0.17116762,
-   "timePerTask": 28.11913068592779
+   "timePerTask": 30.392486080971874
   },
   {
    "slug": "hle-diamond",
    "score": 0.354,
    "outputTokensPerTask": 3521.722,
    "costPerTask": 0.018256048,
-   "timePerTask": 50.406581130576
+   "timePerTask": 54.48181640149673
   },
   {
    "slug": "critpt-v2-hard",
    "score": 0.615,
    "outputTokensPerTask": 10578.375,
    "costPerTask": 0.06905784505761552,
-   "timePerTask": 151.40880446189587
+   "timePerTask": 163.6497953490318
   },
   {
    "slug": "terminal-bench-science",
    "score": 0.333333333333333,
    "outputTokensPerTask": 37989.328571428574,
    "costPerTask": 0.6151487093281068,
-   "timePerTask": 543.7431383657834
+   "timePerTask": 587.7032952756366
   }
  ],
  "briefcaseBreakdown": {
@@ -242,25 +242,25 @@
  },
  "briefcaseTotalCost": 25.07627032865084,
  "headline": {
-  "outputSpeed": 69.86631350531663,
-  "timeToFirstToken": 10.848393052054092,
-  "timeToFirstAnswerToken": 10.848393052054092
+  "outputSpeed": 64.64031914881699,
+  "timeToFirstToken": 12.357585081690688,
+  "timeToFirstAnswerToken": 12.357585081690688
  },
  "multiTurn": {
-  "timeToFirstToken": 4.201761501980786
+  "timeToFirstToken": 4.541874241131468
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 12.7120183913528
+   "timeToFirstToken": 12.160060667905984
   },
   "10k": {
-   "timeToFirstToken": 14.839505660529444
+   "timeToFirstToken": 19.365995064843744
   },
   "100k": {
-   "timeToFirstToken": 24.93354975449995
+   "timeToFirstToken": 28.993832034
   }
  },
- "endToEndTime": 43.975698583338236,
+ "endToEndTime": 50.11388386839584,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "OpenAI"

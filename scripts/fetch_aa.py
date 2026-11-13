@@ -34,7 +34,7 @@ UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chr
 
 # Para añadir un modelo: busca sus slugs en https://artificialanalysis.ai/models/<slug>.
 # El slug base (sin sufijo) corresponde al effort por defecto de esa familia
-# (max en Claude y GPT, high en Gemini 4 Carbon); el resto lleva sufijo "-<effort>".
+# (max en Claude y GPT, high en Gemini 4 Carbon, xhigh en Gemini 4 Hydrogen); el resto lleva sufijo "-<effort>".
 # Las variantes "-non-reasoning" de GPT no se descargan: no son un nivel de effort.
 STD_EFFORTS = [("max", ""), ("xhigh", "-xhigh"), ("high", "-high"), ("medium", "-medium"), ("low", "-low")]
 FAMILIES = {
@@ -45,6 +45,8 @@ FAMILIES = {
     "claude-haiku-5-5": ("Anthropic", "Claude Haiku 5.5", "Haiku", "5.5", STD_EFFORTS),
     "gemini-4-carbon": ("Google", "Gemini 4 Carbon", "Gemini Carbon", "4",
                         [("high", ""), ("medium", "-medium"), ("low", "-low")]),
+    "gemini-4-hydrogen": ("Google", "Gemini 4 Hydrogen", "Gemini Hydrogen", "4",
+                          [("xhigh", ""), ("high", "-high"), ("medium", "-medium"), ("low", "-low")]),
     "gpt-6-astra": ("OpenAI", "GPT-6 Astra", "GPT Astra", "6", STD_EFFORTS),
     "gpt-6-1-sol": ("OpenAI", "GPT-6.1 Sol", "GPT Sol", "6.1", STD_EFFORTS),
     "gpt-6-1-terra": ("OpenAI", "GPT-6.1 Terra", "GPT Terra", "6.1", STD_EFFORTS),

@@ -17,6 +17,9 @@ window.AA_CONFIG = {
     "Sonnet":        { color: "#2a78d6", shape: "square" },
     "Haiku":         { color: "#1baf7a", shape: "triangle" },
     "Gemini Carbon": { color: "#eda100", shape: "hexagon", short: "Carbon" },
+    // 10.º color, fuera de la paleta base: frente a los otros 9, ΔE normal ≥ 18 y
+    // CVD (protan/deutan) ≥ 11. Repite la forma de Sonnet, pero no su color ni su empresa.
+    "Gemini Hydrogen": { color: "#a01860", shape: "square", short: "Hydrogen" },
     // OpenAI: los 3 tonos libres de la paleta + el azul claro; validado con los 5
     // anteriores (ΔE normal ≥ 12,6). La forma distingue los pares más parecidos.
     "GPT Astra":     { color: "#008300", shape: "star", short: "Astra" },
@@ -120,14 +123,14 @@ window.AA_CONFIG = {
   //   € = USD_API × precio_eur / (api_usd_mes × multiplicador_del_modelo × uso_del_límite)
   // api_usd_mes = USD de API que rinde el plan al mes si se agota el límite semanal
   // (low / mid / high). Son ESTIMACIONES de terceros: ningún proveedor lo publica.
-  // Investigado el 2026-11-11; detalle y fuentes en data/subscriptions_research.md.
+  // Investigado el 2026-11-11 (Google AI Pro y Gemini 4 Hydrogen, el 2026-11-13); detalle y fuentes en data/subscriptions_research.md.
   pricing: {
     fxUsdPerEur: 1.1214, fxDate: "2026-11-10 (BCE)",
     defaults: { Anthropic: "claude-max", Google: "google-ai-ultra-5x", OpenAI: "chatgpt-pro-100" },
     // Niveles de precio para la gráfica de suscripciones de la portada (el primero es el inicial)
     homeTiers: [
-      { id: "20", name: "≈ 20 €/mes", plans: ["claude-pro", "chatgpt-plus"],
-        note: "Google AI Pro (21,99 €) no aparece: no incluye Gemini 4 Carbon, el único modelo de Google en los datos." },
+      { id: "20", name: "≈ 20 €/mes", plans: ["claude-pro", "google-ai-pro", "chatgpt-plus"],
+        note: "Google AI Pro (21,99 €) incluye Gemini 4 Hydrogen, pero no Gemini 4 Carbon." },
       { id: "100", name: "≈ 100 €/mes", plans: ["claude-max", "google-ai-ultra-5x", "chatgpt-pro-100"] },
     ],
     // Por proveedor: título del selector de plan y familia de referencia para la portada
@@ -150,12 +153,15 @@ window.AA_CONFIG = {
       { id: "claude-ultra", provider: "Anthropic", name: "Claude Ultra", short: "Ultra", priceEur: 217.8,
         api: { low: 5800, mid: 8700, high: 11926 }, confidence: "media",
         note: "Antes «Max 20x». 10× el límite semanal de Pro, sin límite de 5 h + 200 $/mes de créditos de API." },
+      { id: "google-ai-pro", provider: "Google", name: "Google AI Pro", short: "AI Pro", priceEur: 21.99,
+        api: { low: 60, mid: 150, high: 400 }, payg: ["Gemini Carbon"], confidence: "baja",
+        note: "Incluye Gemini 4 Hydrogen (también en Antigravity) y Argon, pero no Gemini 4 Carbon, que se paga aparte a precio de API. Sin mediciones públicas del límite: estimación a partir de un caso de marzo de 2026 (unos 90 $ al mes) y de las subidas de límites posteriores." },
       { id: "google-ai-ultra-5x", provider: "Google", name: "Google AI Ultra", short: "AI Ultra", priceEur: 99.99,
         api: { low: 300, mid: 750, high: 2000 }, confidence: "baja",
-        note: "Plan de 99,99 € (5× AI Pro). Sin mediciones públicas: supone la misma proporción que AI Pro. AI Pro no incluye Gemini 4 Carbon." },
+        note: "Plan de 99,99 € (5× AI Pro). Incluye Carbon y Hydrogen. Sin mediciones públicas: supone la misma proporción que AI Pro." },
       { id: "google-ai-ultra-20x", provider: "Google", name: "Google AI Ultra 20x", short: "AI Ultra 20x", priceEur: 219.99,
         api: { low: 1200, mid: 3000, high: 8000 }, confidence: "baja",
-        note: "20× AI Pro por 10× su precio: se supone el doble de rendimiento por €. Sin mediciones públicas." },
+        note: "20× AI Pro por 10× su precio: se supone el doble de rendimiento por €. Incluye Carbon y Hydrogen. Sin mediciones públicas." },
       // OpenAI: valores de referencia con GPT-6.1 Sol. Desde el 29/10/2026 Pro rinde ~2× más por $ que Plus.
       // ChatGPT Go no se incluye: solo da GPT-6 Luna.
       { id: "chatgpt-plus", provider: "OpenAI", name: "ChatGPT Plus", short: "Plus", priceEur: 23,
@@ -179,6 +185,7 @@ window.AA_CONFIG = {
       ["finopsllm: Max 20x vs 5x (oct 2026)", "https://finopsllm.com/research/claude-max-20x-vs-5x-weekly-limit"],
       ["Suscripciones de Google AI", "https://gemini.google/es/subscriptions/"],
       ["Gemini 4 Carbon en AI Ultra (nov 2026)", "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"],
+      ["Gemini 4 Hydrogen (nov 2026)", "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"],
       ["Precios y límites de ChatGPT y Codex", "https://learn.chatgpt.com/docs/pricing"],
       ["Créditos de API en ChatGPT Pro", "https://developers.openai.com/api/docs/guides/chatgpt-api-credits"],
       ["InventiveHQ: uso de Codex medido (oct 2026)", "https://inventivehq.com/blog/codex-subscription-usage-measured"],

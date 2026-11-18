@@ -45,10 +45,10 @@
  "mlcrOverall": 0.261111111111111,
  "harveyLab": 0.03333333333333333,
  "gdpPdfAllPass": 0.228,
- "gdpval": 1443.56,
+ "gdpval": 1443.29,
  "gdpvalInterval": {
-  "lower": 1423.74,
-  "upper": 1463.37
+  "lower": 1423.55,
+  "upper": 1463.02
  },
  "itBenchSre": null,
  "tau2": null,
@@ -81,14 +81,13 @@
  "price1mOutputTokens": 0.5,
  "cacheHitPrice": 0.01,
  "cacheHitDiscountPercent": 0.9,
- "cacheWritePrice": 0.125,
  "pricePer1k1mpImages": null,
  "price1mBlended0To3To1": 0.2,
  "price1mBlended7To2To1": 0.077,
  "price1mBlended0To1To1": 0.3,
  "price1mBlended100To1To1": 0.01568627450980392,
  "price1mBlended0To100To1": 0.10396039603960396,
- "intelligenceIndexTimePerTask": 705.5792786474042,
+ "intelligenceIndexTimePerTask": 727.8266801065474,
  "intelligenceIndexCost": {
   "total": 136.06082185078296,
   "input": 81.26666385078296,
@@ -160,90 +159,13 @@
   "answer": 17733.846833032265,
   "output": 75296.05236563871
  },
- "intelligenceIndexEvaluations": [
-  {
-   "slug": "aa-briefcase",
-   "score": 1337.11,
-   "outputTokensPerTask": 110018.61538461539,
-   "costPerTask": 0.16999207407261596,
-   "timePerTask": 1030.9551808095596
-  },
-  {
-   "slug": "automationbench-aa",
-   "score": 0.5316814034483175,
-   "outputTokensPerTask": 34034.07305936073,
-   "costPerTask": 0.03639964442044852,
-   "timePerTask": 318.92424588271564
-  },
-  {
-   "slug": "terminalbench-4-0",
-   "score": 0.126262626262626,
-   "outputTokensPerTask": 140973.75757575757,
-   "costPerTask": 0.23621085607736897,
-   "timePerTask": 1321.027584494048
-  },
-  {
-   "slug": "frontiercode-2-0",
-   "score": 0.251747727272727,
-   "outputTokensPerTask": 69839.4696969697,
-   "costPerTask": 0.17592337388331286,
-   "timePerTask": 654.4470938610955
-  },
-  {
-   "slug": "omniscience",
-   "score": -8.266666666666667,
-   "outputTokensPerTask": 4663.009,
-   "costPerTask": 0.0023437596666666663,
-   "timePerTask": 43.69581702065164
-  },
-  {
-   "slug": "gdp-pdf",
-   "score": 0.228,
-   "outputTokensPerTask": 24831.15,
-   "costPerTask": 0.028547064,
-   "timePerTask": 232.6861017879987
-  },
-  {
-   "slug": "hle-diamond",
-   "score": 0.222,
-   "outputTokensPerTask": 29660.992,
-   "costPerTask": 0.0148947557,
-   "timePerTask": 277.9452664755766
-  },
-  {
-   "slug": "critpt-v2-hard",
-   "score": 0.425,
-   "outputTokensPerTask": 48777.05,
-   "costPerTask": 0.03246350468819355,
-   "timePerTask": 457.0767612945152
-  },
-  {
-   "slug": "terminal-bench-science",
-   "score": 0.0857142857142857,
-   "outputTokensPerTask": 151556.3142857143,
-   "costPerTask": 0.45408419406726913,
-   "timePerTask": 1420.1939085583888
-  }
- ],
  "briefcaseBreakdown": {
   "overall": {
-   "elo": 1337.11,
-   "lower95ci": 1328.58,
-   "upper95ci": 1346.49
-  },
-  "rubricPassRate": 0.4121212121212121,
-  "analyticalQuality": {
-   "elo": 1375.91,
-   "lower95ci": 1357.65,
-   "upper95ci": 1393.47
-  },
-  "presentation": {
-   "elo": 1396.53,
-   "lower95ci": 1380.98,
-   "upper95ci": 1411.75
+   "elo": 1336.35,
+   "lower95ci": 1328.01,
+   "upper95ci": 1345.96
   }
  },
- "briefcaseTotalCost": 15.46927874060805,
  "aa3dElo": 1000,
  "aa3dEloInterval": {
   "lower": 1000,
@@ -256,79 +178,79 @@
  },
  "personalityBench": {
   "scores": {
-   "lexicallyVaried": 886.97,
-   "eloquent": 915.2,
-   "literate": 903.14,
-   "naturalSounding": 1114.92,
-   "metaphorical": 891.14,
-   "structured": 805.33,
-   "scannable": 586.78,
-   "summarizesBottomLine": 941.35,
-   "answerFirst": 1045,
-   "informationDense": 867.54,
-   "evidenceBased": 856.58,
-   "resourceSpecific": 1074.27,
-   "providesActionableGuidance": 903.53,
-   "pragmatic": 892.27,
-   "truthful": 888.57,
-   "admitsUncertainty": 769.37,
-   "disclaimsWithAssumptions": 870.03,
-   "flagsNuances": 790.78,
-   "sycophantic": 1012.78,
-   "friendly": 870.85,
-   "humorous": 822.91,
-   "sincere": 992.55,
-   "emotionallyIntelligent": 893.71,
-   "direct": 1027.15,
-   "confident": 1007.75,
-   "opinionated": 1016.86,
-   "constructivelyPushesBack": 857.46,
-   "creative": 677.38,
-   "openEnded": 731.15,
-   "slop": 793.71
+   "lexicallyVaried": 884.48,
+   "eloquent": 916.22,
+   "literate": 910.34,
+   "naturalSounding": 1099.61,
+   "metaphorical": 890.66,
+   "structured": 806.14,
+   "scannable": 580.19,
+   "summarizesBottomLine": 942.67,
+   "answerFirst": 1044.12,
+   "informationDense": 853.43,
+   "evidenceBased": 859.04,
+   "resourceSpecific": 1052.92,
+   "providesActionableGuidance": 902.96,
+   "pragmatic": 886.44,
+   "truthful": 886.35,
+   "admitsUncertainty": 772.72,
+   "disclaimsWithAssumptions": 862.49,
+   "flagsNuances": 794.27,
+   "sycophantic": 1012.24,
+   "friendly": 871.02,
+   "humorous": 821.01,
+   "sincere": 989.61,
+   "emotionallyIntelligent": 892.05,
+   "direct": 1037.58,
+   "confident": 1009.31,
+   "opinionated": 1007.45,
+   "constructivelyPushesBack": 853.63,
+   "creative": 688.41,
+   "openEnded": 729.34,
+   "slop": 781.78
   },
   "indexScores": {
-   "expressiveness": 40.1875,
-   "organization": 21.625,
-   "informativeness": 17.5,
-   "transparency": 52.56250000000001,
-   "warmth": 48.4375,
-   "conviction": 48.4375,
-   "imagination": 19.5625,
-   "slop": 3.0625
+   "expressiveness": 36.12903225806452,
+   "organization": 36.12903225806452,
+   "informativeness": 29.741935483870968,
+   "transparency": 63.274193548387096,
+   "warmth": 42.516129032258064,
+   "conviction": 40.91935483870967,
+   "imagination": 18.56451612903226,
+   "slop": 18.56451612903226
   },
   "indexIntervals": {
    "expressiveness": {
-    "lower": 37,
-    "upper": 43
+    "lower": 31,
+    "upper": 38
    },
    "organization": {
-    "lower": 19,
-    "upper": 32
+    "lower": 32,
+    "upper": 49
    },
    "informativeness": {
-    "lower": 17,
-    "upper": 19
+    "lower": 27,
+    "upper": 34
    },
    "transparency": {
-    "lower": 47,
-    "upper": 61
+    "lower": 58,
+    "upper": 67
    },
    "warmth": {
-    "lower": 43,
-    "upper": 52
+    "lower": 39,
+    "upper": 44
    },
    "conviction": {
-    "lower": 41,
-    "upper": 55
+    "lower": 31,
+    "upper": 46
    },
    "imagination": {
-    "lower": 15,
-    "upper": 25
+    "lower": 16,
+    "upper": 24
    },
    "slop": {
-    "lower": 3,
-    "upper": 4
+    "lower": 18,
+    "upper": 21
    }
   }
  },
@@ -356,25 +278,24 @@
   "endsWithQuestion": 0.05
  },
  "headline": {
-  "outputSpeed": 106.7152262605859,
-  "timeToFirstToken": 78.93794759828656,
-  "timeToFirstAnswerToken": 78.93794759828656
+  "outputSpeed": 103.453273181214,
+  "timeToFirstToken": 67.6046487238954,
+  "timeToFirstAnswerToken": 67.6046487238954
  },
  "multiTurn": {
-  "timeToFirstToken": 13.846381260131906
+  "timeToFirstToken": 24.875188815337
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 90.4913079867059
+   "timeToFirstToken": 110.4793249115
   },
   "10k": {
-   "timeToFirstToken": 160.7796455411177
+   "timeToFirstToken": 136.128268088861
   },
   "100k": {
-   "timeToFirstToken": 180.81758828149998
+   "timeToFirstToken": 84.3947328970001
   }
  },
- "endToEndTime": 170.76280687566177,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "OpenAI"
@@ -383,7 +304,6 @@
   "type": "firstParty",
   "providerName": "OpenAI"
  },
- "hostModelCount": 8,
  "creator": {
   "id": "e67e56e3-15cd-43db-b679-da4660a69f41",
   "slug": "openai",
@@ -392,6 +312,18 @@
   "color": "#1f1f1f",
   "country": "us"
  },
+ "hosts": [
+  {
+   "slug": "azure",
+   "name": "Microsoft Azure",
+   "logo": "/img/logos/microsoft.svg"
+  },
+  {
+   "slug": "openai",
+   "name": "OpenAI",
+   "logo": "/img/logos/openai.svg"
+  }
+ ],
  "inputModalityText": true,
  "inputModalityImage": true,
  "inputModalitySpeech": false,
@@ -399,5 +331,6 @@
  "outputModalityText": true,
  "outputModalityImage": false,
  "outputModalitySpeech": false,
- "outputModalityVideo": false
+ "outputModalityVideo": false,
+ "cacheWritePrice": 0.125
 }

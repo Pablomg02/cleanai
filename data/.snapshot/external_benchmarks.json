@@ -1,5 +1,5 @@
 {
-  "_readme": "Benchmarks EXTERNOS a Artificial Analysis, metidos a mano. No se regeneran con fetch_aa.py: hay que actualizarlos a mano. Cobertura parcial: suelen estar medidos en un solo effort (casi siempre max). Valores en fracción 0-1. Revisado el 2026-11-11 (también para OpenAI: GPT-6.1 Terra no tiene datos y ningún GPT-6 tiene SWE-bench Pro).",
+  "_readme": "Benchmarks EXTERNOS a Artificial Analysis, metidos a mano. No se regeneran con fetch_aa.py: hay que actualizarlos a mano. Cobertura parcial: suelen estar medidos en un solo effort (casi siempre max). Valores en fracción 0-1. Revisado el 2026-11-13 (también para OpenAI: GPT-6.1 Terra no tiene datos y ningún GPT-6 tiene SWE-bench Pro; Gemini 4 Hydrogen aún no aparece en ninguna fuente externa).",
   "benchmarks": [
     {
       "id": "ext_cyberbench",

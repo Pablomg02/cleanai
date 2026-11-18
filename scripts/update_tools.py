@@ -32,8 +32,6 @@ DATA = F.DATA
 SNAP = DATA / ".snapshot" / "aa_models.json"
 EXT = DATA / "external_benchmarks.json"
 PROVIDERS = {"Anthropic", "OpenAI", "Google"}
-# Sufijos de effort que se prueban en AA para cada familia
-EFFORT_SUFFIXES = ["max", "xhigh", "high", "medium", "low", "minimal"]
 # Palabras para reconocer en fuentes externas las filas de las familias del dataset
 FAMILY_PATTERNS = {
     slug: re.compile(re.escape(display).replace(r"\ ", r"[\s_.-]*").replace(r"\.", r"[\s_.-]*"), re.I)
@@ -97,17 +95,14 @@ def cmd_discover():
         print(f"\nSeguidos que ya no aparecen en /models (¿retirados o renombrados?): {', '.join(gone)}")
     print("\nNota: /models solo lista unos pocos modelos destacados; que un modelo no salga no prueba que no exista.")
 
-    print("\n## Variantes de effort (se prueban las URLs /models/<slug>-<effort>)")
+    # Desde nov. 2026 las URLs /models/<slug>-<effort> redirigen a la base: los efforts se leen del payload
+    print("\n## Variantes de effort (registros con release = slug base en /models/<slug base>)")
     for base, (_, display, _f, _v, efforts) in F.FAMILIES.items():
-        configured = {suf for _, suf in efforts}
-        found = []
-        for eff in EFFORT_SUFFIXES:
-            suf = f"-{eff}"
-            if suf in configured:
-                continue
-            code, _ = fetch_status(f"{F.BASE}/models/{base}{suf}")
-            if code == 200:
-                found.append(base + suf)
+        configured = {base + suf for _, suf in efforts}
+        page = F.flight_text(F.fetch(f"{F.BASE}/models/{base}"))
+        found = sorted({o["slug"] for o in F.enclosing_objects(page, "intelligenceIndex")
+                        if (o.get("release") or {}).get("slug") == base and o.get("slug") not in configured
+                        and "non-reasoning" not in o.get("slug", "")})
         status = ("existen y NO están en FAMILIES: " + ", ".join(found)) if found else "sin variantes nuevas"
         print(f"- {display}: {status}")
     if new:
@@ -131,7 +126,7 @@ def evaluate(slug, rec=None, exclude_family=None):
     """Compara un modelo con las familias del dataset (sin exclude_family) y dice si cumple el criterio."""
     if rec is None:
         txt = F.flight_text(F.fetch(f"{F.BASE}/models/{slug}"))
-        cands = [o for o in F.enclosing_objects(txt, "intelligenceIndexEvaluations") if o.get("slug") == slug]
+        cands = [o for o in F.enclosing_objects(txt, "intelligenceIndex") if o.get("slug") == slug]
         if not cands:
             print(f"- {slug}: no encuentro su registro; evaluar a mano")
             return None

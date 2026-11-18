@@ -1,7 +1,6 @@
 // Configuración editable de la web: grupos de tareas y presets.
 // Para cada grupo: metrics = [[id_de_métrica, peso], ...]. Los ids están en
-// data/benchmarks.csv (columna "column"), o son evcost__<eval> / evtime__<eval>
-// (coste y tiempo por benchmark) o ext_* (data/external_benchmarks.json).
+// data/benchmarks.csv (columna "column") o son ext_* (data/external_benchmarks.json).
 //
 // La puntuación de un grupo (0–100) es la media ponderada de cada benchmark
 // normalizado entre el peor (0) y el mejor (100) modelo del dataset. Si en un
@@ -60,7 +59,7 @@ window.AA_CONFIG = {
       metrics: [["omniscience_index", 1.5], ["omniscience_hallucination_rate", 1], ["omniscience_accuracy", 1], ["hle_diamond", 0.5]] },
     { id: "consulting", short: "Consultoría", icon: "briefcase", name: "Consultoría y asesoramiento",
       desc: "Trabajo de conocimiento de largo recorrido: informes, análisis, estrategia y entregables profesionales.",
-      metrics: [["briefcase_elo", 1.5], ["gdpval_elo", 1], ["cap_strategy_ops", 1], ["briefcase_rubric_pass", 0.5], ["gdp_pdf_all_pass", 0.5]] },
+      metrics: [["briefcase_elo", 1.5], ["gdpval_elo", 1], ["cap_strategy_ops", 1], ["gdp_pdf_all_pass", 0.5]] },
     { id: "engineering", short: "Ing. técnica", icon: "gear", name: "Ingeniería técnica",
       desc: "Ingeniería civil, eléctrica y mecánica: diseño, análisis, cálculo y documentación técnica.",
       metrics: [["cap_engineering", 2], ["scicode", 0.5], ["terminal_bench_science", 0.5]] },
@@ -78,7 +77,7 @@ window.AA_CONFIG = {
       metrics: [["lcr", 1.5], ["mlcr", 1], ["gdp_pdf_all_pass", 1]] },
     { id: "visual", short: "Visual", icon: "eye", name: "Visual y multimodal",
       desc: "Entender imágenes y crear experiencias visuales: 3D, vídeo, presentaciones. Casi todo con datos parciales.",
-      metrics: [["briefcase_presentation_elo", 1], ["mmmu_pro", 1], ["aa3d_elo", 1], ["code2video_elo", 1]] },
+      metrics: [["mmmu_pro", 1], ["aa3d_elo", 1], ["code2video_elo", 1]] },
     { id: "efficiency", short: "Eficiencia", icon: "gauge", name: "Eficiencia",
       desc: "Barato y rápido: coste y tiempo por tarea, velocidad de salida y precio por token.",
       metrics: [["cost_per_task_usd", 1.5], ["time_per_task_s", 1], ["output_speed_tps", 0.5], ["price_blended_3to1", 0.5]] },
@@ -89,10 +88,8 @@ window.AA_CONFIG = {
     { name: "Inteligencia vs tiempo", x: "time_per_task_s", y: "intelligence_index" },
     { name: "Inteligencia vs precio", x: "price_blended_3to1", y: "intelligence_index" },
     { name: "Software vs coste", x: "cost_per_task_usd", y: "grp__software" },
-    { name: "Terminal-Bench vs su coste", x: "evcost__terminalbench-4-0", y: "terminal_bench_4_0" },
     { name: "Ciencia vs coste", x: "cost_per_task_usd", y: "grp__science" },
     { name: "Precisión vs alucinación", x: "omniscience_hallucination_rate", y: "omniscience_accuracy" },
-    { name: "Consultoría vs coste", x: "evcost__aa-briefcase", y: "grp__consulting" },
     { name: "Velocidad vs inteligencia", x: "output_speed_tps", y: "intelligence_index" },
     { name: "Tokens vs inteligencia", x: "output_tokens_per_task", y: "intelligence_index" },
   ],
@@ -100,7 +97,7 @@ window.AA_CONFIG = {
   weightPresets: [
     { name: "Código barato", criteria: [["grp__software", 50], ["cost_per_task_usd", 50]] },
     { name: "Investigador", criteria: [["grp__science", 60], ["grp__qa", 30], ["cost_per_task_usd", 10]] },
-    { name: "Dudas rápidas y fiables", criteria: [["grp__qa", 50], ["e2e_time_s", 30], ["price_blended_3to1", 20]] },
+    { name: "Dudas rápidas y fiables", criteria: [["grp__qa", 50], ["ttfat_s", 30], ["price_blended_3to1", 20]] },
     { name: "Consultor", criteria: [["grp__consulting", 60], ["grp__docs", 20], ["cost_per_task_usd", 20]] },
     { name: "Caza de bugs", criteria: [["grp__bugs", 60], ["grp__software", 20], ["cost_per_task_usd", 20]] },
     { name: "Equilibrado", criteria: [["intelligence_index", 40], ["cost_per_task_usd", 30], ["time_per_task_s", 30]] },
@@ -137,12 +134,12 @@ window.AA_CONFIG = {
     providers: {
       Anthropic: { label: "Plan de Claude", ref: "Opus", refName: "Opus" },
       Google: { label: "Plan de Google (Gemini)", ref: "Gemini Carbon", refName: "Gemini" },
-      OpenAI: { label: "Plan de ChatGPT", ref: "GPT Sol", refName: "GPT-6.1 Sol" },
+      OpenAI: { label: "Plan de ChatGPT", ref: "GPT Sol", refName: "GPT-6.2 Sol" },
     },
     // Valor por unidad de límite respecto al modelo de referencia de cada proveedor
-    // (Fable gasta el límite ~2,5× más rápido que Opus; Astra rinde ~1,4× más que GPT-6.1 Sol)
+    // (Fable gasta el límite ~2,5× más rápido que Opus; Astra rinde ~1,4× más que Sol: medido con GPT-6 Astra y GPT-6.1 Sol)
     modelMult: { Fable: 0.4, "GPT Astra": 1.4 },
-    multNote: "Fable gasta el límite unas 2,5 veces más rápido que Opus, y GPT-6 Astra rinde unas 1,4 veces más API por unidad de límite que GPT-6.1 Sol (estimaciones).",
+    multNote: "Fable gasta el límite unas 2,5 veces más rápido que Opus, y GPT Astra rinde unas 1,4 veces más API por unidad de límite que GPT Sol (estimaciones hechas con GPT-6 Astra y GPT-6.1 Sol, sin verificar aún para la versión 6.2).",
     plans: [
       { id: "claude-pro", provider: "Anthropic", name: "Claude Pro", short: "Pro", priceEur: 21.78,
         api: { low: 600, mid: 850, high: 1200 }, payg: ["Fable"], confidence: "media",
@@ -162,7 +159,7 @@ window.AA_CONFIG = {
       { id: "google-ai-ultra-20x", provider: "Google", name: "Google AI Ultra 20x", short: "AI Ultra 20x", priceEur: 219.99,
         api: { low: 1200, mid: 3000, high: 8000 }, confidence: "baja",
         note: "20× AI Pro por 10× su precio: se supone el doble de rendimiento por €. Incluye Carbon y Hydrogen. Sin mediciones públicas." },
-      // OpenAI: valores de referencia con GPT-6.1 Sol. Desde el 29/10/2026 Pro rinde ~2× más por $ que Plus.
+      // OpenAI: valores de referencia medidos con GPT-6.1 Sol (GPT-6.2 Sol tiene el mismo precio de API). Desde el 29/10/2026 Pro rinde ~2× más por $ que Plus.
       // ChatGPT Go no se incluye: solo da GPT-6 Luna.
       { id: "chatgpt-plus", provider: "OpenAI", name: "ChatGPT Plus", short: "Plus", priceEur: 23,
         api: { low: 150, mid: 211, high: 285 }, confidence: "media",

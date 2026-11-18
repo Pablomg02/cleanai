@@ -28,14 +28,15 @@ Ejecuta todo desde la raíz del proyecto.
 1. **Snapshot**: `python3 scripts/update_tools.py snapshot`. Sin esto no se puede hacer el paso 5.
 2. **Descubrir**: `python3 scripts/update_tools.py discover` (tarda ~1 min). Informa de:
    - modelos por defecto de los tres proveedores que no están en `FAMILIES`;
-   - URLs de effort (`-xhigh`, `-minimal`, …) que existen en AA y no están configuradas.
+   - efforts (`-xhigh`, `-minimal`, …) que existen en AA y no están configurados. Desde nov. 2026 las URLs
+     `/models/<slug>-<effort>` redirigen a la base: los efforts se leen del payload de `/models/<slug base>`.
    - si cada modelo no seguido es competente (CUMPLE / NO CUMPLE, ver «Criterios»).
    Decide con los criterios de abajo. **Pregunta al usuario antes de añadir o quitar una familia**;
    añadir un nivel de effort que falta de una familia ya seguida puedes hacerlo directamente.
    Tras descargar (paso 4), ejecuta también `python3 scripts/update_tools.py review`.
 3. **Editar `FAMILIES`** en `fetch_aa.py` si procede (ver «Añadir un modelo»).
 4. **Descargar**: `python3 scripts/fetch_aa.py` (~1 min). Si sale `¡AVISO! sin registro para <slug>`,
-   el slug no existe o la página cambió: compruébalo abriendo `https://artificialanalysis.ai/models/<slug>`.
+   el slug no existe o la página cambió: compruébalo buscando ese slug en el payload de `https://artificialanalysis.ai/models/<slug base>`.
 5. **Revisar cambios**: `python3 scripts/update_tools.py diff`. Mira:
    - **Cambio de versión del Intelligence Index**: actualiza el nombre en `METRICS`
      (`"AA Intelligence Index vX"`) y avisa al usuario de que los valores no son comparables con los anteriores.
@@ -83,6 +84,10 @@ y arregla el extractor. Es el único caso en que hay que tocar el código de ext
 - **Decisiones ya tomadas** (añade aquí las nuevas, con fecha):
   - 2026-11: `gemini-3-8-flash` fuera, por no competente (NO CUMPLE: mejor puesto 13.º en SciCode; en
     eficiencia, siempre hay un modelo del dataset mejor en los dos ejes).
+  - 2026-11: GPT-6.2 Astra y GPT-6.2 Sol sustituyen a GPT-6 Astra y GPT-6.1 Sol (lo pidió el usuario).
+  - 2026-11: AA dejó de publicar coste/tiempo por evaluación, coste total de Briefcase, tiempo end-to-end y
+    las submétricas de Briefcase por effort. Se quitaron de `METRICS`, de `config.js` y el CSV
+    `index_evals_long.csv`. No los recuperes con estimaciones salvo que el usuario lo pida.
 - **Slug base = effort por defecto** de esa familia en AA (max en Claude y GPT, high en Gemini Carbon).
   Compruébalo con el campo `effort por defecto` de `discover`; si cambia, el sufijo vacío `""` tiene
   que ir asociado al effort nuevo en la lista de efforts de la familia.
@@ -91,7 +96,7 @@ y arregla el extractor. Es el único caso en que hay que tocar el código de ext
 
 1. Añade una entrada a `FAMILIES`: `"slug-base": ("Proveedor", "Nombre visible", "Familia", "versión", efforts)`.
    Usa `STD_EFFORTS` si tiene max/xhigh/high/medium/low; si no, una lista propia como la de Gemini.
-   Comprueba cada URL de effort antes de añadirla.
+   Comprueba que cada effort sale en `discover` (o en el payload de la página base) antes de añadirlo.
 2. Si la **familia** es nueva (el tercer campo), añade color y forma en `web/config.js > families`
    (no repitas color de otra familia del mismo proveedor) y revisa si `pricing` en `config.js` la debe
    mencionar. `check` avisa si falta.

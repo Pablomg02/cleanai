@@ -44,10 +44,10 @@
  "omniscienceHallucinationRate": 0.636241610738255,
  "mlcrOverall": 0.188888888888889,
  "gdpPdfAllPass": 0.252,
- "gdpval": 1556.89,
+ "gdpval": 1551.33,
  "gdpvalInterval": {
-  "lower": 1535.29,
-  "upper": 1578.49
+  "lower": 1530.8,
+  "upper": 1571.85
  },
  "itBenchSre": null,
  "tau2": null,
@@ -80,14 +80,13 @@
  "price1mOutputTokens": 10,
  "cacheHitPrice": 0.1,
  "cacheHitDiscountPercent": 0.95,
- "cacheWritePrice": 2.5,
  "pricePer1k1mpImages": null,
  "price1mBlended0To3To1": 4,
  "price1mBlended7To2To1": 1.47,
  "price1mBlended0To1To1": 6,
  "price1mBlended100To1To1": 0.21568627450980393,
  "price1mBlended0To100To1": 2.0792079207920793,
- "intelligenceIndexTimePerTask": 411.8115007618382,
+ "intelligenceIndexTimePerTask": 420.95290985303257,
  "intelligenceIndexCost": {
   "total": 1268.3005112765024,
   "input": 721.7326912765025,
@@ -159,110 +158,32 @@
   "answer": 26680.319554956302,
   "output": 58421.21201361332
  },
- "intelligenceIndexEvaluations": [
-  {
-   "slug": "aa-briefcase",
-   "score": 1634.38,
-   "outputTokensPerTask": 139975.8901098901,
-   "costPerTask": 3.270737112601085,
-   "timePerTask": 986.6909533337968
-  },
-  {
-   "slug": "automationbench-aa",
-   "score": 0.5942923026067375,
-   "outputTokensPerTask": 14696.050228310502,
-   "costPerTask": 0.3126108042587534,
-   "timePerTask": 103.59255296486596
-  },
-  {
-   "slug": "terminalbench-4-0",
-   "score": 0.439393939393939,
-   "outputTokensPerTask": 76655.04545454546,
-   "costPerTask": 2.1862227174909825,
-   "timePerTask": 540.341910439096
-  },
-  {
-   "slug": "frontiercode-2-0",
-   "score": 0.257380050505051,
-   "outputTokensPerTask": 27587.719696969696,
-   "costPerTask": 0.7604061971175975,
-   "timePerTask": 194.4660143024538
-  },
-  {
-   "slug": "omniscience",
-   "score": 18.733333333333334,
-   "outputTokensPerTask": 532.564,
-   "costPerTask": 0.005669974666666666,
-   "timePerTask": 3.754047075240796
-  },
-  {
-   "slug": "gdp-pdf",
-   "score": 0.252,
-   "outputTokensPerTask": 5556.27,
-   "costPerTask": 0.40860073999999996,
-   "timePerTask": 39.166183111791604
-  },
-  {
-   "slug": "hle-diamond",
-   "score": 0.338,
-   "outputTokensPerTask": 10546.236,
-   "costPerTask": 0.106834654,
-   "timePerTask": 74.34048567045313
-  },
-  {
-   "slug": "critpt-v2-hard",
-   "score": 0.515,
-   "outputTokensPerTask": 13687.325,
-   "costPerTask": 0.18050436842355566,
-   "timePerTask": 96.48204231626666
-  },
-  {
-   "slug": "terminal-bench-science",
-   "score": 0.342857142857143,
-   "outputTokensPerTask": 147368.72857142857,
-   "costPerTask": 4.981271307441899,
-   "timePerTask": 1038.8031193913337
-  }
- ],
  "briefcaseBreakdown": {
   "overall": {
-   "elo": 1634.38,
-   "lower95ci": 1624.66,
-   "upper95ci": 1644.61
-  },
-  "rubricPassRate": 0.602020202020202,
-  "analyticalQuality": {
-   "elo": 1872.56,
-   "lower95ci": 1854.2,
-   "upper95ci": 1891.48
-  },
-  "presentation": {
-   "elo": 1490.7,
-   "lower95ci": 1473.64,
-   "upper95ci": 1508.07
+   "elo": 1633.7,
+   "lower95ci": 1624.74,
+   "upper95ci": 1643.12
   }
  },
- "briefcaseTotalCost": 297.6370772466987,
  "headline": {
-  "outputSpeed": 141.86396423008085,
-  "timeToFirstToken": 10.641957264178458,
-  "timeToFirstAnswerToken": 10.641957264178458
+  "outputSpeed": 138.783247831711,
+  "timeToFirstToken": 9.30911806797146,
+  "timeToFirstAnswerToken": 9.30911806797146
  },
  "multiTurn": {
-  "timeToFirstToken": 4.760842299169435
+  "timeToFirstToken": 5.33581749768366
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 7.194828230750057
+   "timeToFirstToken": 7.06522735888893
   },
   "10k": {
-   "timeToFirstToken": 13.45938669031246
+   "timeToFirstToken": 12.5720719476389
   },
   "100k": {
-   "timeToFirstToken": 28.915001766499927
+   "timeToFirstToken": 20.20995660825
   }
  },
- "endToEndTime": 49.34998666932291,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "Anthropic"
@@ -271,7 +192,6 @@
   "type": "firstParty",
   "providerName": "Anthropic"
  },
- "hostModelCount": 1,
  "creator": {
   "id": "f0aa413f-e8ae-4fcd-9c48-0e049f4f3128",
   "slug": "anthropic",
@@ -280,6 +200,13 @@
   "color": "#cc785c",
   "country": "us"
  },
+ "hosts": [
+  {
+   "slug": "anthropic",
+   "name": "Anthropic",
+   "logo": "/img/logos/anthropic.svg"
+  }
+ ],
  "inputModalityText": true,
  "inputModalityImage": true,
  "inputModalitySpeech": false,
@@ -287,5 +214,6 @@
  "outputModalityText": true,
  "outputModalityImage": false,
  "outputModalitySpeech": false,
- "outputModalityVideo": false
+ "outputModalityVideo": false,
+ "cacheWritePrice": 2.5
 }

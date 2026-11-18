@@ -74,14 +74,13 @@
  "price1mOutputTokens": 7.5,
  "cacheHitPrice": 0.075,
  "cacheHitDiscountPercent": 0.95,
- "cacheWritePrice": null,
  "pricePer1k1mpImages": null,
  "price1mBlended0To3To1": 3,
  "price1mBlended7To2To1": 1.1025,
  "price1mBlended0To1To1": 4.5,
  "price1mBlended100To1To1": 0.16176470588235295,
  "price1mBlended0To100To1": 1.5594059405940595,
- "intelligenceIndexTimePerTask": 78.89831698494052,
+ "intelligenceIndexTimePerTask": 89.39667201949709,
  "intelligenceIndexCost": {
   "total": 331.52134177349996,
   "input": 179.29056427349997,
@@ -153,110 +152,32 @@
   "answer": 7971.000358882973,
   "output": 14073.8174452384
  },
- "intelligenceIndexEvaluations": [
-  {
-   "slug": "aa-briefcase",
-   "score": 946.93,
-   "outputTokensPerTask": 14572.967032967033,
-   "costPerTask": 0.20972102983186808,
-   "timePerTask": 81.69656717887352
-  },
-  {
-   "slug": "automationbench-aa",
-   "score": 0.6051428460649884,
-   "outputTokensPerTask": 11546.20395738204,
-   "costPerTask": 0.16765132257557078,
-   "timePerTask": 64.72842662248073
-  },
-  {
-   "slug": "terminalbench-4-0",
-   "score": 0.0656565656565657,
-   "outputTokensPerTask": 25776.469696969696,
-   "costPerTask": 0.5256524670886361,
-   "timePerTask": 144.50379826351224
-  },
-  {
-   "slug": "frontiercode-2-0",
-   "score": 0.0928621212121212,
-   "outputTokensPerTask": 17122.93181818182,
-   "costPerTask": 0.4666886444295454,
-   "timePerTask": 95.99175970266032
-  },
-  {
-   "slug": "omniscience",
-   "score": 36.1,
-   "outputTokensPerTask": 410.25033333333334,
-   "costPerTask": 0.0033053949999999996,
-   "timePerTask": 2.299877838294822
-  },
-  {
-   "slug": "gdp-pdf",
-   "score": 0.282,
-   "outputTokensPerTask": 3032.29,
-   "costPerTask": 0.15284859000000003,
-   "timePerTask": 16.99912468959929
-  },
-  {
-   "slug": "hle-diamond",
-   "score": 0.322,
-   "outputTokensPerTask": 3352.534,
-   "costPerTask": 0.0260428905,
-   "timePerTask": 18.79442384868237
-  },
-  {
-   "slug": "critpt-v2-hard",
-   "score": 0.48,
-   "outputTokensPerTask": 12506.95,
-   "costPerTask": 0.12247696690874998,
-   "timePerTask": 70.11440282314153
-  },
-  {
-   "slug": "terminal-bench-science",
-   "score": 0.0238095238095238,
-   "outputTokensPerTask": 29102.5,
-   "costPerTask": 0.7121547436821425,
-   "timePerTask": 163.1496414521907
-  }
- ],
  "briefcaseBreakdown": {
   "overall": {
-   "elo": 946.93,
-   "lower95ci": 936.62,
-   "upper95ci": 956.92
-  },
-  "rubricPassRate": 0.2222222222222222,
-  "analyticalQuality": {
-   "elo": 737.13,
-   "lower95ci": 715.67,
-   "upper95ci": 759.11
-  },
-  "presentation": {
-   "elo": 1161.04,
-   "lower95ci": 1143.47,
-   "upper95ci": 1180.66
+   "elo": 946.87,
+   "lower95ci": 935.98,
+   "upper95ci": 956.85
   }
  },
- "briefcaseTotalCost": 19.084613714699994,
  "headline": {
-  "outputSpeed": 178.37918453855863,
-  "timeToFirstToken": 5.730318058005312,
-  "timeToFirstAnswerToken": 5.730318058005312
+  "outputSpeed": 157.431111553783,
+  "timeToFirstToken": 6.15427074008745,
+  "timeToFirstAnswerToken": 6.15427074008745
  },
  "multiTurn": {
-  "timeToFirstToken": 3.161377411188391
+  "timeToFirstToken": 3.5333843790082
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 6.769190637900055
+   "timeToFirstToken": 6.50628962066671
   },
   "10k": {
-   "timeToFirstToken": 7.11042378189998
+   "timeToFirstToken": 8.76975748633335
   },
   "100k": {
-   "timeToFirstToken": 11.018161694666665
+   "timeToFirstToken": 11.0494241965
   }
  },
- "endToEndTime": 19.11173748828891,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "Google"
@@ -265,7 +186,6 @@
   "type": "firstParty",
   "providerName": "Google"
  },
- "hostModelCount": 1,
  "creator": {
   "id": "faddc6d9-2c14-445f-9b28-56726f59c793",
   "slug": "google",
@@ -274,6 +194,13 @@
   "color": "#34A853",
   "country": "us"
  },
+ "hosts": [
+  {
+   "slug": "google",
+   "name": "Google",
+   "logo": "/img/logos/google.svg"
+  }
+ ],
  "inputModalityText": true,
  "inputModalityImage": true,
  "inputModalitySpeech": true,

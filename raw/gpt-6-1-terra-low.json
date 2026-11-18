@@ -42,10 +42,10 @@
  "omniscienceAccuracy": 0.45566666666666666,
  "omniscienceHallucinationRate": 0.41579914268218005,
  "gdpPdfAllPass": 0.256,
- "gdpval": 1203.75,
+ "gdpval": 1203.72,
  "gdpvalInterval": {
-  "lower": 1180.85,
-  "upper": 1226.65
+  "lower": 1181.17,
+  "upper": 1226.27
  },
  "itBenchSre": null,
  "tau2": null,
@@ -78,14 +78,13 @@
  "price1mOutputTokens": 5,
  "cacheHitPrice": 0.05,
  "cacheHitDiscountPercent": 0.95,
- "cacheWritePrice": 1.25,
  "pricePer1k1mpImages": null,
  "price1mBlended0To3To1": 2,
  "price1mBlended7To2To1": 0.735,
  "price1mBlended0To1To1": 3,
  "price1mBlended100To1To1": 0.10784313725490197,
  "price1mBlended0To100To1": 1.0396039603960396,
- "intelligenceIndexTimePerTask": 70.37024489438775,
+ "intelligenceIndexTimePerTask": 73.68323039963332,
  "intelligenceIndexCost": {
   "total": 111.16060431206128,
   "input": 75.21546431206127,
@@ -157,110 +156,32 @@
   "answer": 3472.0716628085765,
   "output": 4422.1722675078345
  },
- "intelligenceIndexEvaluations": [
-  {
-   "slug": "aa-briefcase",
-   "score": 1030.56,
-   "outputTokensPerTask": 6033.384615384615,
-   "costPerTask": 0.08483095654913812,
-   "timePerTask": 96.00954626896942
-  },
-  {
-   "slug": "automationbench-aa",
-   "score": 0.5624828754079192,
-   "outputTokensPerTask": 5661.812785388128,
-   "costPerTask": 0.07831828132992215,
-   "timePerTask": 90.09670545432508
-  },
-  {
-   "slug": "terminalbench-4-0",
-   "score": 0.151515151515152,
-   "outputTokensPerTask": 7482.742424242424,
-   "costPerTask": 0.1066009786508095,
-   "timePerTask": 119.07324839977669
-  },
-  {
-   "slug": "frontiercode-2-0",
-   "score": 0.244852272727273,
-   "outputTokensPerTask": 5981.090909090909,
-   "costPerTask": 0.1066556125306252,
-   "timePerTask": 95.17739394750475
-  },
-  {
-   "slug": "omniscience",
-   "score": 22.933333333333334,
-   "outputTokensPerTask": 132.73666666666668,
-   "costPerTask": 0.0007862349999999998,
-   "timePerTask": 2.1122451082309635
-  },
-  {
-   "slug": "gdp-pdf",
-   "score": 0.256,
-   "outputTokensPerTask": 611.66,
-   "costPerTask": 0.16440301999999998,
-   "timePerTask": 9.733375677912791
-  },
-  {
-   "slug": "hle-diamond",
-   "score": 0.249,
-   "outputTokensPerTask": 499.422,
-   "costPerTask": 0.0031445479999999996,
-   "timePerTask": 7.947326861025018
-  },
-  {
-   "slug": "critpt-v2-hard",
-   "score": 0.505,
-   "outputTokensPerTask": 2471.625,
-   "costPerTask": 0.017804261470666518,
-   "timePerTask": 39.3310902460864
-  },
-  {
-   "slug": "terminal-bench-science",
-   "score": 0.0761904761904762,
-   "outputTokensPerTask": 8273.585714285715,
-   "costPerTask": 0.11737065040726054,
-   "timePerTask": 131.65797658920857
-  }
- ],
  "briefcaseBreakdown": {
   "overall": {
-   "elo": 1030.56,
-   "lower95ci": 1020.36,
-   "upper95ci": 1041.26
-  },
-  "rubricPassRate": 0.2808080808080808,
-  "analyticalQuality": {
-   "elo": 1006.84,
-   "lower95ci": 987.71,
-   "upper95ci": 1025.28
-  },
-  "presentation": {
-   "elo": 1066.82,
-   "lower95ci": 1047.15,
-   "upper95ci": 1086.52
+   "elo": 1031.95,
+   "lower95ci": 1021.62,
+   "upper95ci": 1042.38
   }
  },
- "briefcaseTotalCost": 7.719617045971569,
  "headline": {
-  "outputSpeed": 62.841507431794035,
-  "timeToFirstToken": 2.760478716962109,
-  "timeToFirstAnswerToken": 2.760478716962109
+  "outputSpeed": 60.01599337493,
+  "timeToFirstToken": 2.96838607952205,
+  "timeToFirstAnswerToken": 2.96838607952205
  },
  "multiTurn": {
-  "timeToFirstToken": 2.7656115516595734
+  "timeToFirstToken": 2.87025928843294
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 2.31941505817636
+   "timeToFirstToken": 2.77287964566668
   },
   "10k": {
-   "timeToFirstToken": 2.80788537261759
+   "timeToFirstToken": 2.65223726116667
   },
   "100k": {
-   "timeToFirstToken": 3.1387372159999827
+   "timeToFirstToken": 3.77442170500015
   }
  },
- "endToEndTime": 22.996862059009715,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "OpenAI"
@@ -269,7 +190,6 @@
   "type": "firstParty",
   "providerName": "OpenAI"
  },
- "hostModelCount": 1,
  "creator": {
   "id": "e67e56e3-15cd-43db-b679-da4660a69f41",
   "slug": "openai",
@@ -278,6 +198,13 @@
   "color": "#1f1f1f",
   "country": "us"
  },
+ "hosts": [
+  {
+   "slug": "openai",
+   "name": "OpenAI",
+   "logo": "/img/logos/openai.svg"
+  }
+ ],
  "inputModalityText": true,
  "inputModalityImage": true,
  "inputModalitySpeech": false,
@@ -285,5 +212,6 @@
  "outputModalityText": true,
  "outputModalityImage": false,
  "outputModalitySpeech": false,
- "outputModalityVideo": false
+ "outputModalityVideo": false,
+ "cacheWritePrice": 1.25
 }

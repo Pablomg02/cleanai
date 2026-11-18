@@ -81,14 +81,13 @@
  "price1mOutputTokens": 20,
  "cacheHitPrice": 0.2,
  "cacheHitDiscountPercent": 0.95,
- "cacheWritePrice": 5,
  "pricePer1k1mpImages": null,
  "price1mBlended0To3To1": 8,
  "price1mBlended7To2To1": 2.94,
  "price1mBlended0To1To1": 12,
  "price1mBlended100To1To1": 0.43137254901960786,
  "price1mBlended0To100To1": 4.158415841584159,
- "intelligenceIndexTimePerTask": 1509.3001765579893,
+ "intelligenceIndexTimePerTask": 1475.172289428885,
  "intelligenceIndexCost": {
   "total": 8909.667015653067,
   "input": 4546.758855653068,
@@ -160,90 +159,13 @@
   "answer": 52852.71462398103,
   "output": 173312.63885654428
  },
- "intelligenceIndexEvaluations": [
-  {
-   "slug": "aa-briefcase",
-   "score": 1800.58,
-   "outputTokensPerTask": 338098.7802197802,
-   "costPerTask": 21.045972715658657,
-   "timePerTask": 2944.3470023103073
-  },
-  {
-   "slug": "automationbench-aa",
-   "score": 0.6953868128636069,
-   "outputTokensPerTask": 41105.06088280061,
-   "costPerTask": 1.428755110542112,
-   "timePerTask": 357.9650973936759
-  },
-  {
-   "slug": "terminalbench-4-0",
-   "score": 0.595959595959596,
-   "outputTokensPerTask": 252948.42424242425,
-   "costPerTask": 13.109276120148786,
-   "timePerTask": 2202.811658099338
-  },
-  {
-   "slug": "frontiercode-2-0",
-   "score": 0.464359595959596,
-   "outputTokensPerTask": 199996.64393939395,
-   "costPerTask": 13.455157765196367,
-   "timePerTask": 1741.6789219774466
-  },
-  {
-   "slug": "omniscience",
-   "score": 48.13333333333333,
-   "outputTokensPerTask": 9329.451666666666,
-   "costPerTask": 0.187384838684978,
-   "timePerTask": 81.24590993819218
-  },
-  {
-   "slug": "gdp-pdf",
-   "score": 0.262,
-   "outputTokensPerTask": 42319.45,
-   "costPerTask": 1.55233548,
-   "timePerTask": 368.5406544972537
-  },
-  {
-   "slug": "hle-diamond",
-   "score": 0.679,
-   "outputTokensPerTask": 59682.163,
-   "costPerTask": 1.1983133578968388,
-   "timePerTask": 519.7445480466258
-  },
-  {
-   "slug": "critpt-v2-hard",
-   "score": 0.68,
-   "outputTokensPerTask": 97156.925,
-   "costPerTask": 2.5767134025722402,
-   "timePerTask": 846.095039714377
-  },
-  {
-   "slug": "terminal-bench-science",
-   "score": 0.59047619047619,
-   "outputTokensPerTask": 306992.8714285714,
-   "costPerTask": 19.970984026619043,
-   "timePerTask": 2673.4599282901113
-  }
- ],
  "briefcaseBreakdown": {
   "overall": {
-   "elo": 1800.58,
-   "lower95ci": 1790.45,
-   "upper95ci": 1810.89
-  },
-  "rubricPassRate": 0.6121212121212121,
-  "analyticalQuality": {
-   "elo": 2125.59,
-   "lower95ci": 2104.43,
-   "upper95ci": 2146.98
-  },
-  "presentation": {
-   "elo": 1724.43,
-   "lower95ci": 1706.98,
-   "upper95ci": 1744.22
+   "elo": 1799.88,
+   "lower95ci": 1790.12,
+   "upper95ci": 1810.59
   }
  },
- "briefcaseTotalCost": 1915.1835171249377,
  "aa3dElo": 1202.4312,
  "aa3dEloInterval": {
   "lower": 1174.1234,
@@ -256,79 +178,79 @@
  },
  "personalityBench": {
   "scores": {
-   "lexicallyVaried": 1668.41,
-   "eloquent": 1290.49,
-   "literate": 1062.08,
-   "naturalSounding": 1078.44,
-   "metaphorical": 1471.01,
-   "structured": 1002.87,
-   "scannable": 1192.76,
-   "summarizesBottomLine": 934.65,
-   "answerFirst": 958.17,
-   "informationDense": 1854.97,
-   "evidenceBased": 1709.84,
-   "resourceSpecific": 1634.03,
-   "providesActionableGuidance": 1251.51,
-   "pragmatic": 1237.13,
-   "truthful": 1072.96,
-   "admitsUncertainty": 894.32,
-   "disclaimsWithAssumptions": 893.98,
-   "flagsNuances": 1140.24,
-   "sycophantic": 988.6,
-   "friendly": 1074.54,
-   "humorous": 1353.39,
-   "sincere": 1205.63,
-   "emotionallyIntelligent": 1090,
-   "direct": 781.52,
-   "confident": 1103.63,
-   "opinionated": 1135.88,
-   "constructivelyPushesBack": 1275.41,
-   "creative": 1528.86,
-   "openEnded": 932.44,
-   "slop": 1074.8
+   "lexicallyVaried": 1671.25,
+   "eloquent": 1292.93,
+   "literate": 1058.68,
+   "naturalSounding": 1079.89,
+   "metaphorical": 1462.73,
+   "structured": 1002.53,
+   "scannable": 1189.92,
+   "summarizesBottomLine": 935.33,
+   "answerFirst": 959.56,
+   "informationDense": 1853.27,
+   "evidenceBased": 1714.85,
+   "resourceSpecific": 1631.4,
+   "providesActionableGuidance": 1238.5,
+   "pragmatic": 1240.74,
+   "truthful": 1066.26,
+   "admitsUncertainty": 897.27,
+   "disclaimsWithAssumptions": 898.31,
+   "flagsNuances": 1139.5,
+   "sycophantic": 988.55,
+   "friendly": 1078.81,
+   "humorous": 1350.67,
+   "sincere": 1203.73,
+   "emotionallyIntelligent": 1091.32,
+   "direct": 780.71,
+   "confident": 1098.36,
+   "opinionated": 1132.42,
+   "constructivelyPushesBack": 1277.91,
+   "creative": 1530.81,
+   "openEnded": 934.14,
+   "slop": 1074.58
   },
   "indexScores": {
-   "expressiveness": 89.6875,
-   "organization": 77.3125,
-   "informativeness": 89.6875,
-   "transparency": 89.6875,
-   "warmth": 85.5625,
-   "conviction": 71.125,
-   "imagination": 95.875,
-   "slop": 15.437500000000002
+   "expressiveness": 90.48076923076923,
+   "organization": 79.0576923076923,
+   "informativeness": 90.48076923076923,
+   "transparency": 90.48076923076923,
+   "warmth": 84.76923076923077,
+   "conviction": 69.53846153846153,
+   "imagination": 94.28846153846153,
+   "slop": 20.03846153846154
   },
   "indexIntervals": {
    "expressiveness": {
-    "lower": 88,
-    "upper": 91
+    "lower": 89,
+    "upper": 92
    },
    "organization": {
-    "lower": 70,
+    "lower": 72,
     "upper": 93
    },
    "informativeness": {
-    "lower": 89,
-    "upper": 96
+    "lower": 90,
+    "upper": 94
    },
    "transparency": {
-    "lower": 81,
+    "lower": 83,
     "upper": 95
    },
    "warmth": {
-    "lower": 85,
-    "upper": 88
+    "lower": 84,
+    "upper": 87
    },
    "conviction": {
     "lower": 64,
-    "upper": 80
+    "upper": 78
    },
    "imagination": {
-    "lower": 88,
-    "upper": 96
+    "lower": 89,
+    "upper": 95
    },
    "slop": {
-    "lower": 13,
-    "upper": 19
+    "lower": 18,
+    "upper": 23
    }
   }
  },
@@ -356,25 +278,24 @@
   "endsWithQuestion": 0.04
  },
  "headline": {
-  "outputSpeed": 114.82980095569174,
-  "timeToFirstToken": 343.01432590070243,
-  "timeToFirstAnswerToken": 343.01432590070243
+  "outputSpeed": 117.486370980872,
+  "timeToFirstToken": 353.862152748135,
+  "timeToFirstAnswerToken": 353.862152748135
  },
  "multiTurn": {
-  "timeToFirstToken": 46.08868912974853
+  "timeToFirstToken": 59.2413566791977
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 519.0631261899688
+   "timeToFirstToken": 643.534986547529
   },
   "10k": {
-   "timeToFirstToken": 629.2588781000001
+   "timeToFirstToken": 716.184903311938
   },
   "100k": {
-   "timeToFirstToken": 771.4978837250001
+   "timeToFirstToken": 585.72895659175
   }
  },
- "endToEndTime": 704.7249071156161,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "Anthropic"
@@ -383,7 +304,6 @@
   "type": "firstParty",
   "providerName": "Anthropic"
  },
- "hostModelCount": 9,
  "creator": {
   "id": "f0aa413f-e8ae-4fcd-9c48-0e049f4f3128",
   "slug": "anthropic",
@@ -392,6 +312,28 @@
   "color": "#cc785c",
   "country": "us"
  },
+ "hosts": [
+  {
+   "slug": "amazon_bedrock",
+   "name": "Amazon Bedrock",
+   "logo": "/img/logos/aws.svg"
+  },
+  {
+   "slug": "anthropic",
+   "name": "Anthropic",
+   "logo": "/img/logos/anthropic.svg"
+  },
+  {
+   "slug": "google",
+   "name": "Google",
+   "logo": "/img/logos/google.svg"
+  },
+  {
+   "slug": "azure",
+   "name": "Microsoft Azure",
+   "logo": "/img/logos/microsoft.svg"
+  }
+ ],
  "inputModalityText": true,
  "inputModalityImage": true,
  "inputModalitySpeech": false,
@@ -399,5 +341,6 @@
  "outputModalityText": true,
  "outputModalityImage": false,
  "outputModalitySpeech": false,
- "outputModalityVideo": false
+ "outputModalityVideo": false,
+ "cacheWritePrice": 5
 }

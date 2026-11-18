@@ -46,9 +46,6 @@ SHORT = {
     "lcr": "AA-LCR (contexto largo)",
     "mlcr": "MLCR (contexto largo)",
     "briefcase_elo": "Briefcase (Elo)",
-    "briefcase_rubric_pass": "Briefcase: rúbrica",
-    "briefcase_analytical_elo": "Briefcase: análisis (Elo)",
-    "briefcase_presentation_elo": "Briefcase: presentación (Elo)",
     "gdpval_elo": "GDPval (Elo)",
     "gdp_pdf_all_pass": "GDP.pdf",
     "harvey_lab": "Harvey LAB (legal)",
@@ -61,7 +58,6 @@ SHORT = {
     "cost_per_task_reasoning": "Coste/tarea: reasoning",
     "cost_per_task_answer": "Coste/tarea: respuesta",
     "cost_index_total_usd": "Coste total del Index",
-    "briefcase_total_cost_usd": "Coste total Briefcase",
     "output_tokens_per_task": "Tokens de salida/tarea",
     "reasoning_tokens_per_task": "Tokens reasoning/tarea",
     "answer_tokens_per_task": "Tokens respuesta/tarea",
@@ -71,7 +67,6 @@ SHORT = {
     "output_speed_tps": "Velocidad de salida",
     "ttft_s": "TTFT",
     "ttfat_s": "Primer token de respuesta",
-    "e2e_time_s": "Tiempo de respuesta",
     "ttft_multiturn_s": "TTFT multi-turn",
     "ttft_1k_s": "TTFT prompt 1k",
     "ttft_10k_s": "TTFT prompt 10k",
@@ -112,8 +107,6 @@ CATEGORY_ES = {
     "knowledge_work": "Trabajo de conocimiento",
     "health": "Salud",
     "security": "Ciberseguridad (externo)",
-    "eval_cost": "Coste por benchmark",
-    "eval_time": "Tiempo por benchmark",
     "cost": "Coste",
     "tokens": "Tokens",
     "speed": "Velocidad y latencia",
@@ -153,23 +146,6 @@ def main():
             "ci": list(CI[col]) if col in CI else None,
         })
 
-    # Coste y tiempo por tarea de cada benchmark del Intelligence Index
-    eval_slugs = []
-    for mm in models_src:
-        for e in mm["index_evaluations"]:
-            if e["slug"] not in eval_slugs:
-                eval_slugs.append(e["slug"])
-    for slug in eval_slugs:
-        nm = catalog.get(slug, {}).get("name", slug)
-        metrics.append({"id": f"evcost__{slug}", "name": f"{nm}: coste por tarea (USD)",
-                        "short": f"Coste/tarea {nm}", "unit": "usd", "hib": False, "cat": "eval_cost",
-                        "desc": f"Coste medio en USD de resolver una tarea de {nm} dentro del Intelligence Index.",
-                        "source": "Artificial Analysis", "url": "", "log": True, "ci": None})
-        metrics.append({"id": f"evtime__{slug}", "name": f"{nm}: tiempo por tarea (s)",
-                        "short": f"Tiempo/tarea {nm}", "unit": "s", "hib": False, "cat": "eval_time",
-                        "desc": f"Tiempo medio en segundos por tarea de {nm} dentro del Intelligence Index.",
-                        "source": "Artificial Analysis", "url": "", "log": True, "ci": None})
-
     for b in ext["benchmarks"]:
         metrics.append({"id": b["id"], "name": b["name"], "short": b.get("short", b["name"]),
                         "unit": b["unit"], "hib": b["higher_is_better"], "cat": b["category"],
@@ -180,17 +156,12 @@ def main():
     models = []
     for mm in models_src:
         v = {k: val for k, val in mm["metrics"].items() if isinstance(val, (int, float)) and not isinstance(val, bool)}
-        for e in mm["index_evaluations"]:
-            if e.get("costPerTask") is not None:
-                v[f"evcost__{e['slug']}"] = e["costPerTask"]
-            if e.get("timePerTask") is not None:
-                v[f"evtime__{e['slug']}"] = e["timePerTask"]
         for b in ext["benchmarks"]:
             if mm["slug"] in b["values"]:
                 v[b["id"]] = b["values"][mm["slug"]]
         r = mm["record"]
         models.append({
-            # Nombre largo para la web: "Opus 5.5", "Gemini 4 Carbon", "GPT-6.1 Sol"
+            # Nombre largo para la web: "Opus 5.5", "Gemini 4 Carbon", "GPT-6.2 Sol"
             "slug": mm["slug"], "label": mm["label"], "provider": mm["provider"],
             "name": (mm.get("display") or mm["label"].rsplit(" (", 1)[0]).removeprefix("Claude "),
             "family": mm["family"], "version": mm["version"], "effort": mm["effort"],

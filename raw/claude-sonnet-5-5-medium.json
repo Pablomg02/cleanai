@@ -44,10 +44,10 @@
  "omniscienceHallucinationRate": 0.5003073140749846,
  "mlcrOverall": 0.177777777777778,
  "gdpPdfAllPass": 0.202,
- "gdpval": 1328.63,
+ "gdpval": 1325.77,
  "gdpvalInterval": {
-  "lower": 1307.52,
-  "upper": 1349.74
+  "lower": 1305.26,
+  "upper": 1346.27
  },
  "itBenchSre": null,
  "tau2": null,
@@ -80,14 +80,13 @@
  "price1mOutputTokens": 10,
  "cacheHitPrice": 0.1,
  "cacheHitDiscountPercent": 0.95,
- "cacheWritePrice": 2.5,
  "pricePer1k1mpImages": null,
  "price1mBlended0To3To1": 4,
  "price1mBlended7To2To1": 1.47,
  "price1mBlended0To1To1": 6,
  "price1mBlended100To1To1": 0.21568627450980393,
  "price1mBlended0To100To1": 2.0792079207920793,
- "intelligenceIndexTimePerTask": 226.04030077191666,
+ "intelligenceIndexTimePerTask": 224.79674297435002,
  "intelligenceIndexCost": {
   "total": 679.1556751397377,
   "input": 385.18865513973765,
@@ -159,165 +158,88 @@
   "answer": 16377.2412605479,
   "output": 30745.89477415119
  },
- "intelligenceIndexEvaluations": [
-  {
-   "slug": "aa-briefcase",
-   "score": 1439.22,
-   "outputTokensPerTask": 71619.31868131868,
-   "costPerTask": 1.3920735497567018,
-   "timePerTask": 526.5370370491015
-  },
-  {
-   "slug": "automationbench-aa",
-   "score": 0.5490962996121462,
-   "outputTokensPerTask": 12227.812785388129,
-   "costPerTask": 0.26209815374334866,
-   "timePerTask": 89.89748062611478
-  },
-  {
-   "slug": "terminalbench-4-0",
-   "score": 0.297979797979798,
-   "outputTokensPerTask": 51617.78787878788,
-   "costPerTask": 1.5781629739286835,
-   "timePerTask": 379.48807094440195
-  },
-  {
-   "slug": "frontiercode-2-0",
-   "score": 0.109708080808081,
-   "outputTokensPerTask": 13313.689393939394,
-   "costPerTask": 0.3235497567070719,
-   "timePerTask": 97.88072121810673
-  },
-  {
-   "slug": "omniscience",
-   "score": 18.633333333333333,
-   "outputTokensPerTask": 277.3636666666667,
-   "costPerTask": 0.003117971333333333,
-   "timePerTask": 2.0391459444284723
-  },
-  {
-   "slug": "gdp-pdf",
-   "score": 0.202,
-   "outputTokensPerTask": 2838.57,
-   "costPerTask": 0.38142373999999996,
-   "timePerTask": 20.86884188199246
-  },
-  {
-   "slug": "hle-diamond",
-   "score": 0.238,
-   "outputTokensPerTask": 3133.893,
-   "costPerTask": 0.032728586000000004,
-   "timePerTask": 23.040022790377897
-  },
-  {
-   "slug": "critpt-v2-hard",
-   "score": 0.335,
-   "outputTokensPerTask": 6762.275,
-   "costPerTask": 0.09262695901858506,
-   "timePerTask": 49.71547213475466
-  },
-  {
-   "slug": "terminal-bench-science",
-   "score": 0.161904761904762,
-   "outputTokensPerTask": 73730.82857142857,
-   "costPerTask": 2.135445979673252,
-   "timePerTask": 542.0606161854155
-  }
- ],
  "briefcaseBreakdown": {
   "overall": {
-   "elo": 1439.22,
-   "lower95ci": 1429.96,
-   "upper95ci": 1448.58
-  },
-  "rubricPassRate": 0.509090909090909,
-  "analyticalQuality": {
-   "elo": 1642.55,
-   "lower95ci": 1625.52,
-   "upper95ci": 1660.03
-  },
-  "presentation": {
-   "elo": 1298.81,
-   "lower95ci": 1282.3,
-   "upper95ci": 1316.53
+   "elo": 1437.63,
+   "lower95ci": 1428.61,
+   "upper95ci": 1446.65
   }
  },
- "briefcaseTotalCost": 126.67869302785986,
  "personalityBench": {
   "scores": {
-   "lexicallyVaried": 992.99,
-   "eloquent": 959.51,
-   "literate": 870.9,
-   "naturalSounding": 834.9,
-   "metaphorical": 1274.27,
-   "structured": 867.5,
-   "scannable": 1190.1,
-   "summarizesBottomLine": 897.67,
-   "answerFirst": 875.36,
-   "informationDense": 1340.01,
-   "evidenceBased": 1064.47,
-   "resourceSpecific": 1466.09,
-   "providesActionableGuidance": 1067.55,
-   "pragmatic": 901.6,
-   "truthful": 814.67,
-   "admitsUncertainty": 890.51,
-   "disclaimsWithAssumptions": 934.24,
-   "flagsNuances": 1036.54,
-   "sycophantic": 937.79,
-   "friendly": 1115.38,
-   "humorous": 945.67,
-   "sincere": 980.17,
-   "emotionallyIntelligent": 899.19,
-   "direct": 773.91,
-   "confident": 956.97,
-   "opinionated": 953.43,
-   "constructivelyPushesBack": 1187.17,
-   "creative": 911.59,
-   "openEnded": 1175.67,
-   "slop": 1194.13
+   "lexicallyVaried": 994.66,
+   "eloquent": 962.67,
+   "literate": 869.32,
+   "naturalSounding": 836.23,
+   "metaphorical": 1273.14,
+   "structured": 868.34,
+   "scannable": 1184.46,
+   "summarizesBottomLine": 897.14,
+   "answerFirst": 874.98,
+   "informationDense": 1335.96,
+   "evidenceBased": 1064.19,
+   "resourceSpecific": 1453.56,
+   "providesActionableGuidance": 1068.98,
+   "pragmatic": 901.36,
+   "truthful": 817.19,
+   "admitsUncertainty": 891.54,
+   "disclaimsWithAssumptions": 934.7,
+   "flagsNuances": 1036.83,
+   "sycophantic": 936.66,
+   "friendly": 1120.61,
+   "humorous": 942.88,
+   "sincere": 977.93,
+   "emotionallyIntelligent": 898.14,
+   "direct": 775.01,
+   "confident": 955.8,
+   "opinionated": 956.03,
+   "constructivelyPushesBack": 1190.64,
+   "creative": 912.74,
+   "openEnded": 1177.92,
+   "slop": 1194.91
   },
   "indexScores": {
-   "expressiveness": 38.125,
-   "organization": 45.550000000000004,
-   "informativeness": 48.025,
-   "transparency": 82.675,
-   "warmth": 60.4,
-   "conviction": 38.125,
-   "imagination": 75.25,
-   "slop": 28.225
+   "expressiveness": 46.69230769230769,
+   "organization": 52.40384615384616,
+   "informativeness": 52.40384615384616,
+   "transparency": 82.86538461538461,
+   "warmth": 67.63461538461539,
+   "conviction": 42.88461538461539,
+   "imagination": 79.0576923076923,
+   "slop": 27.653846153846153
   },
   "indexIntervals": {
    "expressiveness": {
-    "lower": 34,
-    "upper": 48
+    "lower": 45,
+    "upper": 56
    },
    "organization": {
-    "lower": 34,
-    "upper": 55
+    "lower": 40,
+    "upper": 62
    },
    "informativeness": {
-    "lower": 38,
-    "upper": 52
+    "lower": 44,
+    "upper": 56
    },
    "transparency": {
     "lower": 81,
-    "upper": 87
+    "upper": 88
    },
    "warmth": {
-    "lower": 57,
-    "upper": 68
+    "lower": 62,
+    "upper": 73
    },
    "conviction": {
-    "lower": 31,
-    "upper": 48
+    "lower": 37,
+    "upper": 51
    },
    "imagination": {
-    "lower": 73,
-    "upper": 79
+    "lower": 77,
+    "upper": 80
    },
    "slop": {
     "lower": 26,
-    "upper": 32
+    "upper": 30
    }
   }
  },
@@ -345,25 +267,24 @@
   "endsWithQuestion": 0.171111111111111
  },
  "headline": {
-  "outputSpeed": 136.01952691248178,
-  "timeToFirstToken": 4.932611810630864,
-  "timeToFirstAnswerToken": 4.932611810630864
+  "outputSpeed": 136.771976174314,
+  "timeToFirstToken": 5.03111231590102,
+  "timeToFirstAnswerToken": 5.03111231590102
  },
  "multiTurn": {
-  "timeToFirstToken": 2.56474219862632
+  "timeToFirstToken": 3.88057414528349
  },
  "workloads": {
   "1k": {
-   "timeToFirstToken": 1.2660292414687615
+   "timeToFirstToken": 1.95341576577786
   },
   "10k": {
-   "timeToFirstToken": 4.317799081437498
+   "timeToFirstToken": 3.13893386027777
   },
   "100k": {
-   "timeToFirstToken": 16.31761594499997
+   "timeToFirstToken": 13.4526018335001
   }
  },
- "endToEndTime": 35.039378035937496,
  "performanceDataSource": {
   "type": "firstParty",
   "providerName": "Anthropic"
@@ -372,7 +293,6 @@
   "type": "firstParty",
   "providerName": "Anthropic"
  },
- "hostModelCount": 1,
  "creator": {
   "id": "f0aa413f-e8ae-4fcd-9c48-0e049f4f3128",
   "slug": "anthropic",
@@ -381,6 +301,13 @@
   "color": "#cc785c",
   "country": "us"
  },
+ "hosts": [
+  {
+   "slug": "anthropic",
+   "name": "Anthropic",
+   "logo": "/img/logos/anthropic.svg"
+  }
+ ],
  "inputModalityText": true,
  "inputModalityImage": true,
  "inputModalitySpeech": false,
@@ -388,5 +315,6 @@
  "outputModalityText": true,
  "outputModalityImage": false,
  "outputModalitySpeech": false,
- "outputModalityVideo": false
+ "outputModalityVideo": false,
+ "cacheWritePrice": 2.5
 }

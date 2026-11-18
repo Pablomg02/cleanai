@@ -2,18 +2,19 @@
 """
 Descarga los datos de Artificial Analysis (artificialanalysis.ai) para los
 modelos definidos en FAMILIES (Claude Fable 5.2, Opus 5.5, Sonnet 5.5,
-Haiku 5.5, Gemini 4 Carbon, GPT-6 Astra, GPT-6.1 Sol, GPT-6.1 Terra y
+Haiku 5.5, Gemini 4 Carbon, GPT-6.2 Astra, GPT-6.2 Sol, GPT-6.1 Terra y
 GPT-6 Luna) en todos sus niveles de effort, y genera:
 
   data/aa_models.json        -> "mega json": metadatos, catálogo de benchmarks y modelos (registro completo)
   data/models_flat.csv       -> 1 fila por modelo/effort, todas las métricas aplanadas
-  data/index_evals_long.csv  -> 1 fila por modelo x evaluación del Intelligence Index
-                                (score, tokens, coste y tiempo por tarea)
   data/benchmarks.csv        -> catálogo de métricas: columna, nombre, unidad, mejor alto/bajo, categoría
   raw/<slug>.json            -> registro bruto tal como viene de la web
 
-Los datos se extraen del payload de Next.js embebido en cada página
-/models/<slug> (la API pública antigua /api/v2/data/* fue retirada).
+Los datos se extraen del payload de Next.js embebido en la página /models/<slug base>
+de cada familia, que trae los registros de todos sus efforts (desde nov. 2026 las URLs
+/models/<slug>-<effort> redirigen a la base). El precio de cache write, que ya no viene en
+esas páginas, se toma de /evaluations/artificial-analysis-intelligence-index (es por modelo,
+igual en todos los efforts). La API pública antigua /api/v2/data/* fue retirada.
 
 Uso:  python3 scripts/fetch_aa.py            (desde la carpeta del proyecto)
 """
@@ -32,7 +33,8 @@ RAW = ROOT / "raw"
 BASE = "https://artificialanalysis.ai"
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
 
-# Para añadir un modelo: busca sus slugs en https://artificialanalysis.ai/models/<slug>.
+# Para añadir un modelo: busca su slug en https://artificialanalysis.ai/models/<slug>; los efforts
+# disponibles están en el payload de esa página (`python3 scripts/update_tools.py discover` los lista).
 # El slug base (sin sufijo) corresponde al effort por defecto de esa familia
 # (max en Claude y GPT, high en Gemini 4 Carbon, xhigh en Gemini 4 Hydrogen); el resto lleva sufijo "-<effort>".
 # Las variantes "-non-reasoning" de GPT no se descargan: no son un nivel de effort.
@@ -47,8 +49,8 @@ FAMILIES = {
                         [("high", ""), ("medium", "-medium"), ("low", "-low")]),
     "gemini-4-hydrogen": ("Google", "Gemini 4 Hydrogen", "Gemini Hydrogen", "4",
                           [("xhigh", ""), ("high", "-high"), ("medium", "-medium"), ("low", "-low")]),
-    "gpt-6-astra": ("OpenAI", "GPT-6 Astra", "GPT Astra", "6", STD_EFFORTS),
-    "gpt-6-1-sol": ("OpenAI", "GPT-6.1 Sol", "GPT Sol", "6.1", STD_EFFORTS),
+    "gpt-6-2-astra": ("OpenAI", "GPT-6.2 Astra", "GPT Astra", "6.2", STD_EFFORTS),
+    "gpt-6-2-sol": ("OpenAI", "GPT-6.2 Sol", "GPT Sol", "6.2", STD_EFFORTS),
     "gpt-6-1-terra": ("OpenAI", "GPT-6.1 Terra", "GPT Terra", "6.1", STD_EFFORTS),
     "gpt-6-luna": ("OpenAI", "GPT-6 Luna", "GPT Luna", "6", STD_EFFORTS),
 }
@@ -96,9 +98,6 @@ METRICS = [
     ("briefcase_elo", "briefcaseBreakdown.overall.elo", "AA-Briefcase v1.1 (Elo)", "elo", True, "knowledge_work", "aa-briefcase"),
     ("briefcase_elo_lo95", "briefcaseBreakdown.overall.lower95ci", "AA-Briefcase Elo lower 95% CI", "elo", True, "knowledge_work", "aa-briefcase"),
     ("briefcase_elo_hi95", "briefcaseBreakdown.overall.upper95ci", "AA-Briefcase Elo upper 95% CI", "elo", True, "knowledge_work", "aa-briefcase"),
-    ("briefcase_rubric_pass", "briefcaseBreakdown.rubricPassRate", "AA-Briefcase rubric pass rate", "frac", True, "knowledge_work", "aa-briefcase"),
-    ("briefcase_analytical_elo", "briefcaseBreakdown.analyticalQuality.elo", "AA-Briefcase analytical quality (Elo)", "elo", True, "knowledge_work", "aa-briefcase"),
-    ("briefcase_presentation_elo", "briefcaseBreakdown.presentation.elo", "AA-Briefcase presentation (Elo)", "elo", True, "knowledge_work", "aa-briefcase"),
     ("gdpval_elo", "gdpval", "GDPval-AA v2.1 (Elo)", "elo", True, "knowledge_work", "gdpval-aa"),
     ("gdpval_elo_lo", "gdpvalInterval.lower", "GDPval-AA Elo lower CI", "elo", True, "knowledge_work", "gdpval-aa"),
     ("gdpval_elo_hi", "gdpvalInterval.upper", "GDPval-AA Elo upper CI", "elo", True, "knowledge_work", "gdpval-aa"),
@@ -114,7 +113,6 @@ METRICS = [
     ("cost_per_task_reasoning", "intelligenceIndexCostPerTask.cost.reasoning", "Coste/tarea: reasoning", "usd", False, "cost", None),
     ("cost_per_task_answer", "intelligenceIndexCostPerTask.cost.answer", "Coste/tarea: answer", "usd", False, "cost", None),
     ("cost_index_total_usd", "intelligenceIndexCost.total", "Coste total de correr el Index (USD)", "usd", False, "cost", None),
-    ("briefcase_total_cost_usd", "briefcaseTotalCost", "Coste total AA-Briefcase (USD)", "usd", False, "cost", None),
     # --- Tokens
     ("output_tokens_per_task", "intelligenceIndexOutputTokensPerTask.output", "Tokens de salida por tarea", "tok", False, "tokens", None),
     ("reasoning_tokens_per_task", "intelligenceIndexOutputTokensPerTask.reasoning", "Tokens de reasoning por tarea", "tok", False, "tokens", None),
@@ -126,7 +124,6 @@ METRICS = [
     ("output_speed_tps", "headline.outputSpeed", "Velocidad de salida (tokens/s)", "tok/s", True, "speed", None),
     ("ttft_s", "headline.timeToFirstToken", "Time to first token (s)", "s", False, "speed", None),
     ("ttfat_s", "headline.timeToFirstAnswerToken", "Time to first answer token (s)", "s", False, "speed", None),
-    ("e2e_time_s", "endToEndTime", "End-to-end response time (s)", "s", False, "speed", None),
     ("ttft_multiturn_s", "multiTurn.timeToFirstToken", "TTFT multi-turn (s)", "s", False, "speed", None),
     ("ttft_1k_s", "workloads.1k.timeToFirstToken", "TTFT con prompt 1k (s)", "s", False, "speed", None),
     ("ttft_10k_s", "workloads.10k.timeToFirstToken", "TTFT con prompt 10k (s)", "s", False, "speed", None),
@@ -232,18 +229,27 @@ def main():
         for o in enclosing_objects(ev_text, "description") if "shortName" in o and "Index" in str(o.get("name"))
     ]
 
-    # 2) Registros por modelo/effort
+    # Precio de cache write por modelo (ya no está en /models/<slug>)
+    ii_text = flight_text(fetch(f"{BASE}/evaluations/artificial-analysis-intelligence-index"))
+    cache_write = {o["slug"]: o["cacheWritePrice"] for o in enclosing_objects(ii_text, "cacheWritePrice")
+                   if "slug" in o and o.get("cacheWritePrice") is not None}
+
+    # 2) Registros por modelo/effort: la página base de cada familia trae todos sus efforts
     models = []
     for fam_slug, (provider, display, family, version, efforts) in FAMILIES.items():
+        print(f"Descargando {fam_slug}…")
+        txt = flight_text(fetch(f"{BASE}/models/{fam_slug}"))
+        time.sleep(1)
+        page_recs = enclosing_objects(txt, "intelligenceIndex")
         for effort, suffix in efforts:
             slug = fam_slug + suffix
-            print(f"Descargando {slug}…")
-            txt = flight_text(fetch(f"{BASE}/models/{slug}"))
-            cands = [o for o in enclosing_objects(txt, "intelligenceIndexEvaluations") if o.get("slug") == slug]
+            cands = [o for o in page_recs if o.get("slug") == slug]
             if not cands:
                 print(f"  ¡AVISO! sin registro para {slug}", file=sys.stderr)
                 continue
             rec = max(cands, key=len)
+            if rec.get("cacheWritePrice") is None and fam_slug in cache_write:
+                rec["cacheWritePrice"] = cache_write[fam_slug]
             (RAW / f"{slug}.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False))
             models.append({
                 "slug": slug, "provider": provider, "family": family, "version": version, "effort": effort,
@@ -253,7 +259,6 @@ def main():
                 "url": f"{BASE}/models/{slug}",
                 "record": rec,
             })
-            time.sleep(1)
 
     # 3) Mega JSON
     metric_defs = [
@@ -271,9 +276,11 @@ def main():
                       "usd": "USD", "s": "segundos", "tok": "tokens", "tok/s": "tokens/segundo",
                       "usd/1M": "USD por millón de tokens"},
             "notes": [
-                "El slug base es el effort por defecto: max en Claude y GPT (p.ej. claude-opus-5-5, gpt-6-1-sol), high en Gemini 4 Carbon.",
+                "El slug base es el effort por defecto: max en Claude y GPT (p.ej. claude-opus-5-5, gpt-6-2-sol), high en Gemini 4 Carbon.",
                 "aa3dElo, code2videoElo y personalityBench solo existen para algunas variantes (sobre todo max).",
                 "time_per_task_s = tokens de salida por tarea / velocidad de salida.",
+                "Desde nov. 2026 AA no publica coste/tiempo por evaluación, coste total de Briefcase, tiempo end-to-end ni las submétricas de Briefcase por effort.",
+                "cacheWritePrice se copia del effort por defecto (página del Intelligence Index) a todos los efforts.",
             ],
         },
         "evaluations": catalog,
@@ -282,7 +289,6 @@ def main():
         "models": [
             {**{k: v for k, v in m.items() if k != "record"},
              "metrics": {c: get_path(m["record"], p) for c, p, *_ in METRICS},
-             "index_evaluations": m["record"].get("intelligenceIndexEvaluations"),
              "record": m["record"]}
             for m in models
         ],
@@ -306,20 +312,6 @@ def main():
                        + [get_path(r, p) for _, p, *_ in METRICS]
                        + [get_path(r, k) for k in extra_keys])
 
-    # 5) CSV largo de evaluaciones del Index
-    with open(DATA / "index_evals_long.csv", "w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
-        w.writerow(["slug", "provider", "family", "effort", "evaluation", "evaluation_name", "score",
-                    "output_tokens_per_task", "cost_per_task_usd", "time_per_task_s", "weighted_cost_per_task_usd"])
-        for m in models:
-            weighted = {e["slug"]: e.get("weightedCostPerTask")
-                        for e in get_path(m["record"], "intelligenceIndexCostPerTask.evaluations") or []}
-            for e in m["record"].get("intelligenceIndexEvaluations") or []:
-                w.writerow([m["slug"], m["provider"], m["family"], m["effort"], e["slug"],
-                            catalog.get(e["slug"], {}).get("name"), e.get("score"),
-                            e.get("outputTokensPerTask"), e.get("costPerTask"), e.get("timePerTask"),
-                            weighted.get(e["slug"])])
-
     # 6) Catálogo de métricas en CSV
     with open(DATA / "benchmarks.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -332,7 +324,6 @@ def main():
     print(f"\nOK: {len(models)} modelos, {len(catalog)} evaluaciones en catálogo -> {DATA}")
 
     # 7) Datos para la web local (web/data.js)
-    import sys
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import build_web
     build_web.main()
